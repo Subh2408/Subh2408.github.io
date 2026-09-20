@@ -1,5 +1,5 @@
 ---
-title: "AI-Powered Claims Adjudication Platform for a Fortune 100 Insurer"
+title: "Claims adjudication for a Fortune 100 insurer"
 position: "quantiphi"
 date: 2022-01
 featured: true

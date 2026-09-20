@@ -1,5 +1,5 @@
 ---
-title: "Market Basket Optimization for US Retailer"
+title: "Market basket optimisation for a US retailer"
 position: "wns-global-services"
 date: 2016-11
 featured: false

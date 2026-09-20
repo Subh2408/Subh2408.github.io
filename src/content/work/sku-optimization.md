@@ -1,5 +1,5 @@
 ---
-title: "SKU Optimization for a Leading US FMCG Brand"
+title: "SKU optimisation for a US FMCG brand"
 position: "wns-global-services"
 date: 2018-06
 featured: true

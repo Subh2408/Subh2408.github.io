@@ -1,5 +1,5 @@
 ---
-title: "Quality Check Program – Analytics Function"
+title: "Quality check program for an analytics function"
 position: "miq-digital"
 date: 2022-10
 featured: true

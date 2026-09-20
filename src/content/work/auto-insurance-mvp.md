@@ -1,5 +1,5 @@
 ---
-title: "MVP for AI Auto Insurance Startup"
+title: "MVP for an AI auto insurance startup"
 position: "auto-insurance-startup"
 date: 2024-08
 featured: true

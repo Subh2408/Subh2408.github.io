@@ -183,6 +183,44 @@ container (the way `.splitband` does) and cap the heading inside it. Never cap a
 `.page` does not do this. It centres only itself, so inline `max-width` on sub-page content
 is safe.
 
+## Mobile
+
+Below 820px the phone gets its own interaction model, not the desktop layout collapsed into
+a column. Same palette, same type, same content, same static HTML. Every rule for it lives
+in a `@media (max-width: 820px)` block at the end of `global.css`. **Nothing there may
+change desktop.** The only rules that sit outside a media query are the ones that hide the
+mobile furniture on desktop: `.tabbar`, `.apx summary` markers, `.moreproof summary`.
+
+- **Bottom tab bar.** Four labels, no icons, in `Nav.astro` so it shares the `items` array
+  and `current` prop with the top bar. The top bar drops to the name alone; its links and
+  the email are hidden, and so is the backdrop blur. `main` gets `padding-bottom: 76px` so
+  the bar never covers content. Dark pages invert the bar and use `#4D9BFF`, because
+  `--blue` is 3.38:1 on near-black.
+- **Swipe decks.** `.worklist` and `.workband` become horizontal scroll-snap decks. Cards
+  are `flex: 0 0 82vw` — never 100%, because the peeking next card *is* the affordance.
+  Pure CSS over the existing markup, so the rows stay real links in DOM order and keyboard
+  traversal is untouched. `.wdesc` is hidden; the description is what made them texty.
+- **Snap sections.** `scroll-snap-type: y proximity` on `html`, not on `main` — `main` is
+  not a scroller, so the property would silently do nothing there. `100svh` not `100vh`,
+  `min-height` not `height`, `proximity` not `mandatory`. Disabled under reduced motion.
+- **Collapsed copy.** Approach pillars and the extra proof rows are `<details>`. The
+  paragraph sits *inside* `<summary>` and is line-clamped to one line when closed, so
+  nothing is duplicated in the DOM. CSS cannot force a `<details>` open or shut, so the
+  markup ships `open` and a small script in `index.astro` closes them below 820px. With JS
+  off, everything is expanded, which is the old behaviour.
+
+### Never ship an unguarded `:hover`
+
+On a touch device `:hover` **sticks** after a tap and stays until the user taps elsewhere.
+This shipped as a real bug: tapping a row in the dark band left it blue and underlined,
+because `.proofrow a:hover .pnum` and `.proofrow a:hover .plabel` kept applying. It looked
+like one entry was styled differently; it was just the last one touched.
+
+Every `:hover` rule in `global.css` is now wrapped in `@media (hover: hover)`. Wrap any new
+one the same way. Where a selector pairs hover with something else — `.rolecard:hover,
+`.rolecard.hot` or `.ph:hover, .ph:focus-visible` — split it, because `.hot` and
+`:focus-visible` must still work on touch.
+
 ## When unsure
 
 Prefer the quieter option when two options say the same thing. "Too cluttered" is a real

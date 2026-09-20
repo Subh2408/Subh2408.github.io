@@ -1,5 +1,5 @@
 ---
-title: "Sales Driver Analysis for Fortune 100 FMCG Brand"
+title: "Sales driver analysis for a Fortune 100 FMCG brand"
 position: "wns-global-services"
 date: 2017-09
 featured: false

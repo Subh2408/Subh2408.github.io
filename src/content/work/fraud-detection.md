@@ -1,5 +1,5 @@
 ---
-title: "AI-Powered Fraud Detection in Auto Insurance"
+title: "Fraud detection in auto insurance"
 position: "auto-insurance-startup"
 date: 2024-05
 featured: false

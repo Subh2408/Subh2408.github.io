@@ -10,10 +10,10 @@ interface Props {
 const { current = null, dark = false } = Astro.props;
 
 const items = [
-  { key: "work", label: "Work", href: url("/work") },
-  { key: "writing", label: "Writing", href: url("/writing") },
-  { key: "photography", label: "Photography", href: url("/photography") },
-  { key: "about", label: "About", href: url("/about") },
+  { key: "work", label: "Work", short: "Work", href: url("/work") },
+  { key: "writing", label: "Writing", short: "Writing", href: url("/writing") },
+  { key: "photography", label: "Photography", short: "Photos", href: url("/photography") },
+  { key: "about", label: "About", short: "About", href: url("/about") },
 ] as const;
 ---
 
@@ -34,3 +34,23 @@ const items = [
   </nav>
   <CopyEmail dark={dark} />
 </header>
+
+{/*
+  Mobile only. The top bar drops to the name alone below 820px and these four
+  become a fixed bottom tab bar. Same items, same current prop, so there is one
+  source of truth. Hidden with display:none on desktop, which also keeps it out
+  of the tab order there.
+*/}
+<nav class="tabbar" aria-label="Sections">
+  {
+    items.map((item) => (
+      <a
+        class:list={["tab", current === item.key && "on"]}
+        href={item.href}
+        aria-current={current === item.key ? "page" : undefined}
+      >
+        {item.short}
+      </a>
+    ))
+  }
+</nav>

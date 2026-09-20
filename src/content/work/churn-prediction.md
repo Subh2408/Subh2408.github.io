@@ -1,5 +1,5 @@
 ---
-title: "Proactive Customer Retention: From Expert Rules to AI-Driven Churn Prediction"
+title: "Churn prediction, from expert rules to a model"
 position: "auto-insurance-startup"
 date: 2024-03
 featured: false

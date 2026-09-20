@@ -110,6 +110,39 @@ const fullTitle = exactTitle ? title : `${title} | ${SITE.person}`;
     </main>
 
     <script>
+      // Below 820px the work and writing lists become horizontal decks. CSS
+      // cannot express scroll position, so this writes a "03 / 15" readout
+      // under each one. It counts visible rows, so a filtered deck reads
+      // correctly. Passive listener, no work when the deck is not a deck.
+      function bindDecks() {
+        document.querySelectorAll<HTMLElement>("[data-deckhint]").forEach((hint) => {
+          const deck = hint.previousElementSibling as HTMLElement | null;
+          if (!deck || hint.dataset.bound === "1") return;
+          hint.dataset.bound = "1";
+          const paint = () => {
+            const horizontal = deck.scrollWidth > deck.clientWidth + 4;
+            const rows = Array.from(deck.children).filter(
+              (el) => !(el as HTMLElement).hidden
+            );
+            if (!horizontal || rows.length < 2) { hint.hidden = true; return; }
+            const span = deck.scrollWidth - deck.clientWidth;
+            const at = span > 0 ? Math.round((deck.scrollLeft / span) * (rows.length - 1)) : 0;
+            const pad = (n: number) => String(n).padStart(2, "0");
+            hint.textContent = `${pad(at + 1)} / ${pad(rows.length)}`;
+            hint.hidden = false;
+          };
+          deck.addEventListener("scroll", paint, { passive: true });
+          window.addEventListener("resize", paint, { passive: true });
+          // Filter chips toggle `hidden` on rows, which changes the count.
+          new MutationObserver(paint).observe(deck, {
+            attributes: true, subtree: true, attributeFilter: ["hidden"],
+          });
+          paint();
+        });
+      }
+      bindDecks();
+      document.addEventListener("astro:page-load", bindDecks);
+
       // Click-to-copy email. Bound on first load and after every view
       // transition, guarded so a button is never bound twice.
       function bindCopy() {

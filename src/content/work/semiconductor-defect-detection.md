@@ -1,5 +1,5 @@
 ---
-title: "Real-Time Defect Detection in Semiconductors with GCP MLOps"
+title: "Real-time defect detection in semiconductors"
 position: "quantiphi"
 date: 2021-06
 featured: true
