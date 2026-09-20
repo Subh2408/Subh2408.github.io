@@ -70,7 +70,7 @@ function span(cls, text) {
 
 export default defineConfig({
   site: "https://Subh2408.github.io",
-  base: "/subh-portfolio-2026",
+  base: "/",
   output: "static",
   integrations: [react(), sitemap()],
   markdown: {
