@@ -978,23 +978,25 @@ input[type=range]::-moz-range-thumb {
   .herocta { margin-top: 18px; }
 
   /* ------------------------------------------------ tile grid */
+  /* Edge to edge. <main> has no width or padding of its own, so removing this
+     grid's own insets is all it takes. Deliberately not width:100vw with a
+     negative margin: 100vw counts the scrollbar and overflows the page. */
   .tiles {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
-    padding: 0 var(--pad-x) 4px; max-width: var(--maxw); margin: 0 auto;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px;
+    padding: 0; margin: 0; max-width: none;
   }
   .tile {
     position: relative; aspect-ratio: 1 / 1; overflow: hidden;
-    border-radius: 12px; text-decoration: none; color: var(--white);
+    border-radius: 0; text-decoration: none; color: var(--white);
     display: flex; flex-direction: column; justify-content: space-between;
     padding: 14px;
   }
   /* The data ramp carries these tiles because each one IS an object and the
      colour is its identity. Deliberate exception, mobile only. See CLAUDE.md. */
-  .tile.t-clay  { background: var(--clay); }
-  .tile.t-blue  { background: var(--d-blue); }
-  .tile.t-teal  { background: var(--d-teal); }
-  .tile.t-amber { background: var(--tile-amber); }
-  .tile.t-ink   { background: var(--ink); }
+  .tile.t-coral { background: var(--tile-coral); }
+  .tile.t-blue  { background: var(--tile-blue); }
+  .tile.t-black { background: var(--tile-black); }
+  .tile.t-grey  { background: var(--tile-grey); }
 
   .tile-n {
     font-family: var(--head); font-weight: 700;
@@ -1005,12 +1007,14 @@ input[type=range]::-moz-range-thumb {
   .tile-n.long { font-size: clamp(15px, 4.4vw, 21px); line-height: 1.15; }
   .tile-l {
     font-size: var(--t-meta); line-height: 1.25; margin-top: 8px;
-    color: var(--white);           /* full white: 80% fails 4.5:1 on four of five */
+    /* 80% white measures 4.31 on blue and 3.84 on coral, both failing. Coral
+       needs 91%, so 92% is the dimmest this can go and stay legible. */
+    color: rgba(255, 255, 255, .92);
   }
 
   .tile img {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; border-radius: 12px;
+    object-fit: cover;
   }
 
   /* ------------------------------------------------ collapsed copy */

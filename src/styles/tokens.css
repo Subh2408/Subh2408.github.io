@@ -33,10 +33,13 @@
   --tint-warm: #FBF4F0;
   --tint-cool: #F1F5FB;
 
-  /* Mobile tile ground only. --d-amber is 4.48:1 against white, just under
-     the 4.5 needed for the 14px tile label. This is that hue, darkened to
-     4.96:1. The chart ramp keeps --d-amber unchanged. */
-  --tile-amber: #9C6400;
+  /* Mobile tile grounds. These four only, and mobile only: the chart ramp
+     and the desktop accents are untouched. White text measures 19.80, 7.34,
+     5.86 and 5.11 against them, so every tile clears 4.5:1. */
+  --tile-black: #0A0A0A;
+  --tile-grey:  #565656;
+  --tile-blue:  #0060D0;
+  --tile-coral: #C0442E;
 
   /* data ramp — charts and modules only */
   --d-blue: #0060D0;
