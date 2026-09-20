@@ -19,6 +19,14 @@ import { url } from "../lib/paths";
 import { SITE, POSITIONING, SUBLINE, APPROACH, PAGE_META, SKILLS } from "../lib/site";
 import { HIGHLIGHTS } from "../lib/highlights";
 import { person } from "../lib/schema";
+import { INDUSTRIES } from "../lib/taxonomy";
+import { Image } from "astro:assets";
+
+// Pulled through astro:assets so the build emits small, hashed derivatives.
+// The originals are 0.8-3.2MB and would be ruinous on a phone.
+import tilePhoto1 from "../../public/images/photos/vietnam/Vietnam.jpg";
+import tilePhoto2 from "../../public/images/photos/goa/Goa1.JPEG";
+import tilePhoto3 from "../../public/images/photos/vietnam/bikeguy1.jpg";
 
 const work = await allWork();
 const positions = await positionsByRecency();
@@ -35,6 +43,29 @@ const featured = FEATURED.map((slug) => work.find((w) => w.id === slug)).filter(
 );
 const [lead, ...rest] = featured;
 
+/**
+ * The mobile tile grid. Five real figures as coloured tiles, three
+ * photographs, interleaved so colour and image alternate. Each colour is
+ * from the data ramp and identifies its tile; see the note in CLAUDE.md.
+ * White text on every ground clears 4.5:1 (amber uses --tile-amber, a
+ * darkened variant, because --d-amber lands at 4.48:1).
+ */
+const TILES = [
+  { kind: "kpi", tone: "t-clay", n: "$5M+", label: "SKU optimisation", slug: "sku-optimization" },
+  { kind: "photo", img: tilePhoto1, alt: "A street in Vietnam" },
+  { kind: "kpi", tone: "t-blue", n: "15 hrs → ~15 min", long: true, label: "Claims adjudication", slug: "claims-adjudication" },
+  { kind: "kpi", tone: "t-teal", n: "QCB", label: "AI governance", slug: "qic-ai-governance-qcb" },
+  { kind: "photo", img: tilePhoto2, alt: "A frame from Goa" },
+  { kind: "kpi", tone: "t-amber", n: "5 teams", label: "Risk operations tool", slug: "qic-risk-operations-tool" },
+  { kind: "kpi", tone: "t-ink", n: "$2.5M", label: "Semiconductor MLOps", slug: "semiconductor-defect-detection" },
+  { kind: "photo", img: tilePhoto3, alt: "A rider in Hanoi" },
+] as const;
+
+/** Stats row on the profile block. Derived, not hand-typed. */
+const YEARS = new Date().getFullYear() - 2015;
+// Read from the taxonomy, so the number cannot drift from what /work filters by.
+const INDUSTRY_COUNT = INDUSTRIES.length;
+
 const origin = Astro.site ?? new URL("http://localhost:4321");
 const jsonLd = [person(origin, positions, [...SKILLS])];
 ---
@@ -46,14 +77,26 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
   ogImage="/og/home.png"
   jsonLd={jsonLd}
 >
-  <section class="hero home-section">
+  <section class="hero">
     <div class="hero-rise hero-say">
+      <p class="profname">{SITE.person}</p>
       <h1 class="display-l">{POSITIONING}</h1>
       <p class="subline">{SUBLINE}</p>
+      <p class="subline-m">AI strategy, product and delivery. {SITE.locality}, {SITE.country}.</p>
+
+      {/* Thin dividers rather than middots: three dot-separated items is a
+          tell, and the audit fails the build over it. */}
+      <div class="profstats">
+        <span>{work.length} projects</span>
+        <span>{YEARS} yrs</span>
+        <span>{INDUSTRY_COUNT} industries</span>
+      </div>
 
       <div class="statusline">
-        <span class="dot" aria-hidden="true"></span>
-        <span>{SITE.locality}, {SITE.country}</span>
+        <span class="st-where">
+          <span class="dot" aria-hidden="true"></span>
+          <span>{SITE.locality}, {SITE.country}</span>
+        </span>
         <span class="clock" data-clock>--:-- {SITE.utcOffset}</span>
         <span class="st-open">Open to conversations</span>
       </div>
@@ -66,15 +109,33 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
 
     <div class="hero-rise-2 hero-demo">
       <p class="demo-cue">Move the slider. This is the model from a real project.</p>
-      <ClaimsThreshold client:load compact />
+      <ClaimsThreshold client:media="(min-width: 820px)" compact />
       <a class="demo-link" href={url("/work/claims-adjudication")}>Read the case study &rarr;</a>
     </div>
   </section>
 
-  <section class="proof home-section" aria-label="Selected results">
+  {/* Mobile only. The visual centrepiece of the phone home page. */}
+  <section class="tiles" aria-label="Highlights">
+    {
+      TILES.map((t) =>
+        t.kind === "kpi" ? (
+          <a class:list={["tile", t.tone]} href={url(`/work/${t.slug}`)}>
+            <span class:list={["tile-n", t.long && "long"]}>{t.n}</span>
+            <span class="tile-l">{t.label}</span>
+          </a>
+        ) : (
+          <a class="tile" href={url("/photography")}>
+            <Image src={t.img} alt={t.alt} width={420} height={420} loading="lazy" />
+          </a>
+        )
+      )
+    }
+  </section>
+
+  <section class="proof" aria-label="Selected results">
     <ul class="prooflist">
       {
-        HIGHLIGHTS.slice(0, 3).map((h) => (
+        HIGHLIGHTS.map((h) => (
           <li class="proofrow">
             <a href={url(`/work/${h.slug}`)}>
               <span class:list={["pnum", h.number.length > 8 && "long"]}>{h.number}</span>
@@ -86,30 +147,9 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
       }
     </ul>
 
-    {/*
-      Mobile shows three figures and folds the rest away, so the band is not a
-      seven-item text wall on a phone. Desktop ships this open and the summary
-      is hidden there, so all seven read as one continuous ledger.
-    */}
-    <details class="moreproof" open>
-      <summary>More numbers</summary>
-      <ul class="prooflist">
-        {
-          HIGHLIGHTS.slice(3).map((h) => (
-          <li class="proofrow">
-            <a href={url(`/work/${h.slug}`)}>
-              <span class:list={["pnum", h.number.length > 8 && "long"]}>{h.number}</span>
-              <span class="plabel">{h.label}</span>
-              <span class="pctx">{h.context}</span>
-            </a>
-          </li>
-          ))
-        }
-      </ul>
-    </details>
   </section>
 
-  <section id="approach" class="band warm home-section">
+  <section id="approach" class="band warm">
     <div class="splitband">
       <div class="splitband-head">
         <h2 class="h2">How I work.</h2>
@@ -119,7 +159,7 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
           APPROACH.map((a, i) => (
             <li class="approachitem">
               <span class="anum" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-              <details class="apx" open>
+              <details class="apx">
                 <summary>
                   <h3>{a.k}</h3>
                   <p class="apxv">{a.v}</p>
@@ -132,7 +172,7 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
     </div>
   </section>
 
-  <section id="featured" class="band cool home-section">
+  <section id="featured" class="band cool">
     <div class="bandhead">
       <h2 class="h2">Selected work.</h2>
       <a class="btn" href={url("/work")}>All {work.length} projects &rarr;</a>
@@ -183,7 +223,7 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
     </div>
   </section>
 
-  <section class="band dark close home-section">
+  <section class="band dark close">
     <h2 class="h2 closehead">Get in touch.</h2>
     <div class="contactrow">
       <CopyEmail dark />
@@ -229,19 +269,4 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
   startClock();
   document.addEventListener("astro:page-load", startClock);
 
-  // Long copy collapses on a phone. The markup ships <details open> so that
-  // desktop, and anyone without JS, sees everything expanded. Below 820px we
-  // close them, which is the only thing CSS cannot express: there is no way to
-  // force a <details> open or shut from a stylesheet.
-  const PHONE = "(max-width: 820px)";
-  function collapseOnPhone() {
-    const small = window.matchMedia(PHONE).matches;
-    document.querySelectorAll<HTMLDetailsElement>("details.apx, details.moreproof").forEach((d) => {
-      if (small) d.removeAttribute("open");
-      else d.setAttribute("open", "");
-    });
-  }
-  collapseOnPhone();
-  window.matchMedia(PHONE).addEventListener("change", collapseOnPhone);
-  document.addEventListener("astro:page-load", collapseOnPhone);
 </script>
