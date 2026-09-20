@@ -1,0 +1,36 @@
+---
+/**
+ * Breadcrumb trail. Sits at the top of every sub-page. The last item is the
+ * current page and is not a link.
+ */
+interface Crumb {
+  label: string;
+  href?: string;
+}
+interface Props {
+  items: Crumb[];
+  dark?: boolean;
+}
+const { items, dark = false } = Astro.props;
+---
+
+<nav class:list={["crumbs", dark && "dark"]} aria-label="Breadcrumb">
+  {
+    items.map((item, i) =>
+      i === items.length - 1 || !item.href ? (
+        <span class="cr-now" aria-current="page">
+          {item.label}
+        </span>
+      ) : (
+        <>
+          <a class="cr-link" href={item.href}>
+            {item.label}
+          </a>
+          <span class="cr-sep" aria-hidden="true">
+            /
+          </span>
+        </>
+      )
+    )
+  }
+</nav>

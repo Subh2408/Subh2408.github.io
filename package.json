@@ -1,0 +1,29 @@
+{
+  "name": "subhabrata-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "audit": "node scripts/audit.mjs",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "@astrojs/react": "^4.0.0",
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@fontsource/oswald": "^5.1.0",
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource/space-mono": "^5.1.0",
+    "exifr": "^7.1.3"
+  },
+  "devDependencies": {
+    "satori": "^0.12.0",
+    "sharp": "^0.33.5"
+  }
+}

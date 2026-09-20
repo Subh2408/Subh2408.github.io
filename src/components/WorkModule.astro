@@ -1,0 +1,35 @@
+---
+/**
+ * Renders the interactive module for a slug, if the project or post has one.
+ *
+ * This is a list of conditionals rather than a slug-to-component map on
+ * purpose. A `client:*` directive needs an import Astro can see statically; a
+ * component pulled out of an object at runtime fails to hydrate with
+ * NoMatchingImport. So each module is imported by name and matched by slug.
+ *
+ * Adding a module: import it, add a line here, and add the slug to
+ * WORK_MODULE_SLUGS or POST_MODULE_SLUGS in src/lib/content.ts so the
+ * "playable" chip appears in listings.
+ *
+ * Hydration is `client:visible`, so a page with no module ships no React and a
+ * page with one pays only when the reader reaches it.
+ */
+import ClaimsThreshold from "./modules/ClaimsThreshold";
+import SkuDelist from "./modules/SkuDelist";
+import SalesDrivers from "./modules/SalesDrivers";
+import BasketMiner from "./modules/BasketMiner";
+import RiskOps from "./modules/RiskOps";
+import BanditSim from "./modules/BanditSim";
+
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+---
+
+{slug === "claims-adjudication" && <ClaimsThreshold client:visible />}
+{slug === "sku-optimization" && <SkuDelist client:visible />}
+{slug === "sales-driver-analysis" && <SalesDrivers client:visible />}
+{slug === "market-basket-analysis" && <BasketMiner client:visible />}
+{slug === "qic-risk-operations-tool" && <RiskOps client:visible />}
+{slug === "exploration-vs-exploitation-k-bandit" && <BanditSim client:visible />}

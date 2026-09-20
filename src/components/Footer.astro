@@ -1,0 +1,18 @@
+---
+/**
+ * Home page only. Sub-pages end on their content.
+ *
+ * The wrapper carries the dark ground so it goes full-bleed. .foot is capped
+ * at --maxw, so a background on it alone would leave white gutters on wide
+ * screens. This shares the closing band's ground, deliberately.
+ */
+import { SITE } from "../lib/site";
+---
+
+<div class="footwrap">
+  <footer class="foot">
+    <span class="fname">{SITE.name}</span>
+    <span>{SITE.person}</span>
+    <span>{SITE.locality}, {SITE.country}</span>
+  </footer>
+</div>

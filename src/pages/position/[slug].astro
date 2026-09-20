@@ -1,0 +1,125 @@
+---
+/**
+ * A company page: the role, what it was, and every case study from it. Reached
+ * from the timeline and from the breadcrumb on a case study.
+ */
+import Base from "../../layouts/Base.astro";
+import Crumbs from "../../components/Crumbs.astro";
+import Chips from "../../components/Chips.astro";
+import WorkModule from "../../components/WorkModule.astro";
+import { getCollection, render } from "astro:content";
+import { workForPosition, WORK_MODULE_SLUGS } from "../../lib/content";
+import { monthLabel, isoMonth, tenure, year } from "../../lib/dates";
+import { url } from "../../lib/paths";
+import { breadcrumbList, organizationRole } from "../../lib/schema";
+
+export async function getStaticPaths() {
+  const positions = await getCollection("positions");
+  return positions.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const items = await workForPosition(entry.id);
+
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const jsonLd = [
+  organizationRole(origin, entry, items.length),
+  breadcrumbList(origin, [
+    { label: "Home", path: "/" },
+    { label: "Work", path: "/work" },
+    { label: entry.data.company, path: `/position/${entry.id}` },
+  ]),
+];
+
+const description = `${entry.data.role} at ${entry.data.company}, ${monthLabel(entry.data.start)} to ${monthLabel(entry.data.end)}. ${entry.data.summary}`;
+---
+
+<Base
+  title={entry.data.company}
+  description={description}
+  nav="work"
+  ogImage={`/og/position-${entry.id}.png`}
+  jsonLd={jsonLd}
+>
+  <div class="page">
+    <Crumbs
+      items={[
+        { label: "Home", href: url("/") },
+        { label: "Work", href: url("/work") },
+        { label: entry.data.company },
+      ]}
+    />
+
+    <h1 class="display" style="margin-top:16px">{entry.data.company}</h1>
+
+    <div class="metarow" style="margin-top:16px">
+      <span class="meta">{entry.data.role}</span>
+      {entry.data.industry && <span class="meta">{entry.data.industry}</span>}
+      {entry.data.location && <span class="meta">{entry.data.location}</span>}
+      <span class="meta-mono">
+        <time datetime={isoMonth(entry.data.start)}>{monthLabel(entry.data.start)}</time>
+        {" to "}
+        {entry.data.end === "present" ? (
+          "present"
+        ) : (
+          <time datetime={isoMonth(entry.data.end)}>{monthLabel(entry.data.end)}</time>
+        )}
+      </span>
+      <span class="meta-mono">{tenure(entry.data.start, entry.data.end)}</span>
+    </div>
+
+    <p class="lede">{entry.data.summary}</p>
+
+    <div class="prose" style="margin-top:20px">
+      <Content />
+    </div>
+
+    {
+      items.map((w) => (
+        <article class="wcard">
+          <div class="wcardhead">
+            <h2 class="wcardtitle">{w.data.title}</h2>
+            <span class="metarow" style="gap:10px">
+              {WORK_MODULE_SLUGS.has(w.id) && <span class="livechip">&#9679; playable</span>}
+              <span class="meta-mono">{year(w.data.date)}</span>
+            </span>
+          </div>
+
+          {w.data.kpis.length > 0 && (
+            <div class="statrow">
+              {w.data.kpis.map((k) => (
+                <div class="stat big">
+                  <span class="stat-v">{k.value}</span>
+                  <span class="stat-s">{k.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <p style="font-size:16px;line-height:1.6;margin-top:20px;max-width:58ch;color:var(--gt)">
+            {w.data.description}
+          </p>
+
+          <Chips chips={w.data.chips} />
+
+          <div style="margin-top:24px">
+            <WorkModule slug={w.id} />
+          </div>
+
+          <p style="margin-top:20px">
+            <a class="ul blue" style="font-size:15px" href={url(`/work/${w.id}`)}>
+              Read the full case study &rarr;
+            </a>
+          </p>
+        </article>
+      ))
+    }
+
+    {
+      items.length === 0 && (
+        <p class="empty">No case studies from this role. It is on the timeline and the résumé.</p>
+      )
+    }
+  </div>
+</Base>

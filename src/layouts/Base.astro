@@ -1,0 +1,139 @@
+---
+/**
+ * Base layout. Owns the document head: title, description, canonical, Open
+ * Graph, Twitter, JSON-LD, and the self-hosted fonts. Every route uses it.
+ */
+import "@fontsource/oswald/400.css";
+import "@fontsource/oswald/600.css";
+import "@fontsource/oswald/700.css";
+import "@fontsource-variable/inter";
+import "@fontsource/space-mono/400.css";
+import "@fontsource/space-mono/700.css";
+import "../styles/tokens.css";
+import "../styles/global.css";
+
+import { ClientRouter } from "astro:transitions";
+import Nav from "../components/Nav.astro";
+import { SITE } from "../lib/site";
+import { url } from "../lib/paths";
+
+interface Props {
+  /** Page title without the site name. "Work", not "Work | Subhabrata Nag". */
+  title: string;
+  description: string;
+  /** Use the title verbatim, without appending the site name. Home only. */
+  exactTitle?: boolean;
+  /** Dark canvas. /photography only. */
+  dark?: boolean;
+  /** Path to this page's generated Open Graph image. */
+  ogImage?: string;
+  /** Which nav item is lit. */
+  nav?: "work" | "writing" | "photography" | "about" | null;
+  /** Structured data blocks. Rendered as one JSON-LD block each. */
+  jsonLd?: Record<string, unknown>[];
+  /** Article pages set this so Open Graph reports the right type. */
+  ogType?: "website" | "article";
+}
+
+const {
+  title,
+  description,
+  exactTitle = false,
+  dark = false,
+  ogImage = "/og/home.png",
+  nav = null,
+  jsonLd = [],
+  ogType = "website",
+} = Astro.props;
+
+// Astro.site is the placeholder until the repo is created. Fall back so `astro
+// dev` and `astro build` both work before it is filled in.
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const canonical = new URL(Astro.url.pathname, origin).href;
+const ogImageUrl = new URL(url(ogImage), origin).href;
+const fullTitle = exactTitle ? title : `${title} | ${SITE.person}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content={SITE.person} />
+    <meta name="theme-color" content={dark ? "#0A0A0A" : "#FFFFFF"} />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.person} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={fullTitle} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="icon" href={url("/favicon.svg")} type="image/svg+xml" />
+    <link rel="icon" href={url("/favicon-32.png")} sizes="32x32" />
+    <link rel="apple-touch-icon" href={url("/apple-touch-icon.png")} />
+    <link rel="sitemap" href={url("/sitemap-index.xml")} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`Writing by ${SITE.person}`}
+      href={url("/rss.xml")}
+    />
+
+    {
+      jsonLd.map((block) => (
+        <script type="application/ld+json" set:html={JSON.stringify(block)} />
+      ))
+    }
+
+    <ClientRouter />
+  </head>
+  <body class={dark ? "dark" : undefined}>
+    <a class="skip" href="#main">Skip to content</a>
+    <Nav current={nav} dark={dark} />
+    <main id="main">
+      <slot />
+    </main>
+
+    <script>
+      // Click-to-copy email. Bound on first load and after every view
+      // transition, guarded so a button is never bound twice.
+      function bindCopy() {
+        const buttons =
+          document.querySelectorAll<HTMLButtonElement>("button[data-copy]");
+        buttons.forEach((btn) => {
+          if (btn.dataset.bound === "1") return;
+          btn.dataset.bound = "1";
+          const original = btn.textContent;
+          btn.addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(btn.dataset.copy ?? "");
+            } catch {
+              // Clipboard blocked. The address is still on screen to read.
+            }
+            btn.textContent = "copied";
+            window.setTimeout(() => {
+              btn.textContent = original;
+            }, 1600);
+          });
+        });
+      }
+      bindCopy();
+      document.addEventListener("astro:page-load", bindCopy);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+---
+/**
+ * One case study. Breadcrumb, headline numbers, the module if the project has
+ * one, then the body. The body is the author's prose and is rendered as
+ * written.
+ */
+import Base from "../../layouts/Base.astro";
+import Crumbs from "../../components/Crumbs.astro";
+import Chips from "../../components/Chips.astro";
+import WorkModule from "../../components/WorkModule.astro";
+import { getCollection, render } from "astro:content";
+import { allWork, positionMap, WORK_MODULE_SLUGS } from "../../lib/content";
+import { year } from "../../lib/dates";
+import { url } from "../../lib/paths";
+import { hasPublicFile } from "../../lib/publicFile";
+import { breadcrumbList, creativeWork } from "../../lib/schema";
+
+export async function getStaticPaths() {
+  const work = await getCollection("work");
+  return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const positions = await positionMap();
+const position = positions.get(entry.data.position);
+
+// Previous and next by date, so a reader can walk the whole body of work.
+const ordered = await allWork();
+const index = ordered.findIndex((w) => w.id === entry.id);
+const newer = index > 0 ? ordered[index - 1] : undefined;
+const older = index < ordered.length - 1 ? ordered[index + 1] : undefined;
+
+const playable = WORK_MODULE_SLUGS.has(entry.id);
+const cover = hasPublicFile(entry.data.cover) ? entry.data.cover : undefined;
+
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const jsonLd = [
+  creativeWork(origin, entry, position),
+  breadcrumbList(origin, [
+    { label: "Home", path: "/" },
+    { label: "Work", path: "/work" },
+    ...(position ? [{ label: position.data.company, path: `/position/${position.id}` }] : []),
+    { label: entry.data.title, path: `/work/${entry.id}` },
+  ]),
+];
+---
+
+<Base
+  title={entry.data.title}
+  description={entry.data.description}
+  nav="work"
+  ogType="article"
+  ogImage={`/og/work-${entry.id}.png`}
+  jsonLd={jsonLd}
+>
+  <article class="page">
+    <Crumbs
+      items={[
+        { label: "Home", href: url("/") },
+        { label: "Work", href: url("/work") },
+        ...(position
+          ? [{ label: position.data.company, href: url(`/position/${position.id}`) }]
+          : []),
+        { label: entry.data.title },
+      ]}
+    />
+
+    <div class="metarow" style="margin-top:16px">
+      {position && <span class="meta">{position.data.company}</span>}
+      <span class="meta-mono">{year(entry.data.date)}</span>
+      {entry.data.readTime && <span class="meta-mono">{entry.data.readTime}</span>}
+      {playable && <span class="livechip">&#9679; playable</span>}
+    </div>
+
+    <h1 class="display" style="margin-top:10px;max-width:20ch">{entry.data.title}</h1>
+
+    {
+      entry.data.kpis.length > 0 && (
+        <div class="statrow" style="margin-top:30px">
+          {entry.data.kpis.map((k) => (
+            <div class="stat big">
+              <span class="stat-v">{k.value}</span>
+              <span class="stat-s">{k.label}</span>
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    <p class="wsum">{entry.data.description}</p>
+
+    <Chips chips={entry.data.chips} />
+
+    {
+      cover && (
+        <img
+          src={url(cover)}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style="margin-top:30px;border-radius:10px"
+        />
+      )
+    }
+
+    <div style="margin-top:30px">
+      <WorkModule slug={entry.id} />
+    </div>
+
+    <div class="prose" style="margin-top:36px">
+      <Content />
+    </div>
+
+    <nav class="pager" aria-label="More work">
+      {
+        newer && (
+          <a class="pager-btn" href={url(`/work/${newer.id}`)}>
+            <span class="pager-k">&larr; Newer</span>
+            <span>{newer.data.title}</span>
+          </a>
+        )
+      }
+      {
+        older && (
+          <a class="pager-btn right" href={url(`/work/${older.id}`)}>
+            <span class="pager-k">Older &rarr;</span>
+            <span>{older.data.title}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</Base>

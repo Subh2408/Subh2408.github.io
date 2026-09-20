@@ -1,0 +1,435 @@
+---
+/**
+ * Work. Two views over the same data: the timeline of roles (default) and the
+ * flat list of projects with a two-axis filter.
+ *
+ * Both views are in the HTML at all times. The toggle only flips the `hidden`
+ * attribute, so a crawler and a reader with no JavaScript see every project.
+ */
+import Base from "../../layouts/Base.astro";
+import Crumbs from "../../components/Crumbs.astro";
+import SecLabel from "../../components/SecLabel.astro";
+import { allWork, rolesByRecency, breaks, positionsByRecency, positionMap, workForPosition, WORK_MODULE_SLUGS } from "../../lib/content";
+import { monthLabel, isoMonth, tenure, year, NOW } from "../../lib/dates";
+import { url } from "../../lib/paths";
+import { packChips } from "../../lib/timeline";
+import { shortName } from "../../lib/shortNames";
+import { PAGE_META } from "../../lib/site";
+import { DISCIPLINES, INDUSTRIES, tagList } from "../../lib/taxonomy";
+import { breadcrumbList } from "../../lib/schema";
+
+const work = await allWork();
+const roles = await rolesByRecency();
+const careerBreaks = await breaks();
+const everything = await positionsByRecency();
+const byPosition = await positionMap();
+
+// Project count per role, used on the cards and the mobile rows.
+const counts = new Map<string, number>();
+for (const p of everything) counts.set(p.id, (await workForPosition(p.id)).length);
+
+/* ---- timeline geometry ------------------------------------------------- */
+
+// A year-stepped axis: evenly spaced years, newest on the left, one marker per
+// role at its start year. Nothing here encodes duration. Tenure is on the role
+// cards below, on the position pages and on the resume.
+
+// The range is derived, so the axis grows a column when the year rolls over.
+const LAST_YEAR = NOW.getUTCFullYear();
+const FIRST_YEAR = Math.min(...everything.map((p) => p.data.start.getUTCFullYear()));
+const years: number[] = [];
+for (let y = LAST_YEAR; y >= FIRST_YEAR; y--) years.push(y);
+
+/** Grid column for a year. 2026 is column 1, counting rightward into the past. */
+const columnFor = (y: number) => LAST_YEAR - y + 1;
+
+// Newest first; roles starting in the same year run oldest first, which puts
+// Ernst & Young (January 2015) above WNS (November 2015).
+const ordered = everything.slice().sort((a, b) => {
+  const byYear = b.data.start.getUTCFullYear() - a.data.start.getUTCFullYear();
+  return byYear !== 0 ? byYear : +a.data.start - +b.data.start;
+});
+
+// The chip carries the company only. Role, dates and tenure are on the cards
+// directly beneath the axis, so repeating them here would be noise.
+const chips = ordered.map((p) => ({
+  position: p,
+  startYear: p.data.start.getUTCFullYear(),
+  column: columnFor(p.data.start.getUTCFullYear()),
+  isBreak: p.data.type === "break",
+  label: shortName(p.id, p.data.company),
+  full: p.data.company,
+}));
+
+const placements = packChips(
+  chips.map((c) => ({ column: c.column, label: c.label })),
+  years.length
+);
+
+const CHIP_ROW = 30;
+const chipRowCount = Math.max(...placements.map((p) => p.row)) + 1;
+const chipsHeight = chipRowCount * CHIP_ROW;
+
+const placed = chips.map((chip, i) => {
+  const p = placements[i];
+  return {
+    ...chip,
+    row: p.row,
+    // Pinned chips grow leftward from the right edge so the 2015 pair stays in.
+    side: p.pinnedRight ? "right:0" : `left:${p.left}%`,
+    top: p.row * CHIP_ROW,
+    // A connector traces a dropped chip back to its dot. It starts on the axis
+    // line, 16px above the chip band, and has to reach the chip's own top.
+    connectorLeft: ((chip.column - 1) / years.length) * 100,
+    connectorHeight: p.row * CHIP_ROW + 16,
+  };
+});
+
+// Guides are drawn only in columns that hold a marker.
+const guideColumns = [...new Set(chips.map((c) => c.column))].sort((a, b) => a - b);
+
+// The vertical version groups by year so empty years still render as steps. It
+// uses full company names, having the room for them.
+const steps = chips;
+
+// The vertical version groups by year so empty years still render as steps.
+const byYear = new Map<number, typeof steps>();
+for (const step of steps) {
+  const list = byYear.get(step.startYear) ?? [];
+  list.push(step);
+  byYear.set(step.startYear, list);
+}
+
+/* ---- project list ------------------------------------------------------ */
+
+const rows = work.map((w) => ({
+  entry: w,
+  company: byPosition.get(w.data.position)?.data.company ?? "",
+  playable: WORK_MODULE_SLUGS.has(w.id),
+  // Filterable on both the coarse axes and any chip value, so a chip on a case
+  // study can link back into this list and land on something.
+  tags: [...tagList(w.id), ...Object.values(w.data.chips).flat()]
+    .map((t) => t.toLowerCase())
+    .join("|"),
+}));
+
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const jsonLd = [
+  breadcrumbList(origin, [
+    { label: "Home", path: "/" },
+    { label: "Work", path: "/work" },
+  ]),
+];
+---
+
+<Base
+  title={PAGE_META.work.title}
+  description={PAGE_META.work.description}
+  nav="work"
+  ogImage="/og/work.png"
+  jsonLd={jsonLd}
+>
+  <div class="page">
+    <Crumbs items={[{ label: "Home", href: url("/") }, { label: "Work" }]} />
+    <h1 class="display" style="margin-top:16px">Work.</h1>
+    <p class="lede">Eleven years of work. Five projects are interactive.</p>
+
+    <div class="segwrap">
+      <div class="seg" role="tablist" aria-label="Work view">
+        <button type="button" class="on" role="tab" aria-selected="true" aria-controls="panel-timeline" data-view="timeline">
+          Timeline
+        </button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-list" data-view="list">
+          Projects
+        </button>
+      </div>
+    </div>
+
+    <!-- ---------------------------------------------------- timeline view -->
+    <section id="panel-timeline" class="viewpanel" role="tabpanel" aria-label="Professional timeline">
+      <SecLabel n="&mdash;">Professional timeline</SecLabel>
+
+      <div class="tlwrap" style={`--cols:${years.length}`}>
+        <div class="tlyears">
+          {
+            years.map((y) => (
+              <span class="tly">
+                <span class="yr">{y}</span>
+                <span class="mark" />
+              </span>
+            ))
+          }
+        </div>
+
+        <div class="tlaxis">
+          <div class="tldots">
+            {
+              placed.map((chip) => (
+                <span
+                  class:list={["tldot", chip.isBreak && "is-break"]}
+                  style={`grid-column:${chip.column}`}
+                  data-slug={chip.position.id}
+                />
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="tlchips" style={`height:${chipsHeight}px`}>
+          {
+            placed.map((chip) => (
+              <>
+                {chip.row > 0 && (
+                  <span
+                    class="tlconn"
+                    aria-hidden="true"
+                    style={`left:${chip.connectorLeft}%;height:${chip.connectorHeight}px`}
+                  />
+                )}
+                <a
+                  class:list={["tlchip", chip.isBreak && "is-break"]}
+                  href={url(`/position/${chip.position.id}`)}
+                  data-slug={chip.position.id}
+                  style={`${chip.side};top:${chip.top}px`}
+                  title={chip.full}
+                  aria-label={`${chip.full}, from ${monthLabel(chip.position.data.start)}`}
+                >
+                  {chip.label}
+                </a>
+              </>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Below 820px the axis turns on its side: years step down the left
+           edge, roles sit beside the year they began. Empty years stay as short
+           steps, because the stepping is what makes it read as a timeline. -->
+      <ol class="tlv">
+        {
+          years.map((y) => {
+            const items = byYear.get(y) ?? [];
+            return (
+              <li class:list={["tlv-year", items.length === 0 && "is-empty"]}>
+                <span class="tlv-yr">{y}</span>
+                <span class="tlv-items">
+                  {
+                    items.map((step) => {
+                      const inner = (
+                        <>
+                          <span class="tlv-co">{step.position.data.company}</span>
+                          <span class="tlv-role">{step.position.data.role}</span>
+                        </>
+                      );
+                      return step.isBreak ? (
+                        <span class="tlv-item is-break">{inner}</span>
+                      ) : (
+                        <a class="tlv-item" href={url(`/position/${step.position.id}`)} data-slug={step.position.id}>
+                          {inner}
+                        </a>
+                      );
+                    })
+                  }
+                </span>
+              </li>
+            );
+          })
+        }
+      </ol>
+
+      <div class="cardrow">
+        {
+          roles.map((r, i) => {
+            const n = counts.get(r.id) ?? 0;
+            return (
+              <a class="rolecard" href={url(`/position/${r.id}`)} data-slug={r.id}>
+                <span class="rnum">{String(i + 1).padStart(2, "0")}</span>
+                <span class="rco">{r.data.company}</span>
+                <span class="rrole">{r.data.role}</span>
+                <span style="flex:1" />
+                <span class="rdates">
+                  <span class="meta-mono">
+                    <time datetime={isoMonth(r.data.start)}>{monthLabel(r.data.start)}</time>
+                    {" to "}
+                    {r.data.end === "present"
+                      ? "present"
+                      : <time datetime={isoMonth(r.data.end)}>{monthLabel(r.data.end)}</time>}
+                  </span>
+                  <span class="meta-mono">{tenure(r.data.start, r.data.end)}</span>
+                </span>
+                <span class="rlink">{n ? `${n} project${n === 1 ? "" : "s"} →` : "no case studies"}</span>
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <div class="chron">
+        {
+          careerBreaks.map((p) => (
+            <div class="chrow break">
+              <span>
+                {p.data.company}. {p.data.summary}
+              </span>
+              <span class="meta-mono">
+                <time datetime={isoMonth(p.data.start)}>{monthLabel(p.data.start)}</time>
+                {" to "}
+                <time datetime={isoMonth(p.data.end as Date)}>{monthLabel(p.data.end)}</time>
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------- list view -->
+    <section id="panel-list" class="viewpanel" role="tabpanel" aria-label="Projects" hidden>
+      <div class="filterbar">
+        <span class="axis-k">discipline</span>
+        <button type="button" class="pill sm on" data-filter="">all</button>
+        {DISCIPLINES.map((d) => <button type="button" class="pill sm" data-filter={d}>{d}</button>)}
+      </div>
+      <div class="filterbar tight">
+        <span class="axis-k">industry</span>
+        {INDUSTRIES.map((d) => <button type="button" class="pill sm" data-filter={d}>{d}</button>)}
+        <span class="filtercount" data-count hidden></span>
+      </div>
+
+      <div class="worklist">
+        {
+          rows.map((row, i) => (
+            <a class="workrow" href={url(`/work/${row.entry.id}`)} data-tags={row.tags}>
+              <span class="wnum">{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <span class="wtitle">{row.entry.data.title}</span>
+                <span class="wdesc">{row.entry.data.description}</span>
+              </span>
+              <span class="wside">
+                <span class="meta">{row.company}</span>
+                <span class="meta-mono">{year(row.entry.data.date)}</span>
+                {row.playable && <span class="livechip">&#9679; playable</span>}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+      <p class="empty" data-empty hidden>
+        Nothing tagged <span data-empty-tag></span>.
+        <button type="button" class="ul plain blue" data-filter="">Clear the filter</button>.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  const TAGS_KEY = "data-tags";
+
+  function setup() {
+    if (!document.querySelector("[data-view]")) return;
+
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-view]"));
+    const panels = {
+      timeline: document.getElementById("panel-timeline"),
+      list: document.getElementById("panel-list"),
+    };
+    const rows = Array.from(document.querySelectorAll<HTMLElement>(".workrow"));
+    const pills = Array.from(document.querySelectorAll<HTMLElement>("[data-filter]"));
+    const count = document.querySelector<HTMLElement>("[data-count]");
+    const empty = document.querySelector<HTMLElement>("[data-empty]");
+    const emptyTag = document.querySelector<HTMLElement>("[data-empty-tag]");
+
+    let currentFilter = "";
+
+    function currentView(): "timeline" | "list" {
+      return panels.list && !panels.list.hidden ? "list" : "timeline";
+    }
+
+    function writeUrl(view: string, filter: string) {
+      const params = new URLSearchParams();
+      if (view === "list") params.set("view", "list");
+      if (filter) params.set("filter", filter);
+      const qs = params.toString();
+      history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
+    }
+
+    function showView(view: "timeline" | "list", push: boolean) {
+      tabs.forEach((t) => {
+        const on = t.dataset.view === view;
+        t.classList.toggle("on", on);
+        t.setAttribute("aria-selected", String(on));
+      });
+      if (panels.timeline) panels.timeline.hidden = view !== "timeline";
+      if (panels.list) panels.list.hidden = view !== "list";
+      if (push) writeUrl(view, currentFilter);
+    }
+
+    function applyFilter(value: string, push: boolean) {
+      currentFilter = value;
+      const needle = value.toLowerCase();
+      let shown = 0;
+      rows.forEach((row) => {
+        const tags = (row.getAttribute(TAGS_KEY) ?? "").split("|");
+        const match = !needle || tags.includes(needle);
+        row.hidden = !match;
+        if (match) {
+          shown++;
+          const num = row.querySelector(".wnum");
+          if (num) num.textContent = String(shown).padStart(2, "0");
+        }
+      });
+
+      pills.forEach((p) => p.classList.toggle("on", (p.dataset.filter ?? "") === value));
+
+      if (count) {
+        count.hidden = !value;
+        count.textContent = value ? `${shown} of ${rows.length}` : "";
+      }
+      if (empty) empty.hidden = shown > 0;
+      if (emptyTag) emptyTag.textContent = value;
+      if (push) writeUrl(currentView(), value);
+    }
+
+    tabs.forEach((t) => {
+      t.addEventListener("click", () => {
+        const view = t.dataset.view === "list" ? "list" : "timeline";
+        if (view === "timeline") applyFilter("", false);
+        showView(view, true);
+      });
+    });
+
+    pills.forEach((p) => {
+      p.addEventListener("click", () => {
+        const value = p.dataset.filter ?? "";
+        // Picking a filter is a request to see projects, not roles.
+        showView("list", false);
+        applyFilter(value === currentFilter ? "" : value, true);
+      });
+    });
+
+    // Highlight a role's bar, its label and its card together.
+    document.querySelectorAll<HTMLElement>("[data-slug]").forEach((el) => {
+      const slug = el.dataset.slug;
+      const pair = () => document.querySelectorAll<HTMLElement>(`[data-slug="${slug}"]`);
+      el.addEventListener("mouseenter", () => pair().forEach((n) => n.classList.add("hot")));
+      el.addEventListener("mouseleave", () => pair().forEach((n) => n.classList.remove("hot")));
+      el.addEventListener("focus", () => pair().forEach((n) => n.classList.add("hot")));
+      el.addEventListener("blur", () => pair().forEach((n) => n.classList.remove("hot")));
+    });
+
+    // Deep links: /work?view=list&filter=ML
+    const params = new URLSearchParams(location.search);
+    const wanted = params.get("filter") ?? "";
+    if (wanted) {
+      showView("list", false);
+      applyFilter(wanted, false);
+    } else if (params.get("view") === "list") {
+      showView("list", false);
+      applyFilter("", false);
+    } else {
+      applyFilter("", false);
+    }
+  }
+
+  setup();
+  document.addEventListener("astro:page-load", setup);
+</script>

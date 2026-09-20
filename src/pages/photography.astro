@@ -1,0 +1,371 @@
+---
+/**
+ * Photography. The one dark room on the site.
+ *
+ * Frames are read from the photos collection; EXIF comes off the files at
+ * build. Until a set is added the page renders its heading and says so. Drop a
+ * set markdown file in src/content/photos/ and the images in
+ * public/images/photos/<set-slug>/ and it fills itself in.
+ */
+import Base from "../layouts/Base.astro";
+import Crumbs from "../components/Crumbs.astro";
+import { photoSets } from "../lib/photos";
+import { url } from "../lib/paths";
+import { PAGE_META, SITE } from "../lib/site";
+import { breadcrumbList, imageObject } from "../lib/schema";
+
+const sets = await photoSets();
+const frames = sets.flatMap((s) => s.frames);
+
+// Filter chips are derived from the sets, never hardcoded, so a chip cannot
+// exist with nothing behind it and a new place appears the first time a set
+// uses it. Alphabetical, so the row does not reshuffle as sets are added.
+const tags = [...new Set(sets.flatMap((s) => s.tags))].sort((a, b) =>
+  a.localeCompare(b)
+);
+
+// Only the fields the lightbox reads, so the inline JSON stays small.
+const lightboxFrames = frames.map((f) => ({
+  index: f.index,
+  href: f.href,
+  alt: f.alt,
+  caption: f.caption,
+  location: f.location,
+  camera: f.camera,
+  lens: f.lens,
+  focal: f.focal,
+  aperture: f.aperture,
+  shutter: f.shutter,
+  iso: f.iso,
+  taken: f.taken,
+  exists: f.exists,
+}));
+
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const jsonLd: Record<string, unknown>[] = [
+  breadcrumbList(origin, [
+    { label: "Home", path: "/" },
+    { label: "Photography", path: "/photography" },
+  ]),
+];
+
+if (frames.length > 0) {
+  jsonLd.push({
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: `Photography by ${SITE.person}`,
+    description: PAGE_META.photography.description,
+    url: new URL(url("/photography"), origin).href,
+    image: frames.map((f) => imageObject(origin, f, f.setTitle, f.location)),
+  });
+}
+
+---
+
+<Base
+  title={PAGE_META.photography.title}
+  description={PAGE_META.photography.description}
+  nav="photography"
+  dark
+  ogImage="/og/photography.png"
+  jsonLd={jsonLd}
+>
+  <div class="page dark">
+    <Crumbs dark items={[{ label: "Home", href: url("/") }, { label: "Photography" }]} />
+    <h1 class="display" style="margin-top:16px;color:var(--white)">Photography.</h1>
+    {
+      tags.length > 0 && (
+        <div class="pfilter" role="group" aria-label="Filter photo sets by place">
+          <button type="button" class="pill on" data-tag="" aria-pressed="true">
+            All
+          </button>
+          {tags.map((t) => (
+            <button type="button" class="pill" data-tag={t} aria-pressed="false">
+              {t}
+            </button>
+          ))}
+        </div>
+      )
+    }
+
+    {sets.length === 0 && <p class="emptyset">No sets published yet.</p>}
+
+    <p class="emptyset" data-no-match hidden>
+      No sets tagged <span data-no-match-tag></span> yet.
+    </p>
+
+    {
+      sets.map((set) => (
+        <section class="setblock" data-set-tags={set.tags.map((t) => t.toLowerCase()).join("|")}>
+          <div class="sethead">
+            <h2 class="settitle">{set.title}</h2>
+            <span class="metarow">
+              {set.location && <span class="meta" style="color:var(--dk-text-2)">{set.location}</span>}
+              <span class="meta-mono" style="color:var(--dk-text-2)">
+                {set.date.getUTCFullYear()}
+              </span>
+            </span>
+          </div>
+          {set.description && <p class="setdesc">{set.description}</p>}
+
+          <div class="pgrid">
+            {set.frames.map((f) => (
+              <button
+                type="button"
+                class:list={["ph", f.hero && "is-hero"]}
+                data-frame={f.index}
+                aria-label={`Open ${f.alt}`}
+              >
+                {f.exists ? (
+                  <img
+                    src={f.href}
+                    alt={f.alt}
+                    width={f.width}
+                    height={f.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <span class="ph-alt">{f.alt}</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+
+    {
+      frames.length > 0 && (
+        <div
+          class="lightbox"
+          id="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photograph"
+          hidden
+        >
+          <div class="lb-inner">
+            <div class="lb-img">
+              <img id="lb-img" src="" alt="" hidden />
+              <span class="lb-none" id="lb-none">Image not in the repo yet</span>
+            </div>
+            <div class="lb-meta">
+              <div class="lb-title" id="lb-title"></div>
+              <div class="lb-cap" id="lb-cap"></div>
+              <div class="exif" id="lb-exif" />
+              <div class="lb-nav">
+                <button type="button" class="darkbtn" data-lb="prev" aria-label="Previous photograph">
+                  &larr;
+                </button>
+                <button type="button" class="darkbtn" data-lb="next" aria-label="Next photograph">
+                  &rarr;
+                </button>
+                <button type="button" class="darkbtn close" data-lb="close">close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    <script type="application/json" id="frame-data" set:html={JSON.stringify(lightboxFrames)} is:inline />
+  </div>
+</Base>
+
+<script>
+  interface LbFrame {
+    index: number;
+    href: string;
+    alt: string;
+    caption?: string;
+    location?: string;
+    camera?: string;
+    lens?: string;
+    focal?: string;
+    aperture?: string;
+    shutter?: string;
+    iso?: string;
+    taken?: string;
+    exists: boolean;
+  }
+
+  function setupLightbox() {
+    const box = document.getElementById("lightbox");
+    const dataEl = document.getElementById("frame-data");
+    if (!box || !dataEl || !dataEl.textContent) return;
+
+    const frames: LbFrame[] = JSON.parse(dataEl.textContent);
+    if (!frames.length) return;
+
+    const img = document.getElementById("lb-img") as HTMLImageElement | null;
+    const none = document.getElementById("lb-none");
+    const title = document.getElementById("lb-title");
+    const cap = document.getElementById("lb-cap");
+    const exif = document.getElementById("lb-exif");
+    let open: number | null = null;
+    let opener: HTMLElement | null = null;
+    // Frame indices currently on screen. The filter rewrites this, so the
+    // arrow keys never walk into a set the reader has filtered out.
+    let visible: number[] = frames.map((f) => f.index);
+
+    function row(key: string, value: string) {
+      const el = document.createElement("div");
+      el.className = "exif-row";
+      const k = document.createElement("span");
+      k.textContent = key;
+      const v = document.createElement("span");
+      v.textContent = value;
+      el.append(k, v);
+      return el;
+    }
+
+    function paint(i: number) {
+      const f = frames[i];
+      if (!f) return;
+      open = i;
+      if (img && none) {
+        if (f.exists) {
+          img.src = f.href;
+          img.alt = f.alt;
+          img.hidden = false;
+          none.hidden = true;
+        } else {
+          img.hidden = true;
+          img.removeAttribute("src");
+          none.hidden = false;
+        }
+      }
+      if (title) title.textContent = f.alt;
+      if (cap) cap.textContent = f.caption ?? "";
+      if (exif) {
+        exif.textContent = "";
+        const pairs: [string, string | undefined][] = [
+          ["camera", f.camera],
+          ["lens", f.lens],
+          ["focal", f.focal],
+          ["aperture", f.aperture],
+          ["shutter", f.shutter],
+          ["iso", f.iso],
+          ["location", f.location],
+          ["date", f.taken],
+        ];
+        pairs.forEach(([k, v]) => {
+          if (v) exif.appendChild(row(k, v));
+        });
+      }
+    }
+
+    function show(i: number, from: HTMLElement | null) {
+      opener = from;
+      box!.hidden = false;
+      document.body.style.overflow = "hidden";
+      paint(i);
+      (box!.querySelector("[data-lb='close']") as HTMLElement | null)?.focus();
+    }
+
+    function close() {
+      box!.hidden = true;
+      document.body.style.overflow = "";
+      open = null;
+      opener?.focus();
+    }
+
+    function move(step: number) {
+      if (open === null || !visible.length) return;
+      const at = visible.indexOf(open);
+      const next = at === -1 ? 0 : (at + step + visible.length) % visible.length;
+      paint(visible[next]);
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-frame]").forEach((btn) => {
+      btn.addEventListener("click", () => show(Number(btn.dataset.frame), btn));
+    });
+
+    box.addEventListener("click", (e) => {
+      if (e.target === box) close();
+    });
+    box.querySelectorAll<HTMLElement>("[data-lb]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const action = btn.dataset.lb;
+        if (action === "close") close();
+        if (action === "prev") move(-1);
+        if (action === "next") move(1);
+      });
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (box!.hidden) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") move(1);
+      if (e.key === "ArrowLeft") move(-1);
+    });
+
+    setupFilter((shown) => {
+      visible = shown;
+    });
+  }
+
+  /**
+   * Place filter. Chips are content-derived, so a chip always has at least one
+   * set behind it; the empty state is a fallback rather than an expectation.
+   * Whole sets are shown or hidden, never individual photographs.
+   */
+  function setupFilter(onChange: (visibleFrames: number[]) => void) {
+    const chips = Array.from(document.querySelectorAll<HTMLElement>("[data-tag]"));
+    if (!chips.length) return;
+    const blocks = Array.from(document.querySelectorAll<HTMLElement>("[data-set-tags]"));
+    const empty = document.querySelector<HTMLElement>("[data-no-match]");
+    const emptyTag = document.querySelector<HTMLElement>("[data-no-match-tag]");
+    let current = "";
+
+    function apply(tag: string, push: boolean) {
+      current = tag;
+      const needle = tag.toLowerCase();
+      let shown = 0;
+      const frameIds: number[] = [];
+
+      blocks.forEach((block) => {
+        const tags = (block.getAttribute("data-set-tags") ?? "").split("|");
+        const match = !needle || tags.includes(needle);
+        block.hidden = !match;
+        if (match) {
+          shown++;
+          block
+            .querySelectorAll<HTMLElement>("[data-frame]")
+            .forEach((btn) => frameIds.push(Number(btn.dataset.frame)));
+        }
+      });
+
+      chips.forEach((c) => {
+        const on = (c.dataset.tag ?? "") === tag;
+        c.classList.toggle("on", on);
+        c.setAttribute("aria-pressed", String(on));
+      });
+
+      if (empty) empty.hidden = shown > 0;
+      if (emptyTag) emptyTag.textContent = tag;
+      onChange(frameIds);
+
+      if (push) {
+        history.replaceState(
+          null,
+          "",
+          tag ? `?tag=${encodeURIComponent(tag)}` : location.pathname
+        );
+      }
+    }
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const tag = chip.dataset.tag ?? "";
+        apply(tag === current ? "" : tag, true);
+      });
+    });
+
+    apply(new URLSearchParams(location.search).get("tag") ?? "", false);
+  }
+
+  setupLightbox();
+  document.addEventListener("astro:page-load", setupLightbox);
+</script>

@@ -1,0 +1,122 @@
+---
+/**
+ * Writing index. Same list pattern as /work: every post is in the HTML, the
+ * tag filter only flips `hidden`.
+ */
+import Base from "../../layouts/Base.astro";
+import Crumbs from "../../components/Crumbs.astro";
+import { publishedPosts, POST_MODULE_SLUGS } from "../../lib/content";
+import { longDate, isoDay } from "../../lib/dates";
+import { url } from "../../lib/paths";
+import { PAGE_META } from "../../lib/site";
+import { breadcrumbList } from "../../lib/schema";
+
+const posts = await publishedPosts();
+const tags = Array.from(new Set(posts.flatMap((p) => p.data.tags))).sort();
+
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const jsonLd = [
+  breadcrumbList(origin, [
+    { label: "Home", path: "/" },
+    { label: "Writing", path: "/writing" },
+  ]),
+];
+---
+
+<Base
+  title={PAGE_META.writing.title}
+  description={PAGE_META.writing.description}
+  nav="writing"
+  ogImage="/og/writing.png"
+  jsonLd={jsonLd}
+>
+  <div class="page">
+    <Crumbs items={[{ label: "Home", href: url("/") }, { label: "Writing" }]} />
+    <h1 class="display" style="margin-top:16px">Writing.</h1>
+    <p class="lede">Notes on machine learning, decisions, and photography.</p>
+
+    <div class="filterbar">
+      <span class="axis-k">filter</span>
+      <button type="button" class="pill sm on" data-tag="">all</button>
+      {tags.map((t) => <button type="button" class="pill sm" data-tag={t}>{t}</button>)}
+    </div>
+
+    <div class="worklist">
+      {
+        posts.map((p, i) => (
+          <a
+            class="workrow"
+            href={url(`/writing/${p.id}`)}
+            data-tags={p.data.tags.map((t) => t.toLowerCase()).join("|")}
+          >
+            <span class="wnum">{String(i + 1).padStart(2, "0")}</span>
+            <span>
+              <span class="wtitle">{p.data.title}</span>
+              <span class="wdesc">{p.data.description}</span>
+            </span>
+            <span class="wside">
+              <span class="meta-mono">
+                <time datetime={isoDay(p.data.date)}>{longDate(p.data.date)}</time>
+              </span>
+              {p.data.readTime && <span class="meta-mono">{p.data.readTime}</span>}
+              {POST_MODULE_SLUGS.has(p.id) && <span class="livechip">&#9679; runs here</span>}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <p class="empty" data-empty hidden>
+      Nothing tagged <span data-empty-tag></span>.
+      <button type="button" class="ul plain blue" data-tag="">Clear the filter</button>.
+    </p>
+  </div>
+</Base>
+
+<script>
+  function setupWriting() {
+    const pills = Array.from(document.querySelectorAll<HTMLElement>("[data-tag]"));
+    if (!pills.length) return;
+    const rows = Array.from(document.querySelectorAll<HTMLElement>(".workrow"));
+    const empty = document.querySelector<HTMLElement>("[data-empty]");
+    const emptyTag = document.querySelector<HTMLElement>("[data-empty-tag]");
+    let current = "";
+
+    function apply(value: string, push: boolean) {
+      current = value;
+      const needle = value.toLowerCase();
+      let shown = 0;
+      rows.forEach((row) => {
+        const tags = (row.getAttribute("data-tags") ?? "").split("|");
+        const match = !needle || tags.includes(needle);
+        row.hidden = !match;
+        if (match) {
+          shown++;
+          const num = row.querySelector(".wnum");
+          if (num) num.textContent = String(shown).padStart(2, "0");
+        }
+      });
+      pills.forEach((p) => p.classList.toggle("on", (p.dataset.tag ?? "") === value));
+      if (empty) empty.hidden = shown > 0;
+      if (emptyTag) emptyTag.textContent = value;
+      if (push) {
+        history.replaceState(
+          null,
+          "",
+          value ? `?tag=${encodeURIComponent(value)}` : location.pathname
+        );
+      }
+    }
+
+    pills.forEach((p) => {
+      p.addEventListener("click", () => {
+        const value = p.dataset.tag ?? "";
+        apply(value === current ? "" : value, true);
+      });
+    });
+
+    apply(new URLSearchParams(location.search).get("tag") ?? "", false);
+  }
+
+  setupWriting();
+  document.addEventListener("astro:page-load", setupWriting);
+</script>

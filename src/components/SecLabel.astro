@@ -1,0 +1,13 @@
+---
+/** Section eyebrow. The number is metadata, so it is set in Space Mono. */
+interface Props {
+  n: string;
+}
+const { n } = Astro.props;
+const hasLabel = Astro.slots.has("default");
+---
+
+<div class="seclabel">
+  <span class="n">{n}</span>
+  {hasLabel && <span><slot /></span>}
+</div>

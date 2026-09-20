@@ -1,0 +1,152 @@
+# CLAUDE.md
+
+Guardrails for this repo. Every session inherits these. When a request conflicts with
+them, say so before proceeding.
+
+## What this site is
+
+A portfolio for a product / risk / AI leader. The reader is a hiring manager or a peer
+who answers four questions in about forty seconds: what does he do, at what level, what's
+the proof, how to reach him. Also legible to AI assistants (ChatGPT, Perplexity) that get
+asked about AI product people in Doha. Distinctive above the fold, clear and boring below
+it. Anything that fights the forty-second read loses.
+
+## The prime directive: no AI tells
+
+This site was deliberately stripped of the things that make a site read as
+machine-generated. Do not reintroduce them.
+
+**Copy rules — hold these everywhere, including UI microcopy:**
+- No rule-of-three ("fast, clean, and simple"). No triads.
+- No em-dash asides mid-sentence. Use a period. Start a new sentence.
+- No "not X, but Y" constructions.
+- No irony, no winking, no metaphor standing in for a label ("the room that goes dark"
+  is banned; the label is "Photography").
+- Short declarative sentences. A label names the thing.
+- No middle-dot triplet strings (`A · B · C`) in running UI. Break them up.
+- These apply to anything YOU write. The user's own prose (bio, case-study bodies) is
+  theirs — flag cadence if asked, don't silently rewrite.
+
+**Layout tells to avoid:** over-tidy symmetry (everything in equal 3- or 4-up grids),
+repeating one section shape down a page until it reads as a slide deck, numbered section
+eyebrows (01, 02, 03, 04) on a single page, warm off-white + single blue accent as the
+whole palette, mesh gradients, blurred blobs, decoration that carries no information.
+
+**Layout moves that are in bounds.** The home page was rebuilt because it read as a
+PowerPoint: four stacked bands, each one an eyebrow plus a heading plus a grid of rounded
+cards. What replaced it is allowed everywhere. Alternating band grounds down a page.
+Full-bleed bands that break the 1280px column. Hairline rules as structure instead of card
+borders. Large Space Mono numerals as a graphic element. Asymmetric two-column splits where
+one side leads and the other lists. Two standing constraints: no two adjacent sections on a
+page may share a shape, and no two adjacent bands may share a ground.
+
+## What is sacred vs. what is not
+
+- **Sacred:** the interactive modules and the real numbers. They are the least AI-like,
+  most specific thing here. No generator builds a working claims-threshold explorer.
+  Never cut, dumb down, or replace a module with a static image. This includes the compact
+  `ClaimsThreshold` running in the home page hero.
+- **Not sacred:** generic prose, filler headings, decorative flourish. Cut freely.
+
+## Colour means data
+
+Chrome is white, near-black, three greys, one blue (`--blue #0060D0`). The other hues
+(`--d-amber --d-teal --d-red`) appear ONLY inside charts and modules. Never put a chart
+colour on a card, button, or nav element. A page with a module looks different from one
+without. That difference is information.
+
+`--blue` was relaxed from accent to structure. It may now carry a rule, an edge, a numeral
+or a solid button fill on chrome, not only a link or an active pill. Measured: 5.86:1 on
+white, 5.33:1 on `--g1`, 3.38:1 on `--ink`. That last figure is why focus rings on `.proof`
+and `.band.dark` switch to `#4D9BFF` (7.02:1). Before this, the home page's dark band was
+shipping a 3.38:1 ring, because the `#4D9BFF` override was scoped to `body.dark`, which only
+/photography sets.
+
+No new hue was added and none should be. `--d-amber #A66A00` is 4.48:1 on white, which fails
+AA at body size. It stays inside charts.
+
+`--g3 #96918A` was added for large decorative type only (3.13:1 on white, the AA floor for
+large text). `--g2 #E6E4E0` is 1.27:1 and is a hairline colour, never a text colour.
+
+## Type
+
+- Headings: Oswald (`--head`).
+- Body: Inter (`--sans`).
+- Numbers and metadata ONLY: Space Mono (`--mono`). KPI figures, dates, timeline ticks,
+  stat readouts. Never body, never headings. This is easy to get wrong — check it.
+- Floor 14px, nothing smaller. No condensed widths below 16px. Hierarchy comes from size
+  and weight, not from shrinking + greying + condensing the same text three ways.
+
+## Accessibility floor (already met — keep it)
+
+Keyboard reachable, visible focus rings in `--blue`, `prefers-reduced-motion` disables
+motion. Contrast: the palette is contrast-checked; `--blue` is `#0060D0` (5.86:1), not
+Apple's `#007AFF` (which fails). Don't revert it. Text never below 14px.
+
+## Motion
+
+One page-load moment, hover states, view transitions between pages. No scroll-triggered
+reveals, no counting-up numbers, no parallax. Motion that pretends to be interactivity is
+itself an AI tell.
+
+Still true. The home page answers "is this alive?" with a working module in the hero rather
+than with motion. `@keyframes rise` is still the only keyframe in the stylesheet.
+
+## The home page
+
+The hero is two columns. Left: positioning line, subline, status line, a solid blue button
+to the work, the email. Right: `ClaimsThreshold` running live in compact mode with
+`client:load`. The live module is the answer to "is this a template?" and it is sacred for
+the same reason the other modules are. It costs the home page ~45KB gzipped of React, which
+it previously did not ship. That is a deliberate trade.
+
+Below the hero, in order:
+
+1. A full-bleed ink proof strip carrying all seven `HIGHLIGHTS` at once, each row linking to
+   its case study. It replaced a carousel that showed one of seven on a 3500ms timer.
+2. Approach as a numbered editorial list, hairline rules, oversized `--g3` numerals.
+3. Selected work as one lead panel plus ruled rows, on `--g1`.
+4. A dark closing band carrying contact, with the footer sharing its ground. Elsewhere used
+   to be its own band of three equal cards; it is gone. It was first folded into this band
+   as three links, then cut, because "Professional timeline", "Writing" and "Photography"
+   all duplicate the top nav, which is on every page.
+
+The page ends on one continuous dark field: heading, contact row, hairline, footer line.
+`Footer.astro` wraps its `<footer>` in `.footwrap`, which carries the background, because
+`.foot` is capped at `--maxw` and a background on it alone leaves white gutters on wide
+screens. `.band.dark.close` trims the band's bottom padding. That is the one sanctioned
+exception to "a filled band's padding stays symmetric": the neighbour below is the same
+`--dark`, so there is no colour edge to sit off-centre.
+
+Four shapes, no repeats, no adjacent grounds alike. There is no 01/02/03/04 numbering on
+this page. `--band-y` is `clamp(32px, 3.6vw, 60px)`; it was `clamp(40px, 6vw, 96px)`, which
+put 192px of nothing between sections. Do not restore it.
+
+In compact mode `ClaimsThreshold` renders its axis ticks as HTML, not as SVG `<text>`. SVG
+text scales with its container, so no `fontSize` holds the 14px floor across the width range.
+The work-page version is unchanged and still draws them in the SVG, where it renders near
+1:1. If you add a module to a narrow column, do the same thing.
+
+### The `.band > *` trap
+
+```css
+.band > * { max-width: var(--maxw); margin-left: auto; margin-right: auto; }
+```
+
+Every direct child of a `.band` gets auto side margins. Give one its own `max-width` and it
+silently centres itself inside the band while its full-width siblings stay flush left. This
+is what made "Get in touch." sit in the middle of the page, via an inline
+`style="max-width:15ch"`. If a heading needs a measure, wrap the section content in a
+container (the way `.splitband` does) and cap the heading inside it. Never cap a direct
+`.band` child.
+
+`.page` does not do this. It centres only itself, so inline `max-width` on sub-page content
+is safe.
+
+## When unsure
+
+Prefer the quieter option when two options say the same thing. "Too cluttered" is a real
+failure mode. So is "reads like a PowerPoint", which is what this rule produced on the home
+page. Quiet is not the same as inert. Prefer fewer elements, but make the ones that remain
+carry real information. If a change would add a tell to remove a minor inconvenience, don't.
+If a change removes a repeated shape, take it.

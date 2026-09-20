@@ -1,0 +1,22 @@
+---
+/**
+ * Click to copy the address. The address itself is always visible, so this
+ * degrades to plain readable text if the clipboard API is blocked.
+ * Behaviour is bound in Base.astro, which survives view transitions.
+ */
+import { SITE } from "../lib/site";
+
+interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={["copymail", dark && "dark"]}
+  data-copy={SITE.email}
+  aria-label={`Copy email address ${SITE.email}`}
+>
+  {SITE.email}
+</button>

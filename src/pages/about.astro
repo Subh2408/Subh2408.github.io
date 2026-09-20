@@ -1,0 +1,73 @@
+---
+/**
+ * About. The bio in src/data/about.md is the author's own writing and is
+ * rendered as written. Do not rewrite it.
+ *
+ * The stat card is derived from the collections rather than typed, so it
+ * cannot drift out of date as work is added.
+ */
+import Base from "../layouts/Base.astro";
+import Crumbs from "../components/Crumbs.astro";
+import { Content as Bio } from "../data/about.md";
+import { allWork, positionsByRecency } from "../lib/content";
+import { url } from "../lib/paths";
+import { PAGE_META, SKILLS } from "../lib/site";
+import { breadcrumbList, person } from "../lib/schema";
+
+const work = await allWork();
+const positions = await positionsByRecency();
+
+const roles = positions.filter((p) => p.data.type === "role");
+const firstYear = Math.min(...roles.map((p) => p.data.start.getUTCFullYear()));
+const years = new Date().getUTCFullYear() - firstYear;
+const industries = new Set(roles.map((p) => p.data.industry).filter(Boolean)).size;
+
+const stats: [string, string][] = [
+  [`${years} yrs`, "in analytics and product"],
+  [String(work.length), "case studies"],
+  [String(industries), "industries"],
+  ["$5M+", "value delivered"],
+];
+
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const jsonLd = [
+  person(origin, positions, [...SKILLS]),
+  breadcrumbList(origin, [
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+  ]),
+];
+---
+
+<Base
+  title={PAGE_META.about.title}
+  description={PAGE_META.about.description}
+  nav="about"
+  ogImage="/og/about.png"
+  jsonLd={jsonLd}
+>
+  <div class="page">
+    <Crumbs items={[{ label: "Home", href: url("/") }, { label: "About" }]} />
+    <h1 class="display" style="margin-top:16px">About.</h1>
+
+    <div class="about-grid">
+      <div class="prose" style="margin-top:26px">
+        <Bio />
+      </div>
+
+      <aside class="statcard">
+        {
+          stats.map(([n, k]) => (
+            <div class="statline">
+              <span class="n">{n}</span>
+              <span class="meta">{k}</span>
+            </div>
+          ))
+        }
+        <a class="btn" style="margin:14px 0 6px;width:100%;text-align:center" href={url("/resume")}>
+          Read the résumé
+        </a>
+      </aside>
+    </div>
+  </div>
+</Base>

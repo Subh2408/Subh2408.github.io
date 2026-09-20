@@ -1,0 +1,130 @@
+---
+/**
+ * Deliberately plain semantic markup. This is the page ATS parsers and LLM
+ * crawlers read, so: real headings in order, real time elements, real lists, no
+ * decoration. Nothing here is a div doing a heading's job.
+ */
+import Base from "../layouts/Base.astro";
+import Crumbs from "../components/Crumbs.astro";
+import { positionsByRecency, workForPosition } from "../lib/content";
+import { monthLabel, isoMonth, tenure } from "../lib/dates";
+import { url } from "../lib/paths";
+import { SITE, PAGE_META, EDUCATION, CERTIFICATIONS, SKILLS } from "../lib/site";
+import { breadcrumbList, person } from "../lib/schema";
+
+const positions = await positionsByRecency();
+const sections = await Promise.all(
+  positions.map(async (p) => ({ position: p, work: await workForPosition(p.id) }))
+);
+
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const jsonLd = [
+  person(origin, positions, [...SKILLS]),
+  breadcrumbList(origin, [
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Resume", path: "/resume" },
+  ]),
+];
+---
+
+<Base
+  title={PAGE_META.resume.title}
+  description={PAGE_META.resume.description}
+  nav="about"
+  ogImage="/og/resume.png"
+  jsonLd={jsonLd}
+>
+  <div class="page">
+    <Crumbs
+      items={[
+        { label: "Home", href: url("/") },
+        { label: "About", href: url("/about") },
+        { label: "Résumé" },
+      ]}
+    />
+
+    <h1 class="display" style="margin-top:16px">Résumé.</h1>
+    <p class="lede">A plain-text version, built to be read by machines and people.</p>
+
+    <p style="margin-top:22px">
+      <a class="btn" href={url(SITE.resumePdf)}>Download the PDF</a>
+    </p>
+
+    <h2 class="rh">Experience</h2>
+    {
+      sections.map(({ position, work }) => (
+        <section style="margin-bottom:26px">
+          <div class="r-role">
+            <h3>
+              {position.data.company}, {position.data.role}
+            </h3>
+            <span class="meta-mono">
+              <time datetime={isoMonth(position.data.start)}>
+                {monthLabel(position.data.start)}
+              </time>
+              {" to "}
+              {position.data.end === "present" ? (
+                "present"
+              ) : (
+                <time datetime={isoMonth(position.data.end)}>
+                  {monthLabel(position.data.end)}
+                </time>
+              )}
+              {` (${tenure(position.data.start, position.data.end)})`}
+            </span>
+          </div>
+          <p class="r-sum">{position.data.summary}</p>
+          {work.length > 0 && (
+            <ul class="r-list">
+              {work.map((w) => (
+                <li>
+                  <b>{w.data.title}.</b>{" "}
+                  {w.data.kpis.length
+                    ? `${w.data.kpis.map((k) => `${k.value} ${k.label}`).join("; ")}.`
+                    : w.data.description}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+
+    <h2 class="rh">Education</h2>
+    {
+      EDUCATION.map((e) => (
+        <p class="r-p">
+          {e.qualification}, {e.school}{" "}
+          <span class="mono">
+            (<time datetime={e.from}>{e.from}</time>
+            {" to "}
+            <time datetime={e.to}>{e.to}</time>)
+          </span>
+        </p>
+      ))
+    }
+
+    <h2 class="rh">Certifications</h2>
+    {
+      CERTIFICATIONS.map((c) => (
+        <p class="r-p">
+          {c.name}, {c.issuer}{" "}
+          <span class="mono">
+            (<time datetime={c.iso}>{c.date}</time>)
+          </span>
+        </p>
+      ))
+    }
+
+    <h2 class="rh">Contact</h2>
+    <dl class="r-dl">
+      <dt>Email</dt>
+      <dd><a class="ul blue" href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+      <dt>Phone</dt>
+      <dd><a class="ul blue mono" href={`tel:${SITE.phone.replace(/\s/g, "")}`}>{SITE.phone}</a></dd>
+      <dt>Location</dt>
+      <dd>{SITE.locality}, {SITE.country}</dd>
+    </dl>
+  </div>
+</Base>

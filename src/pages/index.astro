@@ -1,0 +1,207 @@
+---
+/**
+ * Home. Single-page scroll: hero, proof, Approach, Selected work, Close.
+ * The footer appears here and nowhere else.
+ *
+ * Shape matters on this page. No two adjacent sections share a form: a split
+ * hero with a working module, a ruled ledger of numbers on ink, an editorial
+ * list on white, an asymmetric pair on grey, a dark closing band. The earlier
+ * version stacked four identical card grids under numbered eyebrows, which
+ * read as a slide deck.
+ */
+import Base from "../layouts/Base.astro";
+import Footer from "../components/Footer.astro";
+import CopyEmail from "../components/CopyEmail.astro";
+import ClaimsThreshold from "../components/modules/ClaimsThreshold";
+import { allWork, positionsByRecency, positionMap, WORK_MODULE_SLUGS } from "../lib/content";
+import { year } from "../lib/dates";
+import { url } from "../lib/paths";
+import { SITE, POSITIONING, SUBLINE, APPROACH, PAGE_META, SKILLS } from "../lib/site";
+import { HIGHLIGHTS } from "../lib/highlights";
+import { person } from "../lib/schema";
+
+const work = await allWork();
+const positions = await positionsByRecency();
+const byPosition = await positionMap();
+
+/**
+ * The three featured on the home page are chosen, not derived. Eight entries
+ * carry `featured: true`, and these three are the ones with a working module,
+ * which is the point the section is making. The first is the lead.
+ */
+const FEATURED = ["qic-risk-operations-tool", "claims-adjudication", "sku-optimization"];
+const featured = FEATURED.map((slug) => work.find((w) => w.id === slug)).filter(
+  (w): w is NonNullable<typeof w> => Boolean(w)
+);
+const [lead, ...rest] = featured;
+
+const origin = Astro.site ?? new URL("http://localhost:4321");
+const jsonLd = [person(origin, positions, [...SKILLS])];
+---
+
+<Base
+  title={PAGE_META.home.title}
+  description={PAGE_META.home.description}
+  exactTitle
+  ogImage="/og/home.png"
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="hero-rise hero-say">
+      <h1 class="display-l">{POSITIONING}</h1>
+      <p class="subline">{SUBLINE}</p>
+
+      <div class="statusline">
+        <span class="dot" aria-hidden="true"></span>
+        <span>{SITE.locality}, {SITE.country}</span>
+        <span class="clock" data-clock>--:-- {SITE.utcOffset}</span>
+        <span>Open to conversations</span>
+      </div>
+
+      <div class="herocta">
+        <a class="btn solid" href={url("/work")}>See the work</a>
+        <CopyEmail />
+      </div>
+    </div>
+
+    <div class="hero-rise-2 hero-demo">
+      <p class="demo-cue">Move the slider. This is the model from a real project.</p>
+      <ClaimsThreshold client:load compact />
+      <a class="demo-link" href={url("/work/claims-adjudication")}>Read the case study &rarr;</a>
+    </div>
+  </section>
+
+  <section class="proof" aria-label="Selected results">
+    <ul class="prooflist">
+      {
+        HIGHLIGHTS.map((h) => (
+          <li class="proofrow">
+            <a href={url(`/work/${h.slug}`)}>
+              <span class:list={["pnum", h.number.length > 8 && "long"]}>{h.number}</span>
+              <span class="plabel">{h.label}</span>
+              <span class="pctx">{h.context}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="approach" class="band">
+    <div class="splitband">
+      <div class="splitband-head">
+        <h2 class="h2">How I work.</h2>
+      </div>
+      <ol class="approachlist">
+        {
+          APPROACH.map((a, i) => (
+            <li class="approachitem">
+              <span class="anum" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{a.k}</h3>
+                <p>{a.v}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="featured" class="band grey">
+    <div class="bandhead">
+      <h2 class="h2">Selected work.</h2>
+      <a class="btn" href={url("/work")}>All {work.length} projects &rarr;</a>
+    </div>
+    <div class="workband">
+      {
+        lead && (
+          <a class="leadcard" href={url(`/work/${lead.id}`)}>
+            <span class="ftitle">{lead.data.title}</span>
+            <span class="fmeta">
+              <span>{byPosition.get(lead.data.position)?.data.company}</span>
+              <span class="yr">{year(lead.data.date)}</span>
+            </span>
+            <span class="fkpis">
+              {lead.data.kpis.map((k) => (
+                <span>
+                  <b>{k.value}</b>
+                  {k.label}
+                </span>
+              ))}
+            </span>
+            {WORK_MODULE_SLUGS.has(lead.id) && <span class="livechip">&#9679; playable</span>}
+          </a>
+        )
+      }
+      <div class="worksub">
+        {
+          rest.map((w) => (
+            <a class="worksubrow" href={url(`/work/${w.id}`)}>
+              <span class="ftitle">{w.data.title}</span>
+              <span class="fmeta">
+                <span>{byPosition.get(w.data.position)?.data.company}</span>
+                <span class="yr">{year(w.data.date)}</span>
+              </span>
+              <span class="fkpis inline">
+                {w.data.kpis.slice(0, 2).map((k) => (
+                  <span>
+                    <b>{k.value}</b>
+                    {k.label}
+                  </span>
+                ))}
+              </span>
+              {WORK_MODULE_SLUGS.has(w.id) && <span class="livechip">&#9679; playable</span>}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark close">
+    <h2 class="h2 closehead">Get in touch.</h2>
+    <div class="contactrow">
+      <CopyEmail dark />
+      <a class="cmeta ul" href={`tel:${SITE.phone.replace(/\s/g, "")}`}>{SITE.phone}</a>
+      <span class="cmeta clock">
+        {SITE.locality}, <span data-clock>--:-- {SITE.utcOffset}</span>
+      </span>
+      <a class="btn ghost" href={url("/resume")}>Résumé</a>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<script>
+  // Local time in Doha, so a caller knows whether it is a reasonable hour.
+  // Server-rendered as "--:--" at the same width, so nothing shifts.
+  function paintClock() {
+    const nodes = document.querySelectorAll<HTMLElement>("[data-clock]");
+    if (!nodes.length) return;
+    let time: string;
+    try {
+      time = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Qatar",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }).format(new Date());
+    } catch {
+      return; // Timezone data unavailable. Leave the placeholder.
+    }
+    nodes.forEach((n) => {
+      n.textContent = `${time} GMT+3`;
+    });
+  }
+
+  let timer: number | undefined;
+  function startClock() {
+    paintClock();
+    window.clearInterval(timer);
+    timer = window.setInterval(paintClock, 20000);
+  }
+  startClock();
+  document.addEventListener("astro:page-load", startClock);
+</script>

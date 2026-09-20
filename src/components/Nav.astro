@@ -1,0 +1,36 @@
+---
+import CopyEmail from "./CopyEmail.astro";
+import { url } from "../lib/paths";
+import { SITE } from "../lib/site";
+
+interface Props {
+  current?: "work" | "writing" | "photography" | "about" | null;
+  dark?: boolean;
+}
+const { current = null, dark = false } = Astro.props;
+
+const items = [
+  { key: "work", label: "Work", href: url("/work") },
+  { key: "writing", label: "Writing", href: url("/writing") },
+  { key: "photography", label: "Photography", href: url("/photography") },
+  { key: "about", label: "About", href: url("/about") },
+] as const;
+---
+
+<header class:list={["nav", dark && "dark"]}>
+  <a class="brand" href={url("/")}>{SITE.person}</a>
+  <nav class="navlinks" aria-label="Primary">
+    {
+      items.map((item) => (
+        <a
+          class:list={["navlink", current === item.key && "on"]}
+          href={item.href}
+          aria-current={current === item.key ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+  <CopyEmail dark={dark} />
+</header>

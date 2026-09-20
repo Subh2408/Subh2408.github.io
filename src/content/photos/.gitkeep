@@ -1,0 +1,3 @@
+Photo sets go here, one .md per set.
+See content-templates/photo-set.md.
+Images live in public/images/photos/<set-slug>/

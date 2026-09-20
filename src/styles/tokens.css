@@ -1,0 +1,58 @@
+/* ------------------------------------------------------------------
+   Design tokens. Hex values are contrast-checked. Do not change them.
+
+   Chrome uses: white, ink, two greys, one blue.
+   The data ramp (--d-*) appears ONLY inside charts and interactive
+   modules. Never on a card, button, chip or nav element.
+   ------------------------------------------------------------------ */
+
+:root {
+  --white: #FFFFFF;
+  --ink: #0A0A0A;
+  --g1: #F5F4F2;
+  --g2: #E6E4E0;
+  --g3: #96918A;          /* 3.13:1 on white. Large decorative type only. */
+  --gt: #56534E;
+  --blue: #0060D0;        /* 5.86:1 on white. Not #007AFF, which fails. */
+  --blue-deep: #0051D5;
+  --dark: #0A0A0A;
+
+  /* data ramp — charts and modules only */
+  --d-blue: #0060D0;
+  --d-amber: #A66A00;
+  --d-teal: #00796B;
+  --d-red: #C93F1B;
+  --d-grey: #C4C1BC;
+
+  /* dark-canvas greys, used on /photography and the contact band */
+  --dk-1: #181818;
+  --dk-2: #1E1E1E;
+  --dk-line: #3A3A3A;
+  --dk-text: #9A9A9A;
+  --dk-text-2: #8A8A8A;
+
+  /* Photography surfaces. Warm-neutral charcoal, not black: photographs need a
+     surface to sit on rather than a void to float in. Scoped to /photography
+     alone. The contact band on the home page stays --dark. */
+  --photo-bg: #1C1C1E;
+  --photo-tile: #26262A;
+  --photo-well: #121214;
+
+  /* type families */
+  --sans: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --head: 'Oswald', 'Inter Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* type scale — floor is 14px, nothing smaller */
+  --t-hero: clamp(36px, 5.4vw, 74px);
+  --t-page: clamp(30px, 4vw, 52px);
+  --t-section: clamp(24px, 2.6vw, 36px);
+  --t-card: 22px;
+  --t-body: 17px;
+  --t-meta: 14px;
+
+  /* rhythm */
+  --pad-x: clamp(18px, 4vw, 56px);
+  --band-y: clamp(32px, 3.6vw, 60px);
+  --maxw: 1280px;
+}
