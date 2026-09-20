@@ -45,10 +45,12 @@ const [lead, ...rest] = featured;
 
 /**
  * The mobile tile grid. Five real figures as coloured tiles, three
- * photographs, interleaved so colour and image alternate. Each colour is
- * from the data ramp and identifies its tile; see the note in CLAUDE.md.
- * White text on every ground clears 4.5:1 (amber uses --tile-amber, a
- * darkened variant, because --d-amber lands at 4.48:1).
+ * photographs, interleaved so colour and image alternate.
+ *
+ * Grounds are the four --tile-* tokens, mobile only. The order keeps blue
+ * and coral from ever touching themselves once the photos are in place.
+ * White text clears 4.5:1 on all four (19.80, 7.34, 5.86, 5.11); the small
+ * label sits at 92%, because 80% fails on blue and coral.
  */
 const TILES = [
   { kind: "kpi", tone: "t-coral", n: "$5M+", label: "SKU optimisation", slug: "sku-optimization" },
