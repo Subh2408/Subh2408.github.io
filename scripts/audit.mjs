@@ -60,8 +60,9 @@ for (const file of files) {
   if (h1s.length !== 1) fail(`${h1s.length} h1 elements, expected 1`);
 
   // Every img needs an alt attribute, even if empty for decorative ones.
+  // Astro serialises alt="" as a bare `alt`, which is the same thing.
   for (const tag of html.match(/<img\b[^>]*>/g) ?? []) {
-    if (!/\balt=/.test(tag)) fail(`img without alt: ${tag.slice(0, 70)}`);
+    if (!/\balt(?:=|\s|>)/.test(tag)) fail(`img without alt: ${tag.slice(0, 70)}`);
   }
 
   // JSON-LD must parse.
