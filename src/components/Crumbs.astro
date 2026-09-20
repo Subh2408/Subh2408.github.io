@@ -2,6 +2,10 @@
 /**
  * Breadcrumb trail. Sits at the top of every sub-page. The last item is the
  * current page and is not a link.
+ *
+ * `back` is optional. Below 820px it replaces the whole trail with one link,
+ * for pages where the trail would wrap and end in the page's own title.
+ * Desktop hides it and shows the full trail.
  */
 interface Crumb {
   label: string;
@@ -10,11 +14,13 @@ interface Crumb {
 interface Props {
   items: Crumb[];
   dark?: boolean;
+  back?: Crumb;
 }
-const { items, dark = false } = Astro.props;
+const { items, dark = false, back } = Astro.props;
 ---
 
-<nav class:list={["crumbs", dark && "dark"]} aria-label="Breadcrumb">
+<nav class:list={["crumbs", dark && "dark", back && "has-back"]} aria-label="Breadcrumb">
+  {back && <a class="cr-back" href={back.href}>&larr; {back.label}</a>}
   {
     items.map((item, i) =>
       i === items.length - 1 || !item.href ? (

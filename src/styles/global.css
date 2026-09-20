@@ -120,6 +120,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
 .crumbs.dark .cr-sep { color: var(--dk-line); }
 .crumbs.dark .cr-now { color: var(--dk-text-2); }
 .crumbs.dark .cr-link { color: #4D9BFF; }
+.cr-back { display: none; }   /* mobile only, see the 820px block */
 
 .seclabel {
   display: flex; gap: 12px; align-items: baseline;
@@ -937,7 +938,7 @@ input[type=range]::-moz-range-thumb {
    ================================================================== */
 
 /* Mobile-only furniture, hidden on desktop. */
-.profname, .subline-m, .profstats, .tiles { display: none; }
+.subline-m, .profstats, .tiles { display: none; }
 
 /* The Approach pillars are <details> at every width. The paragraph lives
    inside <summary> and is clamped only below 820px, so on desktop the
@@ -947,6 +948,16 @@ input[type=range]::-moz-range-thumb {
 .apx summary { display: block; list-style: none; cursor: default; }
 .apx summary::-webkit-details-marker { display: none; }
 
+/* The case-study chips fold ships closed because the phone wants it closed
+   and CSS cannot flip a <details>. At desktop widths the summary is hidden
+   and the content forced visible, so the chips render exactly as they did
+   before the fold existed. A browser without ::details-content shows a
+   summary that opens on click instead. */
+@media (min-width: 821px) {
+  .chipfold summary { display: none; }
+  .chipfold::details-content { display: block; content-visibility: visible; }
+}
+
 @media (max-width: 820px) {
   /* ------------------------------------------------ profile block */
   .hero { padding-top: 18px; padding-bottom: 22px; gap: 0; }
@@ -955,10 +966,6 @@ input[type=range]::-moz-range-thumb {
   .subline { display: none; }
   .herocta .copymail { display: none; }
 
-  .profname {
-    display: block; font-family: var(--head); font-weight: 600;
-    font-size: 17px; line-height: 1.2; color: var(--gt); margin: 0 0 10px;
-  }
   .hero .display-l { font-size: clamp(27px, 7.4vw, 34px); line-height: 1.12; }
   .subline-m {
     display: block; font-size: 15.5px; line-height: 1.5;
@@ -1045,6 +1052,37 @@ input[type=range]::-moz-range-thumb {
     overflow: hidden;
   }
   .apx[open] summary .apxv { -webkit-line-clamp: unset; overflow: visible; }
+
+  /* ------------------------------------------------ breadcrumb */
+  /* A trail that wraps to two lines and ends in the page title is noise
+     under an H1 that says the same thing. Pages that pass `back` show one
+     link instead. Padding makes the row a 44px target without moving it. */
+  .crumbs.has-back > :not(.cr-back) { display: none; }
+  .cr-back {
+    display: inline-block; color: var(--blue); text-decoration: none;
+    padding: 11px 0; margin: -11px 0;
+  }
+
+  /* ------------------------------------------------ case study header */
+  /* Tighter row so the playable badge sits in the meta line instead of
+     dropping to a line of its own. */
+  .casestudy .metarow { gap: 4px 14px; }
+
+  /* Stack / domain / method behind one fold. Same marker as .apx. */
+  .chipfold { margin-top: 22px; }
+  .chipfold summary {
+    display: block; list-style: none; cursor: pointer; position: relative;
+    padding: 11px 30px 11px 0; min-height: 44px;
+    font-size: var(--t-meta); color: var(--gt);
+    border-top: 1px solid var(--g2); border-bottom: 1px solid var(--g2);
+  }
+  .chipfold summary::-webkit-details-marker { display: none; }
+  .chipfold summary::after {
+    content: "+"; position: absolute; right: 0; top: 10px;
+    font-family: var(--mono); font-size: 20px; line-height: 1; color: var(--clay);
+  }
+  .chipfold[open] summary::after { content: "−"; }
+  .chipfold .chips { margin-top: 14px; }
 
   /* The tiles already carry five of these seven figures, so the ledger would
      be the same evidence twice. */

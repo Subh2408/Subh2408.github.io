@@ -70,8 +70,9 @@ shipping a 3.38:1 ring, because the `#4D9BFF` override was scoped to `body.dark`
 `--clay #A84B32` is a warm accent for **non-interactive marks only**. Blue keeps every
 clickable thing, so the two never compete and blue still means "you can press this".
 
-Clay is on exactly five selectors. Adding a sixth needs a reason:
-`.statusline .dot`, `.livechip`, `.anum`, `.wnum`, `.rnum`.
+Clay is on these selectors and no others. Adding one needs a reason:
+`.statusline .dot`, `.livechip`, `.anum`, `.wnum`, `.rnum`, and the `+`/`−` marker on
+`.apx summary::after` and `.chipfold summary::after`.
 
 Measured: 5.65:1 on white, 5.19:1 on `--tint-warm`, 5.16:1 on `--tint-cool`, 5.14:1 on
 `--g1`. Passes as text everywhere it is used.

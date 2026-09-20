@@ -33,6 +33,7 @@ const newer = index > 0 ? ordered[index - 1] : undefined;
 const older = index < ordered.length - 1 ? ordered[index + 1] : undefined;
 
 const playable = WORK_MODULE_SLUGS.has(entry.id);
+const hasChips = Object.values(entry.data.chips ?? {}).some((v) => v.length > 0);
 const cover = hasPublicFile(entry.data.cover) ? entry.data.cover : undefined;
 
 const origin = Astro.site ?? new URL("http://localhost:4321");
@@ -55,8 +56,9 @@ const jsonLd = [
   ogImage={`/og/work-${entry.id}.png`}
   jsonLd={jsonLd}
 >
-  <article class="page">
+  <article class="page casestudy">
     <Crumbs
+      back={{ label: "Work", href: url("/work") }}
       items={[
         { label: "Home", href: url("/") },
         { label: "Work", href: url("/work") },
@@ -91,7 +93,15 @@ const jsonLd = [
 
     <p class="wsum">{entry.data.description}</p>
 
-    <Chips chips={entry.data.chips} />
+    {/* Closed on the phone, forced open on desktop by CSS. See global.css. */}
+    {
+      hasChips && (
+        <details class="chipfold">
+          <summary>Stack and method</summary>
+          <Chips chips={entry.data.chips} />
+        </details>
+      )
+    }
 
     {
       cover && (
