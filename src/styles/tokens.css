@@ -17,6 +17,22 @@
   --blue-deep: #0051D5;
   --dark: #0A0A0A;
 
+  /* Warm accent. Non-interactive marks only: section numerals, labels, the
+     status dot. Blue keeps every interactive element, so the two never fight.
+     --clay is 5.65:1 on white, 5.19:1 on --tint-warm, 5.16:1 on --tint-cool.
+     --clay-soft is 4.36:1 and is a FILL ONLY. It fails 4.5:1 as small text and
+     also fails for white text placed on it. A filled badge with a white label
+     must use --clay.
+     Note: --clay sits at Lab hue 42deg, --d-red at 43deg. Same family. See the
+     palette section of CLAUDE.md before putting clay near a chart. */
+  --clay: #A84B32;
+  --clay-soft: #C25A3C;
+
+  /* Band grounds. Both 1.09:1 against white, the same weight as --g1, so they
+     read as a temperature shift and not as coloured panels. */
+  --tint-warm: #FBF4F0;
+  --tint-cool: #F1F5FB;
+
   /* data ramp — charts and modules only */
   --d-blue: #0060D0;
   --d-amber: #A66A00;

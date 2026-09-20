@@ -50,7 +50,8 @@ page may share a shape, and no two adjacent bands may share a ground.
 
 ## Colour means data
 
-Chrome is white, near-black, three greys, one blue (`--blue #0060D0`). The other hues
+Chrome is white, near-black, three greys, one blue (`--blue #0060D0`), one clay
+(`--clay #A84B32`), and two barely-tinted band grounds. The chart hues
 (`--d-amber --d-teal --d-red`) appear ONLY inside charts and modules. Never put a chart
 colour on a card, button, or nav element. A page with a module looks different from one
 without. That difference is information.
@@ -62,8 +63,40 @@ and `.band.dark` switch to `#4D9BFF` (7.02:1). Before this, the home page's dark
 shipping a 3.38:1 ring, because the `#4D9BFF` override was scoped to `body.dark`, which only
 /photography sets.
 
-No new hue was added and none should be. `--d-amber #A66A00` is 4.48:1 on white, which fails
-AA at body size. It stays inside charts.
+`--d-amber #A66A00` is 4.48:1 on white, which fails AA at body size. It stays inside charts.
+
+### Clay
+
+`--clay #A84B32` is a warm accent for **non-interactive marks only**. Blue keeps every
+clickable thing, so the two never compete and blue still means "you can press this".
+
+Clay is on exactly five selectors. Adding a sixth needs a reason:
+`.statusline .dot`, `.livechip`, `.anum`, `.wnum`, `.rnum`.
+
+Measured: 5.65:1 on white, 5.19:1 on `--tint-warm`, 5.16:1 on `--tint-cool`, 5.14:1 on
+`--g1`. Passes as text everywhere it is used.
+
+`--clay-soft #C25A3C` is **4.36:1 and is a fill only**. It fails 4.5:1 as small text *and*
+fails for white text placed on it. A filled badge carrying a white label must use `--clay`.
+It is currently defined but unused.
+
+**The one thing to know before extending clay.** `--clay` sits at Lab hue 42deg and the chart
+red `--d-red #C93F1B` sits at 43deg. Same hue family, separated only by lightness and chroma
+(deltaE 23.9; `--clay-soft` is 43deg, deltaE 19.2). This was checked and accepted, not
+overlooked: deltaE 23.9 is well above the ~12 confusion threshold and the two never sit side
+by side. But `ClaimsThreshold` runs in the hero and its "cleared in error" bars are `--d-red`,
+so the clay status dot is the closest the two ever get. If the hero ever reads muddy, put that
+dot back to blue first. Never put clay inside a chart, and never put a chart hue on chrome.
+
+Not on /photography. No gradients, flat fills only.
+
+### Tinted bands
+
+`--tint-warm #FBF4F0` and `--tint-cool #F1F5FB` replaced the white/grey band alternation on
+the home page. Both measure 1.09:1 against white, the same weight as the `--g1` (1.10:1) they
+replaced, so they read as a change of temperature rather than as coloured panels. If a tint
+ever looks obviously coloured, it is too saturated. Body text on them: `--ink` 18.2:1, `--gt`
+7.04:1 warm and 7.00:1 cool, `--blue` links 5.39:1 and 5.36:1.
 
 `--g3 #96918A` was added for large decorative type only (3.13:1 on white, the AA floor for
 large text). `--g2 #E6E4E0` is 1.27:1 and is a hairline colour, never a text colour.
@@ -96,7 +129,13 @@ than with motion. `@keyframes rise` is still the only keyframe in the stylesheet
 
 The hero is two columns. Left: positioning line, subline, status line, a solid blue button
 to the work, the email. Right: `ClaimsThreshold` running live in compact mode with
-`client:load`. The live module is the answer to "is this a template?" and it is sacred for
+`client:load`.
+
+Compact is deliberately thin: title, tag, histogram, slider, and **two** stats (percent
+cleared, percent cleared in error). No description paragraph, no commentary line, no queue
+count or settle time. Those four things stay on /work/claims-adjudication, which renders the
+full module. The hero column was a dashboard and towered over the headline; two stats is what
+balances the two columns. Do not add a third. The live module is the answer to "is this a template?" and it is sacred for
 the same reason the other modules are. It costs the home page ~45KB gzipped of React, which
 it previously did not ship. That is a deliberate trade.
 
@@ -104,8 +143,9 @@ Below the hero, in order:
 
 1. A full-bleed ink proof strip carrying all seven `HIGHLIGHTS` at once, each row linking to
    its case study. It replaced a carousel that showed one of seven on a 3500ms timer.
-2. Approach as a numbered editorial list, hairline rules, oversized `--g3` numerals.
-3. Selected work as one lead panel plus ruled rows, on `--g1`.
+2. Approach as a numbered editorial list, hairline rules, oversized `--clay` numerals, on
+   `--tint-warm`.
+3. Selected work as one lead panel plus ruled rows, on `--tint-cool`.
 4. A dark closing band carrying contact, with the footer sharing its ground. Elsewhere used
    to be its own band of three equal cards; it is gone. It was first folded into this band
    as three links, then cut, because "Professional timeline", "Writing" and "Photography"

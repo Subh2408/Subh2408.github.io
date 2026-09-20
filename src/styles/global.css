@@ -137,6 +137,10 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
 .band { padding: var(--band-y) var(--pad-x); }
 .band > * { max-width: var(--maxw); margin-left: auto; margin-right: auto; }
 .band.grey { background: var(--g1); }
+/* Barely-tinted grounds. Both 1.09:1 against white, so they read as a change of
+   temperature rather than as coloured panels. */
+.band.warm { background: var(--tint-warm); }
+.band.cool { background: var(--tint-cool); }
 .band.dark { background: var(--dark); color: var(--white); }
 .band.dark.close { padding-bottom: 30px; }
 .bandhead {
@@ -175,9 +179,11 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
 .seg button { background: none; border: 0; padding: 7px 16px; font-size: var(--t-meta); cursor: pointer; }
 .seg button.on { background: var(--ink); color: var(--white); }
 
+/* A label, not a control, so it takes clay and stops competing with the blue
+   links around it. */
 .livechip {
   display: inline-block; font-size: var(--t-meta); font-weight: 600;
-  color: var(--blue); white-space: nowrap;
+  color: var(--clay); white-space: nowrap;
 }
 
 /* ---------------------------------------------------------- resume */
@@ -225,7 +231,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
   gap: 10px 26px; margin-top: 22px; font-size: var(--t-meta); color: var(--gt);
 }
 .statusline .dot {
-  width: 7px; height: 7px; border-radius: 50%; background: var(--blue);
+  width: 7px; height: 7px; border-radius: 50%; background: var(--clay);
   flex: 0 0 7px; margin-right: -16px;
 }
 .statusline .clock { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
@@ -300,7 +306,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
 .approachitem:last-child { border-bottom: 1px solid var(--g2); }
 .anum {
   font-family: var(--mono); font-weight: 700; letter-spacing: -0.04em;
-  font-size: clamp(26px, 3vw, 42px); line-height: 1; color: var(--g3);
+  font-size: clamp(26px, 3vw, 42px); line-height: 1; color: var(--clay);
   font-variant-numeric: tabular-nums;
 }
 .approachitem h3 { font-size: 21px; line-height: 1.15; margin: 0 0 8px; font-weight: 600; }
@@ -381,6 +387,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
 }
 @media (max-width: 820px) {
   .navlinks { margin-left: 0; width: 100%; order: 3; }
+  /* 44px minimum tap target. */
+  .navlink { padding: 12px 14px; }
+  .copymail { padding: 12px 0; }
+}
+
+/* --t-hero floors at 36px, which eats a phone's first screen. */
+@media (max-width: 560px) {
+  .hero .display-l { font-size: clamp(29px, 8vw, 36px); }
 }
 @media (max-width: 760px) {
   .proofrow a { grid-template-columns: 1fr; gap: 3px; padding: 16px 0; }
@@ -399,7 +413,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
   transition: background-color .14s, transform .14s;
 }
 .rolecard:hover, .rolecard.hot { background: var(--g2); transform: translateY(-3px); }
-.rnum { font-family: var(--mono); font-size: var(--t-meta); color: var(--blue); font-variant-numeric: tabular-nums; }
+.rnum { font-family: var(--mono); font-size: var(--t-meta); color: var(--clay); font-variant-numeric: tabular-nums; }
 .rco { font-family: var(--head); font-weight: 600; font-size: 18px; line-height: 1.12; margin-top: 6px; }
 .rrole { font-size: var(--t-meta); color: var(--gt); margin-top: 4px; }
 .rdates { display: grid; gap: 2px; margin-top: 14px; }
@@ -428,7 +442,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
 }
 .workrow:hover { background: var(--g2); transform: translateX(3px); }
 .workrow[hidden] { display: none; }
-.wnum { font-family: var(--mono); font-size: var(--t-meta); color: var(--blue); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.wnum { font-family: var(--mono); font-size: var(--t-meta); color: var(--clay); font-variant-numeric: tabular-nums; padding-top: 4px; }
 .wtitle { display: block; font-family: var(--head); font-weight: 600; font-size: clamp(19px, 1.9vw, 23px); line-height: 1.16; max-width: 34ch; }
 .wdesc { display: block; font-size: 15.5px; line-height: 1.55; color: var(--gt); margin-top: 8px; max-width: 62ch; }
 .wside { text-align: right; display: grid; gap: 3px; justify-items: end; }
@@ -589,6 +603,20 @@ input[type=range]::-moz-range-thumb {
 .modbtns { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 18px; }
 .modseg { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
 .modfig { width: 100%; height: auto; display: block; }
+
+@media (pointer: coarse) {
+  .slider input[type=range] { height: 28px; background: transparent; }
+  .slider input[type=range]::-webkit-slider-runnable-track {
+    height: 4px; background: var(--g2); border-radius: 2px;
+  }
+  .slider input[type=range]::-webkit-slider-thumb {
+    width: 26px; height: 26px; margin-top: -11px;
+  }
+  .slider input[type=range]::-moz-range-track {
+    height: 4px; background: var(--g2); border-radius: 2px;
+  }
+  .slider input[type=range]::-moz-range-thumb { width: 26px; height: 26px; }
+}
 
 @media (max-width: 1000px) {
   .mgrid { grid-template-columns: 1fr; }

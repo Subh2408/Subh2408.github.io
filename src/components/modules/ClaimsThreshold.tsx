@@ -71,7 +71,11 @@ export default function ClaimsThreshold({ compact = false }: { compact?: boolean
       level={compact ? 3 : 2}
       compact={compact}
       title="Auto-clear threshold"
-      note="Every claim gets a confidence score. Above the line, it clears automatically. Below it, a person reviews it. Moving the line trades speed against error."
+      note={
+        compact
+          ? ""
+          : "Every claim gets a confidence score. Above the line, it clears automatically. Below it, a person reviews it. Moving the line trades speed against error."
+      }
     >
       <div className="mgrid">
         <div>
@@ -144,11 +148,13 @@ export default function ClaimsThreshold({ compact = false }: { compact?: boolean
               tone={m.errPct > 4 ? D.red : C.ink}
             />
           </div>
-          <div className="statrow">
-            <Stat value={m.queue.toLocaleString()} sub="claims still in the queue" />
-            <Stat value={fmt(m.avgMin)} sub="average time to settle, blended" tone={D.teal} />
-          </div>
-          <p className="readout">{readout}</p>
+          {!compact && (
+            <div className="statrow">
+              <Stat value={m.queue.toLocaleString()} sub="claims still in the queue" />
+              <Stat value={fmt(m.avgMin)} sub="average time to settle, blended" tone={D.teal} />
+            </div>
+          )}
+          {!compact && <p className="readout">{readout}</p>}
         </div>
       </div>
     </ModuleFrame>

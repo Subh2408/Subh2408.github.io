@@ -44,6 +44,7 @@ export function ModuleFrame({
   compact = false,
 }: {
   title: string;
+  /** Pass an empty string to omit the note entirely (the compact hero does). */
   note: string;
   children: ReactNode;
   /**
@@ -62,7 +63,7 @@ export function ModuleFrame({
         <Title className="modtitle">{title}</Title>
         <span className="tagchip">synthetic data</span>
       </div>
-      <p className="modnote">{note}</p>
+      {note && <p className="modnote">{note}</p>}
       <div className="modbody">{children}</div>
     </section>
   );
