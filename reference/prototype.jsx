@@ -18,7 +18,7 @@ const DATA = {
    "slug": "qatar-insurance-group",
    "type": "role",
    "company": "Qatar Insurance Group",
-   "role": "AI Projects Manager",
+   "role": "AI Strategy and Products Manager",
    "start": "2025-08",
    "end": "present",
    "industry": "Insurance",

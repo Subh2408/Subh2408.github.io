@@ -1,12 +1,12 @@
 ---
 type: role
 company: "Qatar Insurance Group"
-role: "AI Projects Manager"
+role: "AI Strategy and Products Manager"
 start: 2025-08
 end: present
 location: "Doha, Qatar"
 industry: "Insurance"
-summary: "Own enterprise AI strategy and governance at QIC, and run a portfolio of 8–10 concurrent AI initiatives from business case through delivery."
+summary: "Own enterprise AI strategy, governance and products at QIC, and run a portfolio of 8–10 concurrent AI initiatives from business case through delivery."
 order: 1
 ---
 
