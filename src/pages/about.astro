@@ -21,13 +21,13 @@ const positions = await positionsByRecency();
 const roles = positions.filter((p) => p.data.type === "role");
 const firstYear = Math.min(...roles.map((p) => p.data.start.getUTCFullYear()));
 const years = new Date().getUTCFullYear() - firstYear;
-const industries = new Set(roles.map((p) => p.data.industry).filter(Boolean)).size;
 
 const stats: [string, string][] = [
   [`${years} yrs`, "in analytics and product"],
   [String(work.length), "case studies"],
   [String(industries), "industries"],
   ["$5M+", "value delivered"],
+  [String(INDUSTRIES.length), "industries"],
 ];
 
 const origin = Astro.site ?? new URL("http://localhost:4321");
