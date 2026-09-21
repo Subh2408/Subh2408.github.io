@@ -1,4 +1,4 @@
-I am a designer at heart who happens to like statistics. Twelve years of
+I am a designer at heart who happens to like statistics. Eleven years of
 building products, most of them with machine learning somewhere inside. The
 label changed to AI along the way. The work did not.
 
