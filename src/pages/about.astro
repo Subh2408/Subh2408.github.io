@@ -25,9 +25,8 @@ const years = new Date().getUTCFullYear() - firstYear;
 const stats: [string, string][] = [
   [`${years} yrs`, "in analytics and product"],
   [String(work.length), "case studies"],
-  [String(industries), "industries"],
-  ["$5M+", "value delivered"],
   [String(INDUSTRIES.length), "industries"],
+  ["$5M+", "value delivered"],
 ];
 
 const origin = Astro.site ?? new URL("http://localhost:4321");
