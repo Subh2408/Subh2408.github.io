@@ -23,7 +23,7 @@ export const SITE = {
 
 /** Hero. Author's copy. */
 export const POSITIONING = "I build AI products for decisions that carry risk.";
-export const SUBLINE = "I lead AI strategy and product at Qatar Insurance Group. Twelve years building in insurance, FMCG, semiconductor and adtech.";
+export const SUBLINE = "I lead AI strategy and product at Qatar Insurance Group. Eleven years building in insurance, FMCG, semiconductor and adtech.";
 
 /**
  * Approach pillars. Names follow the approved copy pass
@@ -82,7 +82,7 @@ export const PAGE_META = {
   work: {
     title: "Work",
     description:
-      "Twelve years of AI, machine learning and analytics work across insurance, FMCG, semiconductor and adtech. Five of the projects are interactive.",
+      "Eleven years of AI, machine learning and analytics work across insurance, FMCG, semiconductor and adtech. Five of the projects are interactive.",
   },
   writing: {
     title: "Writing",
@@ -95,7 +95,7 @@ export const PAGE_META = {
   about: {
     title: "About",
     description:
-      "Subhabrata Nag is a product and program leader in AI, machine learning and analytics, currently leading enterprise AI at Qatar Insurance Group in Doha.",
+      "Subhabrata Nag is a product leader in AI, machine learning and analytics, currently leading enterprise AI strategy and products at Qatar Insurance Group in Doha.",
   },
   resume: {
     title: "Resume",
