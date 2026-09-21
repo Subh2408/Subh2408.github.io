@@ -2,11 +2,10 @@
 title: "AI governance should happen before the audit"
 date: 2026-09-22
 description: >-
-  Real versus nominal is taught in the first month of an economics degree and forgotten immediately after. Applied to AI, for the people who pay nothing and the people who pay twenty dollars
+  Most AI governance turns into paperwork because it starts with the annual inventory. Register a system before it goes into use and governance becomes part of how the organisation decides what is allowed to run.
 tags: ["AI", "AI Governance"]
 readTime: "8 min read"
 draft: false
-cover: 
 ---
 
 AI governance has an odd problem. Almost everyone agrees that it is necessary, but the moment an organisation tries to put it into practice, it has a tendency to become paperwork.
