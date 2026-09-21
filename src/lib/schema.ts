@@ -48,9 +48,13 @@ export function person(origin: URL, positions: Position[], skills: string[]) {
     url: abs(origin, "/"),
     email: `mailto:${SITE.email}`,
     telephone: SITE.phone,
+    sameAs: [
+      "https://www.linkedin.com/in/subhabrata-n/",
+      "https://github.com/Subh2408",
+    ],
     jobTitle: current?.data.role ?? SITE.role,
     description:
-      "Product and program leader in AI, machine learning and analytics. Leads enterprise AI strategy, governance and delivery at Qatar Insurance Group.",
+      "Product leader in AI and machine learning. Leads AI strategy and product at Qatar Insurance Group in Doha, Qatar.",
     address: {
       "@type": "PostalAddress",
       addressLocality: SITE.locality,
