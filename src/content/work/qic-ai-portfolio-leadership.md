@@ -26,19 +26,36 @@ which few things are worth building now.
 
 ## How the portfolio is prioritised
 
-[you fill: how you rank use cases by business value — the actual criteria, not just
-the phrase. what gets something moved up or killed.]
+Every use case matters to someone, which is exactly why prioritisation is the job.
+The value a portfolio leader adds is saying no to the right things at the right
+time, and holding that line.
+
+I use a ring model: use cases are placed by how close they sit to the company's
+P&L, and sized, where possible, by cost saved, revenue gained or risk reduced. Laid
+over a delivery timeline, each window takes two use cases from the inner ring and
+one from further out, so near-term impact funds the longer bets.
 
 ## Coordinating delivery
 
-[you fill: how engineering and business teams stay aligned across 8–10 parallel
-threads. where the agile practice is real vs. ceremony.]
+Delivery is agile by default: short iterations, with engineering and business
+teams working from the same priorities. Some stretches of work have fixed
+dependencies, such as a regulatory sign-off, a vendor contract or an integration
+with a core system. I plan those sequentially, waterfall-style, and let everything
+else move iteratively around them. The method follows the constraint, not the
+other way round.
 
 ## A concrete call
 
-[you fill: one initiative you pushed up, or one you stopped, and the reasoning.
-this is what turns "managed a portfolio" into evidence.]
+For close to 18 months, an enterprise cloud agreement sat unformalised. The
+blocker wasn't the vendor. No one had gone deep enough into the spend to see where
+money was going and where it wasn't. No one had made the case for what an
+enterprise commitment could unlock in discounts and partnership terms.
+
+I took it on. I broke down the spend, built the case for a committed agreement and
+pushed it through to close. The company is now formally contracted with a cloud
+provider, with a significant reduction in overall cloud cost of 25%.
 
 ## Outcome
 
-[you fill: portfolio-level results in safe-to-publish terms.]
+The clearest result so far is the cloud agreement: an 18-month stall resolved and
+25% in annual savings. 
