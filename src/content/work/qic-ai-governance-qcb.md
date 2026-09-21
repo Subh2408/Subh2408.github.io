@@ -26,21 +26,33 @@ regulator" instead of naming QCB if you'd rather not name it publicly. -->
 
 ## Why it mattered
 
-[you fill: what the submission was responding to, at a level you're comfortable
-publishing. one or two sentences.]
+In Qatar, financial institutions operate under the Qatar Central Bank. When QCB
+issued its AI regulation in 2024, compliance was not optional: it set clear
+expectations for how AI is used and governed across the sector, and every
+regulated firm had to show how it met them.
 
 ## The register and framework
 
-[you fill: what the AI register captures, and the 2–3 principles the governance
-framework runs on. what makes it something teams keep current rather than a
-one-time audit artefact.]
+The framework itself is internal, but the ground it has to cover is not. Where
+data is processed and where models run both matter, and every AI system in
+production has to be classified: by risk level, by how autonomous it is, and by
+whether a human stays in the loop.
+
+That starts with knowing what you have. I established an enterprise AI register
+that captures every AI system in the company, bought or built. On top of it sit
+the AI governance framework I authored and a set of standard operating procedures
+that turn it into day-to-day practice. Together they are what made the regulatory
+submission possible.
 
 ## What was hard
 
-[you fill: the genuine tension — e.g. governance that constrains without stalling
-delivery, or making the register useful to engineers and legible to a regulator
-at the same time.]
+Writing the rules was the easier part. Explaining them was harder. The most
+common question was some version of "why can't I just use ChatGPT?" Every "no"
+needed a reason people could accept, and ideally an approved alternative. The
+real tension is between enabling AI and enabling it safely, and governance only
+works if it doesn't read as a blanket no.
 
 ## Outcome
 
-[you fill: the state now, in safe-to-publish terms.]
+The register, framework and operating procedures are in force across the
+company.
