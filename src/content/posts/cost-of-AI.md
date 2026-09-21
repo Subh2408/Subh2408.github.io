@@ -1,10 +1,10 @@
 ---
 title: "THE REAL PRICE OF AI"
-date: 2026-21-09
+date: 2026-09-21
 description: >-
   Real versus nominal is taught in the first month of an economics degree and forgotten immediately after. Applied to AI, for the people who pay nothing and the people who pay twenty dollars
 tags: ["AI", "Cost of AI", "Real vs nominal", "Human intelligence"]
-readTime: "10 min read"
+readTime: "6 min read"
 draft: false
 cover: "/images/blog/cost-of-ai.png"
 ---
