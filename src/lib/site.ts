@@ -9,9 +9,9 @@
 
 export const SITE = {
   /** Footer / site name. */
-  name: "Subh : Product, Risk and AI",
+  name: "Subh : Product and AI",
   person: "Subhabrata Nag",
-  role: "AI Projects Manager",
+  role: "Product Leader, AI",
   locality: "Doha",
   country: "Qatar",
   email: "subhabrata.nag@outlook.com",
@@ -23,7 +23,7 @@ export const SITE = {
 
 /** Hero. Author's copy. */
 export const POSITIONING = "I build AI products for decisions that carry risk.";
-export const SUBLINE = "AI strategy, product and delivery. Insurance, FMCG, semiconductor, adtech.";
+export const SUBLINE = "I lead AI strategy and product at Qatar Insurance Group. Twelve years building in insurance, FMCG, semiconductor and adtech.";
 
 /**
  * Approach pillars. Names follow the approved copy pass
@@ -50,16 +50,16 @@ export const APPROACH = [
 
 /** Feeds Person.knowsAbout and Occupation.skills in the structured data. */
 export const SKILLS = [
-  "AI strategy",
-  "AI governance",
-  "Machine learning product management",
   "Product management",
-  "Program management",
+  "Product leadership",
+  "AI product strategy",
+  "Machine learning product management",
+  "AI governance",
   "Insurance",
   "Risk operations",
   "Analytics",
   "MLOps",
-  "Data science delivery",
+  "Program management",
 ] as const;
 
 export const EDUCATION = [
@@ -75,14 +75,14 @@ export const CERTIFICATIONS = [
 /** Page titles and descriptions. Every page gets a unique pair. */
 export const PAGE_META = {
   home: {
-    title: "Subhabrata Nag, AI product and risk leader in Doha",
+    title: "Subhabrata Nag, AI product leader in Doha",
     description:
-      "Subhabrata Nag builds AI products for decisions that carry risk. AI strategy, product and delivery across insurance, FMCG, semiconductor and adtech. Based in Doha, Qatar.",
+      "Subhabrata Nag builds AI products for decisions that carry risk. Leads AI product at Qatar Insurance Group, with eleven years across insurance, FMCG, semiconductor and adtech. Based in Doha, Qatar.",
   },
   work: {
     title: "Work",
     description:
-      "Eleven years of AI, machine learning and analytics work across insurance, FMCG, semiconductor and adtech. Five of the projects are interactive.",
+      "Twelve years of AI, machine learning and analytics work across insurance, FMCG, semiconductor and adtech. Five of the projects are interactive.",
   },
   writing: {
     title: "Writing",
