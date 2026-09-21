@@ -29,7 +29,7 @@ export async function GET(context: APIContext) {
 
   add(`# ${SITE.person}`);
   add();
-  add(`${POSITIONING} ${SITE.person} is a product and program leader in AI, machine learning and analytics, based in ${SITE.locality}, ${SITE.country}.`);
+  add(`${POSITIONING} ${SITE.person} is a product leader in AI, machine learning and analytics, based in ${SITE.locality}, ${SITE.country}.`);
   add();
   add(`Website: ${abs("/")}`);
   add(`Contact: ${SITE.email}, ${SITE.phone}`);
