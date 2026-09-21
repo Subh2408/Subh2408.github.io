@@ -141,6 +141,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
   font-size: var(--t-meta); color: var(--dk-text);
 }
 .foot .fname { font-family: var(--head); font-weight: 600; font-size: 16px; color: var(--white); }
+.foot a { color: var(--white); text-decoration: none; border-bottom: 1px solid var(--dk-line); }
+.foot a:hover { border-bottom-color: var(--white); }
 
 /* ---------------------------------------------------------- layout */
 
