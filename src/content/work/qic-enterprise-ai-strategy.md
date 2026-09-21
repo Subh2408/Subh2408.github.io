@@ -24,20 +24,33 @@ functions, and the standards that apply as they are.
 
 ## The problem
 
-[you fill: what was the state before a strategy existed — scattered pilots, no shared
-standard, unclear ownership? one or two sentences.]
+The starting point is a familiar one: a mandate to "bring AI into the
+organisation." What typically follows is a round of workshops across departments,
+a list of problem statements, and a scattered set of proofs of concept, none of
+them tied to an overall goal. What gets skipped is the harder questions: what to
+build, where it pays off, and how, given the talent the company actually has and
+the technology it already runs on.
 
 ## What the strategy actually says
 
-[you fill: the 2–4 load-bearing decisions. e.g. where AI is applied first and why,
-what stays human, how build-vs-buy is decided, what "good" looks like before something ships.]
+The strategy starts with the case for AI: why the business needs it, what peers
+in the market are doing, and where QIC can build a real advantage. It then turns
+that into a plan. Use cases are ranked by how close they sit to the P&L, and the
+closest are taken up first, each tied to a direct KPI. The rest are sequenced on
+a timeline behind them.
+
+Alongside the roadmap, it sets two things that shape every initiative: when to
+build and when to buy, and how AI governance is embedded in line with local
+regulation from the start rather than added later.
 
 ## The hard call
 
-[you fill: one genuine trade-off you argued — speed vs. governance, centralised vs.
-embedded teams, a use case you chose *not* to pursue. this is the part that reads as judgment.]
+Not every problem statement gets picked up first, especially those from teams
+far from the P&L. They still get worked on, but only after the use cases closest
+to revenue and cost have shown real value. That order is deliberate: early,
+measurable wins earn the credibility and the budget for everything that follows.
 
 ## Where it stands
 
-[you fill: what is live or adopted now, in outcome terms. avoid internal specifics
-you'd rather not publish.]
+In progress, and deliberately so. A strategy that stops changing has stopped
+being useful.
