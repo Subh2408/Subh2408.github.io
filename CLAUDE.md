@@ -106,25 +106,30 @@ large text). `--g2 #E6E4E0` is 1.27:1 and is a hairline colour, never a text col
 
 ## Surfaces
 
-Every surface defines four tokens: `--surface`, `--surface-raised`, `--surface-line` and
-`--surface-ink`, plus `--surface-accent` for hover and focus. **Components never hard-code
+Every surface defines five tokens: `--surface`, `--surface-raised`, `--surface-line`,
+`--surface-ink` and `--surface-muted` (secondary text, such as chip labels), plus
+`--surface-accent` for hover and focus. **Components never hard-code
 a background.** They take `--surface-raised` and `--surface-line` from the surface they sit
 on, so the same component stays visible on every surface. The
 rules live in `global.css` under "surfaces"; the raw greys are in `tokens.css`.
 
-| Surface | Selector | Raised (vs surface) | Line (vs surface) | Ink on raised | Accent on raised |
-|---|---|---|---|---|---|
-| Page `#FFFFFF` | `:root` | `#FFFFFF` 1.00 | `#CFCBC5` 1.62 | 19.80 | `--blue` 5.86 |
-| Grey `#F5F4F2` | `.wcard`, `.band.grey` | `#FFFFFF` 1.10 | `#CFCBC5` 1.47 | 19.80 | 5.86 |
-| Warm `#FBF4F0` | `.band.warm` | `#FFFFFF` 1.09 | `#CFCBC5` 1.48 | 19.80 | 5.86 |
-| Cool `#F1F5FB` | `.band.cool` | `#FFFFFF` 1.09 | `#CFCBC5` 1.48 | 19.80 | 5.86 |
-| Dark `#0A0A0A` | `.band.dark` | `#1E1E1E` 1.19 | `#6E6E6E` 3.88 | 16.67 white | `#4D9BFF` 5.91 |
-| Photo `#1C1C1E` | `body.dark` | `#2C2C30` 1.22 | `#7A7A7A` 3.96 | 13.91 white | `#4D9BFF` 4.93 |
+| Surface | Selector | Raised (vs surface) | Line (vs surface) | Muted label (vs surface) | Ink on raised | Accent on raised |
+|---|---|---|---|---|---|---|
+| Page `#FFFFFF` | `:root` | `#FFFFFF` 1.00 | `#CFCBC5` 1.62 | `--gt` 7.66 | 19.80 | `--blue` 5.86 |
+| Grey `#F5F4F2` | `.wcard`, `.band.grey` | `#FFFFFF` 1.10 | `#CFCBC5` 1.47 | `--gt` 6.96 | 19.80 | 5.86 |
+| Warm `#FBF4F0` | `.band.warm` | `#FFFFFF` 1.09 | `#CFCBC5` 1.48 | `--gt` 7.04 | 19.80 | 5.86 |
+| Cool `#F1F5FB` | `.band.cool` | `#FFFFFF` 1.09 | `#CFCBC5` 1.48 | `--gt` 7.00 | 19.80 | 5.86 |
+| Dark `#0A0A0A` | `.band.dark` | `#1E1E1E` 1.19 | `#363636` 1.64 | `--dk-text` 7.04 | 16.67 white | `#4D9BFF` 5.91 |
+| Photo `#1C1C1E` | `body.dark` | `#2C2C30` 1.22 | `#3E3E42` 1.60 | `--dk-text` 6.05 | 13.91 white | `#4D9BFF` 4.93 |
 
 The **line is decorative**. A chip's text identifies it, so WCAG 1.4.11 does not ask the
-border for 3:1. On light surfaces the white fill does the separating and the line only
-edges it, kept deliberately light at 1.4 to 1.8:1. Do not darken it to "pass" a rule that
-does not apply. Hover and focus turn the line and text `--surface-accent`.
+border for 3:1. The raised fill does the separating and the line only edges it, kept
+deliberately light at 1.4 to 1.8:1 on every surface, dark ones included. Do not darken it
+to "pass" a rule that does not apply. Hover and focus turn the line and text
+`--surface-accent`.
+
+The **muted label is text**, so `--surface-muted` must clear 4.5:1 against its surface.
+Only the line is decorative.
 
 The case-study chips (`.chip`) are the first component on this system. Older hard-coded
 backgrounds, such as `.wcard .modbox`, predate the rule. Move them over when touched. The
