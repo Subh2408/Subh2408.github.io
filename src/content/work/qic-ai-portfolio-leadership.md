@@ -5,7 +5,7 @@ date: 2026-02
 featured: false
 order: 5
 description: >-
-  Run a portfolio of 8–10 concurrent AI initiatives, prioritising use cases by
+  Runs a portfolio of 8–10 concurrent AI initiatives, prioritising use cases by
   business value and coordinating delivery across engineering and business teams
   using agile practices.
 kpis:
@@ -14,7 +14,7 @@ kpis:
   - value: "Business value"
     label: "the axis use cases are ranked on"
 chips:
-  domain: ["Insurance", "Program leadership"]
+  domain: ["Insurance", "Portfolio management"]
   method: ["Portfolio prioritisation", "Agile delivery", "Cross-team coordination"]
 ---
 
@@ -29,9 +29,9 @@ The value a portfolio leader adds is saying no to the right things at the right
 time, and holding that line.
 
 I use a ring model: use cases are placed by how close they sit to the company's
-P&L, and sized, where possible, by cost saved, revenue gained or risk reduced. Laid
-over a delivery timeline, each window takes two use cases from the inner ring and
-one from further out, so near-term impact funds the longer bets.
+P&L, and sized, where possible, by cost saved, revenue gained or risk reduced. I
+lay the rings over a delivery timeline. Each window takes two use cases from the
+inner ring and one from further out, so near-term impact funds the longer bets.
 
 ## Coordinating delivery
 
@@ -44,16 +44,15 @@ other way round.
 
 ## A concrete call
 
-For close to 18 months, an enterprise cloud agreement sat unformalised. The
-blocker wasn't the vendor. No one had gone deep enough into the spend to see where
-money was going and where it wasn't. No one had made the case for what an
-enterprise commitment could unlock in discounts and partnership terms.
+In-house AI and ML workloads needed dedicated GPU compute. I drove the business
+case for it and brought leadership into alignment behind it.
 
-I took it on. I broke down the spend, built the case for a committed agreement and
-pushed it through to close. The company is now formally contracted with a cloud
-provider, with a significant reduction in overall cloud cost of 25%.
+The enterprise cloud agreement was a commercial call of a different kind. It is
+written up in [closing the enterprise cloud agreement](/work/qic-cloud-adoption-strategy).
 
 ## Outcome
 
-The clearest result so far is the cloud agreement: an 18-month stall resolved and
-25% in annual savings. 
+The portfolio has shipped LUMINA, an AI learning app with more than 200 active
+users across the business. It has also shipped the
+[risk operations tool](/work/qic-risk-operations-tool) and the
+[AI regulatory submission to the Qatar Central Bank](/work/qic-ai-governance-qcb). 

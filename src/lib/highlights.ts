@@ -55,7 +55,7 @@ export const HIGHLIGHTS: Highlight[] = [
   },
   {
     kind: "kpi",
-    number: "$2.5M",
+    number: "$2.5M+",
     label: "client account expansion",
     context: "Quantiphi · Semiconductor",
     slug: "semiconductor-defect-detection",

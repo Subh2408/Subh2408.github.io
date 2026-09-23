@@ -4,7 +4,7 @@ date: 2026-09-22
 description: >-
   Most AI governance turns into paperwork because it starts with the annual inventory. Register a system before it goes into use and governance becomes part of how the organisation decides what is allowed to run.
 tags: ["AI", "AI Governance"]
-readTime: "8 min read"
+readTime: "5 min read"
 draft: false
 ---
 

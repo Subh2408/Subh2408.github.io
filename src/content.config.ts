@@ -7,6 +7,8 @@ const positions = defineCollection({
     type: z.enum(["role", "break"]).default("role"),
     company: z.string(),
     role: z.string(),
+    /** Contractual title. Shown only on the position page, under the role. */
+    formalTitle: z.string().optional(),
     start: z.coerce.date(),
     end: z.union([z.coerce.date(), z.literal("present")]),
     location: z.string().optional(),

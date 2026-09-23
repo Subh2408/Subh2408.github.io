@@ -20,13 +20,6 @@ import { SITE, POSITIONING, SUBLINE, APPROACH, PAGE_META, SKILLS } from "../lib/
 import { HIGHLIGHTS } from "../lib/highlights";
 import { person } from "../lib/schema";
 import { INDUSTRIES } from "../lib/taxonomy";
-import { Image } from "astro:assets";
-
-// Pulled through astro:assets so the build emits small, hashed derivatives.
-// The originals are 2.0-2.6MB and would be ruinous on a phone.
-import tile1 from "../../public/images/tiles/tile-01.png";
-import tile2 from "../../public/images/tiles/tile-02.png";
-import tile3 from "../../public/images/tiles/tile-03.png";
 
 const work = await allWork();
 const positions = await positionsByRecency();
@@ -35,34 +28,30 @@ const byPosition = await positionMap();
 /**
  * The three featured on the home page are chosen, not derived. Eight entries
  * carry `featured: true`, and these three are the ones with a working module,
- * which is the point the section is making. The first is the lead.
+ * which is the point the section is making. The first is the lead. Claims
+ * adjudication is left out on purpose: its module already runs in the hero.
  */
-const FEATURED = ["qic-risk-operations-tool", "claims-adjudication", "sku-optimization"];
+const FEATURED = ["qic-risk-operations-tool", "market-basket-analysis", "sku-optimization"];
 const featured = FEATURED.map((slug) => work.find((w) => w.id === slug)).filter(
   (w): w is NonNullable<typeof w> => Boolean(w)
 );
 const [lead, ...rest] = featured;
 
 /**
- * The mobile tile grid. Five real figures as coloured tiles, three
- * graphics, interleaved so colour and image alternate. The graphics are
- * decoration, not links; tapping one shows a short overlay (see the script
- * at the end of this file).
+ * The mobile tile grid. Real figures as coloured tiles, two to a row. Each
+ * links to its case study. An odd last tile spans the row (see global.css).
  *
- * Grounds are the four --tile-* tokens, mobile only. The order keeps blue
- * and coral from ever touching themselves once the graphics are in place.
+ * Grounds are the four --tile-* tokens, mobile only. The order keeps no two
+ * neighbours, across or down, on the same ground.
  * White text clears 4.5:1 on all four (19.80, 7.34, 5.86, 5.11); the small
  * label sits at 92%, because 80% fails on blue and coral.
  */
 const TILES = [
-  { kind: "kpi", tone: "t-coral", n: "$5M+", label: "SKU optimisation", slug: "sku-optimization" },
-  { kind: "graphic", img: tile1 },
-  { kind: "kpi", tone: "t-blue", n: "15 hrs → ~15 min", long: true, label: "Claims adjudication", slug: "claims-adjudication" },
-  { kind: "kpi", tone: "t-black", n: "QCB", label: "AI governance", slug: "qic-ai-governance-qcb" },
-  { kind: "graphic", img: tile2 },
-  { kind: "kpi", tone: "t-grey", n: "5 teams", label: "Risk operations tool", slug: "qic-risk-operations-tool" },
-  { kind: "kpi", tone: "t-blue", n: "$2.5M", label: "Semiconductor MLOps", slug: "semiconductor-defect-detection" },
-  { kind: "graphic", img: tile3 },
+  { tone: "t-coral", n: "$5M+", label: "SKU optimisation", slug: "sku-optimization" },
+  { tone: "t-blue", n: "15 hrs → ~15 min", long: true, label: "Claims adjudication", slug: "claims-adjudication" },
+  { tone: "t-black", n: "QCB", label: "AI governance", slug: "qic-ai-governance-qcb" },
+  { tone: "t-grey", n: "5 teams", label: "Risk operations tool", slug: "qic-risk-operations-tool" },
+  { tone: "t-blue", n: "$2.5M+", label: "Semiconductor MLOps", slug: "semiconductor-defect-detection" },
 ] as const;
 
 /** Stats row on the profile block. Derived, not hand-typed. */
@@ -120,19 +109,12 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
   {/* Mobile only. The visual centrepiece of the phone home page. */}
   <section class="tiles" aria-label="Highlights">
     {
-      TILES.map((t) =>
-        t.kind === "kpi" ? (
-          <a class:list={["tile", t.tone]} href={url(`/work/${t.slug}`)}>
-            <span class:list={["tile-n", t.long && "long"]}>{t.n}</span>
-            <span class="tile-l">{t.label}</span>
-          </a>
-        ) : (
-          <div class="tile tile-g" aria-hidden="true">
-            <Image src={t.img} alt="" width={420} height={420} loading="lazy" />
-            <span class="tile-msg">Made you wonder, didn't I?</span>
-          </div>
-        )
-      )
+      TILES.map((t) => (
+        <a class:list={["tile", t.tone]} href={url(`/work/${t.slug}`)}>
+          <span class:list={["tile-n", "long" in t && t.long && "long"]}>{t.n}</span>
+          <span class="tile-l">{t.label}</span>
+        </a>
+      ))
     }
   </section>
 
@@ -272,30 +254,5 @@ const jsonLd = [person(origin, positions, [...SKILLS])];
   }
   startClock();
   document.addEventListener("astro:page-load", startClock);
-
-  // Graphic tiles: a tap shows the overlay, which clears itself after 2.5s
-  // or on a second tap. Each tile keeps its own timer, so they never
-  // interfere with each other.
-  function bindTiles() {
-    document.querySelectorAll<HTMLElement>(".tile-g").forEach((tile) => {
-      if (tile.dataset.bound === "1") return;
-      tile.dataset.bound = "1";
-      let hideTimer: number | undefined;
-      const hide = () => {
-        window.clearTimeout(hideTimer);
-        tile.classList.remove("is-on");
-      };
-      tile.addEventListener("click", () => {
-        if (tile.classList.contains("is-on")) {
-          hide();
-          return;
-        }
-        tile.classList.add("is-on");
-        hideTimer = window.setTimeout(hide, 2500);
-      });
-    });
-  }
-  bindTiles();
-  document.addEventListener("astro:page-load", bindTiles);
 
 </script>

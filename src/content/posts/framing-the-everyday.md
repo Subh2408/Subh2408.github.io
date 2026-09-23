@@ -42,7 +42,7 @@ Ask yourself - *What do I want this image to convey?*
 What should the viewer feel when they see it?
 
 - Stillness? Movement?  
-- Color and energy?  
+- Colour and energy?  
 - Nostalgia? The beauty of routine?
 
 The photograph can be loud or quiet, raw or composed - but it should reflect **what you felt** in that moment.

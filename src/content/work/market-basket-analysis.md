@@ -1,8 +1,8 @@
 ---
-title: "Market basket optimisation for a US retailer"
+title: "Market basket optimisation for a North American retailer"
 position: "wns-global-services"
 date: 2016-11
-featured: false
+featured: true
 order: 3
 readTime: "5 min read"
 description: >-
@@ -11,7 +11,7 @@ cover: "/images/projects/marketbasket.jpg"
 kpis:
   - value: "10%"
     label: "increase in average basket size"
-  - value: "10-15%"
+  - value: "10–15%"
     label: "lift in category sales"
 chips:
   stack: ["Apriori", "SQL", "R"]
@@ -19,11 +19,11 @@ chips:
   method: ["Association rule mining", "Pilot design", "Stakeholder handover"]
 ---
 
-Led a strategic market basket analysis for a prominent North American big-box retailer, focusing on uncovering product associations within the feminine care category. The initiative aimed to increase average basket size and optimize merchandising and promotional strategies. This data-driven approach yielded a **10% increase in average basket size** and a **10–15% lift in category sales**.
+Led a strategic market basket analysis for a prominent North American big-box retailer, focusing on uncovering product associations within the feminine care category. The initiative aimed to increase average basket size and optimise merchandising and promotional strategies. This data-driven approach yielded a **10% increase in average basket size** in pilot stores and a **10–15% lift in category sales**.
 
 ### The Opportunity: Understanding Customer Purchase Patterns
 
-The client sought deeper insights into which feminine care products were frequently purchased together. This understanding was crucial for enhancing in-store shelf placement, developing effective bundled promotions, and refining targeted marketing campaigns. The analysis utilized six months of transaction-level data from stores across North America, concentrating on specific partner brands within the category.
+The client sought deeper insights into which feminine care products were frequently purchased together. This understanding was crucial for enhancing in-store shelf placement, developing effective bundled promotions, and refining targeted marketing campaigns. The analysis utilised six months of transaction-level data from stores across North America, concentrating on specific partner brands within the category.
 
 ---
 
@@ -36,9 +36,9 @@ Our approach involved a systematic analysis of transaction data to identify acti
     -   Applied established market basket analysis techniques (e.g., the **Apriori algorithm**) to identify frequent co-occurring itemsets from the prepared transactional data.
     -   Generated and evaluated association rules based on key statistical measures (Support, Confidence, and Lift) to pinpoint strong, commercially relevant product pairings.
 3.  **Actionable Insight Generation:**
-    -   Translated statistical findings into practical recommendations, such as optimizing in-store shelf layouts to encourage co-purchases of highly associated products.
+    -   Translated statistical findings into practical recommendations, such as optimising in-store shelf layouts to encourage co-purchases of highly associated products.
     -   Advised on creating bundled promotional offers for identified product pairs and implementing cross-selling prompts in digital channels.
-4.  **Stakeholder Engagement & Knowledge Transfer:** Delivered a comprehensive report detailing the methodology, key findings, and prioritized recommendations, supported by visualizations. Collaborated closely with the client’s category management and analytics teams to facilitate understanding and guide implementation.
+4.  **Stakeholder Engagement & Knowledge Transfer:** Delivered a comprehensive report detailing the methodology, key findings, and prioritised recommendations, supported by visualisations. Collaborated closely with the client’s category management and analytics teams to facilitate understanding and guide implementation.
 
 ---
 
@@ -47,7 +47,7 @@ Our approach involved a systematic analysis of transaction data to identify acti
 The market basket analysis initiative delivered substantial, measurable results:
 
 -   **Increased Sales & Basket Size:** Achieved a **10% increase in average basket size** in pilot stores and a **10–15% uplift in overall category sales** within the subsequent quarter.
--   **Enhanced Merchandising Strategies:** Provided data-driven rationale for optimizing product placement and promotional activities.
+-   **Enhanced Merchandising Strategies:** Provided data-driven rationale for optimising product placement and promotional activities.
 -   **Scalable Insights:** The success of this pilot led to the adoption of similar analytical approaches across other key retail categories (e.g., baby care, personal hygiene).
 -   **Improved Customer Experience:** More intuitive product layouts contributed to a better shopping experience.
 -   **Strengthened Client Partnership:** Deepened the collaborative relationship, paving the way for further advanced analytics engagements.

@@ -5,7 +5,7 @@ date: 2026-03
 featured: true
 order: 3
 description: >-
-  Designed and built a multi-department tool that scores real-world events against
+  Designed and built a tool for five teams that scores real-world events against
   live policy exposure and recommends action for the teams that have to respond.
 kpis:
   - value: "5"
@@ -15,7 +15,7 @@ kpis:
 chips:
   stack: ["GCP", "BigQuery"]
   domain: ["Insurance", "Risk operations", "Reinsurance"]
-  method: ["Cross-department discovery", "Alert design", "Exposure modelling"]
+  method: ["Cross-team discovery", "Alert design", "Exposure modelling"]
 ---
 
 Risk, claims, underwriting, investments and reinsurance were all reacting to the
@@ -24,7 +24,7 @@ view of which policies were actually exposed.
 
 ## The problem
 
-Risk, underwriting and compliance each had tools for part of the picture: world
+Risk and underwriting each had tools for part of the picture: world
 events, catastrophe exposure, vessel route risk, natural hazards. None of them
 covered everything, and none talked to each other. Compliance gaps weren't
 monitored continuously at all. Reinsurance had its own blind spot: no clear way
@@ -37,19 +37,19 @@ different time, with a different read on what it meant.
 
 The platform is a single control centre for five teams. It pulls intelligence
 from regulatory, market, ratings, cyber, legal, catastrophe and corporate sources
-into one feed, then interprets each event for the department viewing it. The same
-geopolitical event surfaces as a treaty question for Reinsurance, a portfolio
-question for Investments and a screening question for Compliance.
+into one feed, then interprets each event for the team viewing it. The same
+geopolitical event surfaces as a treaty question for Reinsurance and a portfolio
+question for Investments.
 
 It is part proactive, part reactive. Each day starts with a morning brief and a
-list of actions mapped to each department. When something happens, it flags
+list of actions mapped to each team. When something happens, it flags
 treaty breaches, risk concentrations and compliance gaps against live policy
 exposure. Situations move from triage to resolution inside the tool, and each
 decision can be exported as an audit-ready record.
 
 ## The real design problem
 
-Building it was the easier part. Adoption was harder: every department was used
+Building it was the easier part. Adoption was harder: every team was used
 to its own set of tools, with data spread across sources it trusted.
 
 What changed minds wasn't a feature walkthrough. I showed each team real events

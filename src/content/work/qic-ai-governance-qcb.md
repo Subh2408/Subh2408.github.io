@@ -23,7 +23,7 @@ is a product question before it is a legal one.
 ## Why it mattered
 
 In Qatar, financial institutions operate under the Qatar Central Bank. When QCB
-issued its AI regulation in 2024, compliance was not optional: it set clear
+issued its AI guideline in 2024, compliance was not optional: it set clear
 expectations for how AI is used and governed across the sector, and every
 regulated firm had to show how it met them.
 
@@ -36,7 +36,7 @@ whether a human stays in the loop.
 
 That starts with knowing what you have. I established an enterprise AI register
 that captures every AI system in the company, bought or built. On top of it sit
-the AI governance framework I authored and a set of standard operating procedures
+the AI governance framework I established and a set of standard operating procedures
 that turn it into day-to-day practice. Together they are what made the regulatory
 submission possible.
 
@@ -50,5 +50,4 @@ works if it doesn't read as a blanket no.
 
 ## Outcome
 
-The register, framework and operating procedures are in force across the
-company.
+The register, the framework and the operating procedures are established.

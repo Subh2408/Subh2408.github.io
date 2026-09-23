@@ -1021,24 +1021,9 @@ input[type=range]::-moz-range-thumb {
     color: rgba(255, 255, 255, .92);
   }
 
-  .tile img {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover;
-  }
-  /* Graphic tiles are decoration. No cursor, no hover, no focus: nothing
-     advertises the tap. The overlay is a plain class toggle from index.astro.
-     The global reduced-motion rule removes the fade, so it just shows and
-     hides. */
-  .tile-g { padding: 0; cursor: default; }
-  .tile-msg {
-    position: absolute; inset: 0; display: grid; place-items: center;
-    padding: 14px; text-align: center;
-    background: rgba(0, 0, 0, .75); color: var(--white);
-    font-family: var(--head); font-weight: 700;
-    font-size: clamp(18px, 5.6vw, 26px); line-height: 1.15;
-    opacity: 0; pointer-events: none; transition: opacity .25s ease;
-  }
-  .tile-g.is-on .tile-msg { opacity: 1; }
+  /* An odd tile out takes the whole last row, so the grid closes up
+     instead of leaving a hole. */
+  .tile:last-child:nth-child(odd) { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
 
   /* ------------------------------------------------ collapsed copy */
   .apx summary {

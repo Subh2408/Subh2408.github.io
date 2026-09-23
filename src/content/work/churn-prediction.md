@@ -1,5 +1,5 @@
 ---
-title: "Churn prediction, from expert rules to a model"
+title: "Churn prediction, rules built to become a model"
 position: "auto-insurance-startup"
 date: 2024-03
 featured: false
@@ -21,7 +21,7 @@ chips:
 
 ### Project Objective and Strategic Imperative
 
-For an early-stage insurance startup operating without historical customer data, establishing an immediate and actionable churn management framework was paramount. The core objective was to implement a foundational **rule-based system, leveraging internal business expertise and industry best practices,** to proactively identify and mitigate early customer attrition. This pragmatic strategy enabled churn management from day one, supported initial business operations, and critically, facilitated the collection of proprietary customer data necessary for planned future AI-driven enhancements.
+For an early-stage insurance startup operating without historical customer data, establishing an immediate and actionable churn management framework was paramount. The core objective was to implement a foundational **rule-based system, leveraging internal business expertise and industry best practices,** to proactively identify and mitigate early customer attrition. This pragmatic strategy enabled churn management from day one, supported initial business operations, and, critically, facilitated the collection of proprietary customer data necessary for planned future AI-driven enhancements.
 
 ---
 
@@ -31,13 +31,13 @@ In the absence of data for machine learning, our initial churn identification re
 
 **Key Principles Guiding Rule Design:**
 
--   **Focus on Early-Stage Behaviors:** Indicators were primarily based on customer actions (or inactions) within the initial months of their journey.
+-   **Focus on Early-Stage Behaviours:** Indicators were primarily based on customer actions (or inactions) within the initial months of their journey.
 -   **Leveraging Industry Knowledge:** Rules incorporated common patterns associated with churn in similar insurance or subscription products.
--   **Prioritizing Actionable Signals:** The system was designed to flag customers for whom targeted interventions by our service teams could be most effective.
+-   **Prioritising Actionable Signals:** The system was designed to flag customers for whom targeted interventions by our service teams could be most effective.
 
 **Categories of Early Churn Indicators Monitored:**
 
-1.  **Policy Renewal Intent & Payment Behavior**
+1.  **Policy Renewal Intent & Payment Behaviour**
 2.  **Application Engagement & Feature Usage**
 3.  **Customer Support Interaction Patterns**
 
@@ -50,16 +50,18 @@ In the absence of data for machine learning, our initial churn identification re
 
 ### 2. System Integration and Enabling Business Growth
 
-The insights from this rule-based system were immediately operationalized:
+The insights from this rule-based system were immediately operationalised:
 
 -   **Agent Dashboard Integration:** Churn risk indicators were integrated into agent dashboards, providing visibility into at-risk customer segments and enabling targeted outreach.
--   **Facilitating Essential Data Collection:** A crucial outcome was the **systematic accrual of proprietary customer data**. Interactions monitored by these rules (e.g., payment patterns, app usage) formed the foundational dataset for future, more sophisticated predictive modeling.
+-   **Facilitating Essential Data Collection:** A crucial outcome was the **systematic accrual of proprietary customer data**. Interactions monitored by these rules (e.g., payment patterns, app usage) formed the foundational dataset for future, more sophisticated predictive modelling.
 -   **Establishing an Operational Baseline:** This provided an initial framework for churn management and early benchmarks for customer retention.
+
+The framework projected a **15% reduction** in churn and a **10% uplift** in retention. Both figures are projections.
 
 ---
 
 ### 3. Planned Evolution: Architecting for Future AI-Driven Insights
 
-While the rule-based system provided immediate value, it was architected as a foundational step. Concurrently, groundwork was laid for a **scalable, AI-driven churn prediction system,** including planning for data infrastructure (ETL, data warehousing in BigQuery) and ML modeling capabilities (leveraging Vertex AI). This strategic foresight ensures that as sufficient customer data accumulates, the company can seamlessly transition to more advanced predictive analytics, enhancing churn prediction accuracy and enabling more nuanced retention strategies without losing momentum.
+While the rule-based system provided immediate value, it was architected as a foundational step. Concurrently, groundwork was laid for a **scalable, AI-driven churn prediction system,** including planning for data infrastructure (ETL, data warehousing in BigQuery) and ML modelling capabilities (leveraging Vertex AI). This strategic foresight ensures that as sufficient customer data accumulates, the company can seamlessly transition to more advanced predictive analytics, enhancing churn prediction accuracy and enabling more nuanced retention strategies without losing momentum.
 
 ---

@@ -4,7 +4,7 @@ date: 2025-04-03
 description: >-
   A stay at Craft Hostel in North Goa, and why the places that stay with you are usually about the people rather than the rooms.
 tags: ["Travel", "Goa", "Hostels", "Experiences"]
-readTime: "10 min read"
+readTime: "3 min read"
 draft: false
 cover: "/images/blog/hostel.JPEG"
 ---
@@ -43,7 +43,7 @@ At the summit, you're greeted with a stunning, relatively untouched view overloo
 
 ## More Than Just a Bed
 
-Craft Hostel encapsulates the best of North Goa's spirit – community, creativity, adventure, and genuine connection. It's a place where you arrive as a traveler and leave feeling like part of a tribe. If you're seeking more than just accommodation, if you're looking for a place with character, charm, and a touch of hidden magic, Craft Hostel is waiting.
+Craft Hostel encapsulates the best of North Goa's spirit – community, creativity, adventure, and genuine connection. It's a place where you arrive as a traveller and leave feeling like part of a tribe. If you're seeking more than just accommodation, if you're looking for a place with character, charm, and a touch of hidden magic, Craft Hostel is waiting.
 
 ---
 

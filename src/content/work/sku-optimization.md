@@ -19,29 +19,29 @@ chips:
   method: ["SKU rationalisation", "Custom Sales/ACV metric", "Decision frameworks"]
 ---
 
-This high-impact initiative focused on optimizing shelf space for a leading US FMCG brand's **feminine care division** across major big-box retailers. By identifying underperforming SKUs and providing data-driven rationalization strategies, the project delivered over **$5 million in annualized cost savings** and boosted prospective sales through an enhanced product assortment.
+This high-impact initiative focused on optimising shelf space for a leading US FMCG brand's **feminine care division** across major big-box retailers. By identifying underperforming SKUs and providing data-driven rationalisation strategies, the project delivered over **$5 million in annualised cost savings** and lifted projected sales through an enhanced product assortment.
 
 ---
 
-### The Imperative of SKU Optimization in Modern Retail
+### The Imperative of SKU Optimisation in Modern Retail
 
-In the competitive landscape of Fast-Moving Consumer Goods (FMCG) and retail, maintaining an optimal product assortment is critical. Over time, product lines naturally expand due to innovation, line extensions, and changing consumer trends. Without periodic rationalization, this can lead to:
+In the competitive landscape of Fast-Moving Consumer Goods (FMCG) and retail, maintaining an optimal product assortment is critical. Over time, product lines naturally expand due to innovation, line extensions, and changing consumer trends. Without periodic rationalisation, this can lead to:
 
 -   **Shelf Clutter & Shopper Confusion:** Overwhelming consumers with too many choices, potentially leading to decision paralysis and lost sales.
 -   **Operational Inefficiencies:** Increased inventory holding costs, supply chain complexity, and higher handling expenses for a multitude of SKUs.
 -   **Diluted Brand Focus:** Spreading marketing and promotional resources too thinly across a vast portfolio.
 -   **Reduced Profitability:** Underperforming SKUs occupying valuable shelf space that could be allocated to higher-velocity, higher-margin items.
 
-Industry best practices involve regular, data-driven SKU optimization exercises. This typically includes analyzing sales velocity, profitability, distribution efficiency, and strategic importance of each item to ensure the assortment meets consumer demand effectively while maximizing retailer and brand profitability. This project addressed precisely these challenges.
+Industry best practices involve regular, data-driven SKU optimisation exercises. This typically includes analysing sales velocity, profitability, distribution efficiency, and strategic importance of each item to ensure the assortment meets consumer demand effectively while maximising retailer and brand profitability. This project addressed precisely these challenges.
 
 ---
 
 ### The Business Challenge: Enhancing Our Client's Shelf Profitability
 
-Our client, a major consumer goods company, recognized the need to address growing assortment complexity within their key feminine care segments (Pads, Liners, Tampons). They aimed to:
+Our client, a major consumer goods company, recognised the need to address growing assortment complexity within their key feminine care segments (Pads, Liners, Tampons). They aimed to:
 
 -   Gain a clear, data-backed understanding of individual SKU performance across top retail partners.
--   Systematically identify and rationalize low-performing or redundant SKUs.
+-   Systematically identify and rationalise low-performing or redundant SKUs.
 -   Implement an effective delisting strategy to improve shelf space productivity and overall category profitability.
 
 ---
@@ -58,10 +58,10 @@ Actionable, brand-specific roadmaps for delisting and shelf space reallocation w
 
 ### Transformative Business Impact
 
--   **Annualized Cost Savings:** Over **$5 million** through optimized inventory and supply chain efficiencies.
--   **Sales Optimization:** Strategic focus on higher ROI SKUs, enhancing overall category performance.
+-   **Annualised Cost Savings:** Over **$5 million** through optimised inventory and supply chain efficiencies.
+-   **Sales Optimisation:** Strategic focus on higher-ROI SKUs, enhancing overall category performance.
 -   **Strengthened Retailer Partnerships:** Enabled by data-driven, collaborative shelf planning.
 
-This project provided a scalable framework for SKU rationalization, transforming shelf clutter into clarity and delivering significant financial and strategic wins.
+This project provided a scalable framework for SKU rationalisation, transforming shelf clutter into clarity and delivering significant financial and strategic wins.
 
 ---

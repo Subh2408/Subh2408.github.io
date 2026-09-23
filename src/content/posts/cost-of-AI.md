@@ -1,15 +1,15 @@
 ---
-title: "THE REAL PRICE OF AI"
+title: "The real price of AI"
 date: 2026-09-21
 description: >-
-  Real versus nominal is taught in the first month of an economics degree and forgotten immediately after. Applied to AI, for the people who pay nothing and the people who pay twenty dollars
+  Real versus nominal is taught in the first month of an economics degree and forgotten immediately after. Applied to AI, for the people who pay nothing and the people who pay twenty dollars.
 tags: ["AI", "Cost of AI", "Real vs nominal", "Human intelligence"]
 readTime: "6 min read"
 draft: false
 cover: "/images/blog/cost-of-ai.png"
 ---
 
-I did my masters in econometrics, which means I spent two years being taught, in a lot of different ways, that **the number printed on the front of the thing is not the number.**
+I did my master's in econometrics, which means I spent two years being taught, in a lot of different ways, that **the number printed on the front of the thing is not the number.**
 
 The cleanest version of this is any investment. You buy one paying six percent and you feel good about it, because six percent is a real thing that arrives in your account. Then somebody points out that prices went up five percent over the same year, and what you actually earned was one. Nobody lied to you. The six was accurate but it wasn't an answer to the question you thought you were asking, which was whether you were better off at the end than at the start.
 
@@ -25,7 +25,7 @@ For a person. Me, the consumer, sitting with the thing open in a tab.
 
 AI is an umbrella and it's been over us for a long time. Market basket analysis so a supermarket knows what sits next to what. Fraud models at banks and insurers. Whatever Spotify does to decide the next song.
 
-I've spent 12 years in and around that work, across semiconductor, FMCG, advertising and now insurance, and at no point did any of it feel like a moment. It felt like delivery. There were models which went into production or they didn't, and the difference was usually organisational rather than technical.
+I've spent eleven years in and around that work, across semiconductor, FMCG, advertising and now insurance, and at no point did any of it feel like a moment. It felt like delivery. There were models which went into production or they didn't, and the difference was usually organisational rather than technical.
 
 What changed in November 2022 wasn't the capability. GPT-3 had been available since 2020 and the general public did not care, because you needed an API key and a reason. What changed was that somebody put a text box on a webpage and you could type into it without asking anyone.
 
@@ -55,7 +55,7 @@ That's the nominal return and it's large.
 
 **Second** — and this is the one that stings for the kind of person likely to read this — everybody else got the same lift. If a meaningful part of what your work is worth is relative, and for most senior professional work it is, then **a gain distributed to everyone simultaneously isn't a gain in the thing you were actually being paid for.**
 
-What's given up is the awkward part, because it's the judgment itself. You need the capacity to evaluate the output, and that capacity was built by doing the work the output replaces.
+What's given up is the awkward part, because it's the judgement itself. You need the capacity to evaluate the output, and that capacity was built by doing the work the output replaces.
 
 > So the loss degrades the instrument you'd use to detect the loss.
 
@@ -65,7 +65,7 @@ In econometric terms your measurement error is correlated with your treatment, w
 
 Here I think the intuition is straightforwardly backwards.
 
-The fee is twenty dollars, or two hundred, and it gets compared to a lunch, so it lands as a rounding error — and it is one, which is why it doesn't function as a price signal. It doesn't buy down any of the costs above. What it does is remove the last bit of friction, because once the subscription is sunk the marginal cost of the next query is zero, and usage goes up. More usage, more offloading. **The payment doesn't offset the hidden costs, it raises them**, and it does it in the way sunk costs always do, by quietly making the next use feel free.
+The fee is twenty dollars, or two hundred, and it gets compared to a lunch, so it lands as a rounding error — and it is one, which is why it doesn't function as a price signal. It doesn't buy down any of the costs above. What it does is remove the last bit of friction, because once the subscription is sunk the marginal cost of the next query is zero, and usage goes up. More usage, more offloading. **The payment doesn't offset the hidden costs. It raises them.** It does it in the way sunk costs always do, by quietly making the next use feel free.
 
 The nominal return is higher. Better model, higher ceiling, genuinely more capability. But two of the deflators behave badly. Verification doesn't fall the way you'd expect, because a better model makes fewer errors and makes the remaining ones harder to see — something plausible and wrong is far more expensive to catch than something obviously wrong, and it fails at the point where you've stopped looking. And the positional advantage of paying exists only while few people pay, which is not a durable condition in a market where the cost of serving the next user falls every year.
 
@@ -77,9 +77,9 @@ Because evaluating fit costs more than just trying, and when trying is free that
 
 Which is, I think, the whole thing. Both groups are paying in the same currency, and **money is the smallest line in either column**. One group can see none of it and the other can see the least important part of it, and so neither does the subtraction.
 
-There's a positive real return in here somewhere. I'd guess the condition is something like: the task you're handing over has to be one you were never going to get better at, or you have to hold on to the judgment some other way, by doing enough of the work yourself that the evaluation muscle stays attached.
+There's a positive real return in here somewhere. I'd guess the condition is something like: the task you're handing over has to be one you were never going to get better at, or you have to hold on to the judgement some other way, by doing enough of the work yourself that the evaluation muscle stays attached.
 
-I can't tell you in advance which tasks those are. I've been doing this for 12 years and I can't reliably tell for my own work, which is either an admission or the finding, and I genuinely don't know which.
+I can't tell you in advance which tasks those are. I've been doing this for eleven years and I can't reliably tell for my own work, which is either an admission or the finding, and I genuinely don't know which.
 
 
 ---

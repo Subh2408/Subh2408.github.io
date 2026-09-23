@@ -5,11 +5,12 @@ date: 2025-09
 featured: true
 order: 1
 description: >-
-  Authored QIC's enterprise AI strategy — how AI and ML get applied across core
-  insurance and support functions, and the governance that has to travel with it.
+  Authoring and refining QIC's enterprise AI strategy. It sets how AI and ML get
+  applied across core insurance and support functions, and the governance that has
+  to travel with it.
 kpis:
   - value: "Enterprise"
-    label: "AI strategy authored and owned"
+    label: "AI strategy, authoring and refining"
   - value: "8–10"
     label: "initiatives sequenced under one strategy"
 chips:
@@ -22,12 +23,12 @@ functions, and the standards that apply as they are.
 
 ## The problem
 
-The starting point is a familiar one: a mandate to "bring AI into the
-organisation." What typically follows is a round of workshops across departments,
-a list of problem statements, and a scattered set of proofs of concept, none of
-them tied to an overall goal. What gets skipped is the harder questions: what to
-build, where it pays off, and how, given the talent the company actually has and
-the technology it already runs on.
+Across the industry, the starting point is a familiar one: a mandate to "bring AI
+into the organisation." What typically follows is a round of workshops across
+teams, a list of problem statements, and a scattered set of proofs of concept, none
+of them tied to an overall goal. The harder questions get skipped: what to build,
+where it pays off, and how, given the talent a company actually has and the
+technology it already runs on.
 
 ## What the strategy actually says
 
