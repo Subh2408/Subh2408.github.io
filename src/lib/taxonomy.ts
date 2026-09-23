@@ -11,7 +11,7 @@
  */
 
 export const DISCIPLINES = ["AI Strategy", "ML", "Data", "BI", "Ops", "Design"] as const;
-export const INDUSTRIES = ["Insurance", "FMCG", "Semiconductor", "Advertising"] as const;
+export const INDUSTRIES = ["Insurance", "FMCG", "Semiconductor", "Adtech"] as const;
 
 export type Discipline = (typeof DISCIPLINES)[number];
 export type Industry = (typeof INDUSTRIES)[number];
@@ -19,7 +19,7 @@ export type Industry = (typeof INDUSTRIES)[number];
 type Axes = { discipline: Discipline[]; industry: Industry[] };
 
 const TAGS: Record<string, Axes> = {
-  "analytics-quality-program": { discipline: ["Ops", "BI"], industry: ["Advertising"] },
+  "analytics-quality-program": { discipline: ["Ops", "BI"], industry: ["Adtech"] },
   "auto-insurance-mvp": { discipline: ["ML", "Design"], industry: ["Insurance"] },
   "churn-prediction": { discipline: ["ML", "Data"], industry: ["Insurance"] },
   "claims-adjudication": { discipline: ["ML", "Design"], industry: ["Insurance"] },

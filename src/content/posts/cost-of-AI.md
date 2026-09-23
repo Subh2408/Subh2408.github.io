@@ -25,7 +25,7 @@ For a person. Me, the consumer, sitting with the thing open in a tab.
 
 AI is an umbrella and it's been over us for a long time. Market basket analysis so a supermarket knows what sits next to what. Fraud models at banks and insurers. Whatever Spotify does to decide the next song.
 
-I've spent eleven years in and around that work, across semiconductor, FMCG, advertising and now insurance, and at no point did any of it feel like a moment. It felt like delivery. There were models which went into production or they didn't, and the difference was usually organisational rather than technical.
+I've spent eleven years in and around that work, across semiconductor, FMCG, adtech and now insurance, and at no point did any of it feel like a moment. It felt like delivery. There were models which went into production or they didn't, and the difference was usually organisational rather than technical.
 
 What changed in November 2022 wasn't the capability. GPT-3 had been available since 2020 and the general public did not care, because you needed an API key and a reason. What changed was that somebody put a text box on a webpage and you could type into it without asking anyone.
 

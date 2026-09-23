@@ -21,5 +21,13 @@ frames:
     alt: "Tourists stop to read a café's hiring notice under pink bougainvillea in Hanoi's Old Quarter."
   - src: "scooterguy.jpg"
     alt: "A woman in a yellow T-shirt leans on her scooter's handlebars beside a street vegetable market in Hanoi."
+  - src: "Vietnam.jpg"
+    alt: "A Grab rider in a green jacket waits beside a scooter piled high with tarp-wrapped cargo in Hanoi traffic."
+  - src: "Vietnam1.jpg"
+    alt: "Sapa's main street at dusk under a red patterned arch, with scooters, cars and people on the pavement."
+  - src: "mountain.jpg"
+    alt: "Visitors climb stone steps to a pagoda on a karst peak above the valley in Ninh Bình."
+  - src: "vietnamtemple.jpg"
+    alt: "A black-and-white view of a crowded temple courtyard, with two women in conical hats in the foreground."
 ---
 

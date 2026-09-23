@@ -14,7 +14,7 @@ kpis:
   - value: "70%"
     label: "drop in data errors"
 chips:
-  domain: ["Analytics operations", "Advertising"]
+  domain: ["Analytics operations", "Adtech"]
   method: ["Process design", "Checklist frameworks", "Templating", "Enablement"]
 ---
 

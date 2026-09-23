@@ -47,7 +47,7 @@ export default function RiskOps() {
   return (
     <ModuleFrame
       title="Event routing"
-      note="Every event carries a severity and an amount of live policy exposure. Alert on everything and five departments stop reading. Alert on too little and the tool is decorative the one time it matters. The thresholds are the product."
+      note="Every event carries a severity and an amount of live policy exposure. Alert on everything and five teams stop reading. Alert on too little and the tool is decorative the one time it matters. The thresholds are the product."
     >
       <div className="mgrid">
         <div>

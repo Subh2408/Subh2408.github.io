@@ -4,7 +4,7 @@ company: "MiQ Digital"
 role: "Engagement Manager, Data & Analytics"
 start: 2022-04
 end: 2022-11
-industry: "Advertising"
+industry: "Adtech"
 summary: "Led analytics engagements for global advertisers and rebuilt how the analytics pods checked their own work."
 order: 3
 ---

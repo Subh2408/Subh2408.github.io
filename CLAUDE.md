@@ -26,6 +26,8 @@ machine-generated. Do not reintroduce them.
 - No middle-dot triplet strings (`A · B · C`) in running UI. Break them up.
 - These apply to anything YOU write. The user's own prose (bio, case-study bodies) is
   theirs — flag cadence if asked, don't silently rewrite.
+- The mobile home graphic tiles (tile-01–03) and their "Made you wonder, didn't I?" tap
+  overlay are the author's choice. Do not remove or reword them.
 
 **Layout tells to avoid:** over-tidy symmetry (everything in equal 3- or 4-up grids),
 repeating one section shape down a page until it reads as a slide deck, numbered section
