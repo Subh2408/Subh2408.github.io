@@ -18,8 +18,8 @@ frames:
     # shutter: "1/250 s"
     # iso: "400"
   - src: "coffeeshop.jpg"
-    alt: ""  # ASK SUBH: alt text for this photo
+    alt: "Tourists stop to read a café's hiring notice under pink bougainvillea in Hanoi's Old Quarter."
   - src: "scooterguy.jpg"
-    alt: ""  # ASK SUBH: alt text for this photo
+    alt: "A woman in a yellow T-shirt leans on her scooter's handlebars beside a street vegetable market in Hanoi."
 ---
 

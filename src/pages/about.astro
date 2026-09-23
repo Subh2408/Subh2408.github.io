@@ -8,19 +8,21 @@
  */
 import Base from "../layouts/Base.astro";
 import Crumbs from "../components/Crumbs.astro";
-import { Content as Bio } from "../data/about.md";
+import { compiledContent as bioHtml } from "../data/about.md";
 import { allWork, positionsByRecency } from "../lib/content";
 import { url } from "../lib/paths";
-import { PAGE_META, SKILLS } from "../lib/site";
+import { PAGE_META, SKILLS, YEARS_OF_EXPERIENCE, YEARS_WORD_CAP } from "../lib/site";
 import { breadcrumbList, person } from "../lib/schema";
 import { INDUSTRIES } from "../lib/taxonomy";
 
 const work = await allWork();
 const positions = await positionsByRecency();
 
-const roles = positions.filter((p) => p.data.type === "role");
-const firstYear = Math.min(...roles.map((p) => p.data.start.getUTCFullYear()));
-const years = new Date().getUTCFullYear() - firstYear;
+const years = YEARS_OF_EXPERIENCE;
+
+// The bio spells the year count as a word. It is written as {{years}} in
+// about.md and filled here from the same calculation as the stat card.
+const bio = (await bioHtml()).replaceAll("{{years}}", YEARS_WORD_CAP);
 
 const stats: [string, string][] = [
   [`${years} yrs`, "in analytics and product"],
@@ -52,7 +54,7 @@ const jsonLd = [
 
     <div class="about-grid">
       <div class="prose" style="margin-top:26px">
-        <Bio />
+        <Fragment set:html={bio} />
       </div>
 
       <aside class="statcard">

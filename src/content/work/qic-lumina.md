@@ -1,7 +1,7 @@
 ---
 title: "LUMINA, an AI learning app"
 position: "qatar-insurance-group"
-date: 2026-01  # CONFIRM: launch month (Subh's guess). Only the year renders.
+date: 2026-01
 featured: false
 order: 2
 readTime: "3 min read"

@@ -8,7 +8,7 @@ import type { APIRoute } from "astro";
 import { renderOg, type OgCard } from "../../lib/og";
 import { allWork, positionsByRecency, publishedPosts, positionMap, workForPosition } from "../../lib/content";
 import { monthLabel, year, longDate } from "../../lib/dates";
-import { PAGE_META, SITE } from "../../lib/site";
+import { PAGE_META, SITE, YEARS_WORD_CAP } from "../../lib/site";
 
 export async function getStaticPaths() {
   const work = await allWork();
@@ -30,7 +30,7 @@ export async function getStaticPaths() {
     {
       params: { route: "work" },
       props: {
-        card: { eyebrow: "Work", title: "Eleven years of work.", facts: [`${work.length} projects`] },
+        card: { eyebrow: "Work", title: `${YEARS_WORD_CAP} years of work.`, facts: [`${work.length} projects`] },
       },
     },
     {
@@ -39,7 +39,7 @@ export async function getStaticPaths() {
     },
     {
       params: { route: "photography" },
-      props: { card: { eyebrow: "Photography", title: "Photographs from Doha, Kolkata and Goa." } },
+      props: { card: { eyebrow: "Photography", title: "Photographs from Goa and Vietnam." } },
     },
     {
       params: { route: "about" },
@@ -47,7 +47,7 @@ export async function getStaticPaths() {
     },
     {
       params: { route: "resume" },
-      props: { card: { eyebrow: "Résumé", title: "Eleven years in AI, ML and analytics.", facts: [SITE.role] } },
+      props: { card: { eyebrow: "Résumé", title: `${YEARS_WORD_CAP} years in AI, ML and analytics.`, facts: [SITE.role] } },
     },
   ];
 

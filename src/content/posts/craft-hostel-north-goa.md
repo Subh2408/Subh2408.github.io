@@ -6,14 +6,11 @@ description: >-
 tags: ["Travel", "Goa", "Hostels", "Experiences"]
 readTime: "3 min read"
 draft: false
-cover: "/images/blog/hostel.JPEG"
 ---
 
 North Goa. The name itself conjures images of sun-drenched beaches, vibrant parties, and a certain infectious energy. But beyond the usual tourist trails, there's a deeper charm, a sense of belonging waiting to be discovered. And sometimes, you find it in the most unexpected, yet perfect, places – like a quaint hostel that instantly feels like home. For me, that place was **Craft Hostel**.
 
 Nestled in North Goa, Craft Hostel isn't just a place to crash; it's an experience. From the moment you step in, you're enveloped by a vibe that's hard to put into words – let's just call it *immaculate*. It’s welcoming, creative, and utterly genuine.
-
-![hostel](/images/blog/hostel.JPEG)
 
 ## An Oasis of Green and Calm
 
@@ -27,8 +24,6 @@ What truly elevates Craft Hostel is the people. The caretaker isn't just staff; 
 
 Step inside, and the hostel walls whisper stories. Dotted throughout are umpteen photographs, each resonating with the artistic nature of the founders. Particularly striking are the beautiful monochrome pictures capturing glimpses of Goa from the past. It feels less like a hostel and more like a curated gallery, adding a layer of depth and history to your stay. It’s clear that art and soul are woven into the very fabric of Craft Hostel.
 
-![photo](/images/blog/photowall.JPEG)
-
 ## A Secret Trek to a Coastal Panorama
 
 But the magic doesn't stop within the hostel grounds. Ask about the "little trek," and you're in for a treat. Starting right from behind the hostel, a path winds its way up a small hill.
@@ -36,8 +31,6 @@ But the magic doesn't stop within the hostel grounds. Ask about the "little trek
 The journey itself is part of the adventure. The road gets a bit steep at times, you might hop over small, gentle water bodies, and navigate parts of the hillside. It’s not a strenuous hike, but it requires a little effort.
 
 And the reward? Absolutely breathtaking.
-
-![Coastline](/images/blog/northcoast.JPEG)
 
 At the summit, you're greeted with a stunning, relatively untouched view overlooking the expansive northern coastline of Goa. The sea stretches out before you, the breeze is fresh, and the sense of accomplishment mixed with the sheer beauty is pure bliss. It's a perspective of Goa many miss, and it's literally right on Craft Hostel's doorstep.
 

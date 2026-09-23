@@ -13,10 +13,6 @@ The street offers a mix of motion and stillness - and both can be equally compel
 It could be a moving cyclist, a stationary shopkeeper, or just the way shadows fall on a wall.
 
 ---
-
-![Random Guy](/images/blog/vegseller.jpg)
-
----
 ### Framing a Stationary Subject
 
 Framing comes next.  

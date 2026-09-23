@@ -21,9 +21,33 @@ export const SITE = {
   resumePdf: "/resume/subhabrata-nag-resume.pdf",
 } as const;
 
+/**
+ * Years of experience. One calculation, used by the stat rows and by every
+ * sentence that spells the number out, so the two can never disagree. It is
+ * computed at build, so the figure moves on the first deploy of a new year.
+ */
+export const CAREER_START_YEAR = 2015;
+export const YEARS_OF_EXPERIENCE = new Date().getUTCFullYear() - CAREER_START_YEAR;
+
+const NUMBER_WORDS = [
+  "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+  "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+  "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four",
+  "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine", "thirty",
+];
+
+/** A number as a word ("eleven"), falling back to digits past thirty. */
+export function numberWord(n: number, capital = false): string {
+  const w = NUMBER_WORDS[n] ?? String(n);
+  return capital ? w.charAt(0).toUpperCase() + w.slice(1) : w;
+}
+
+export const YEARS_WORD = numberWord(YEARS_OF_EXPERIENCE);
+export const YEARS_WORD_CAP = numberWord(YEARS_OF_EXPERIENCE, true);
+
 /** Hero. Author's copy. */
 export const POSITIONING = "I build AI products for decisions that carry risk.";
-export const SUBLINE = "I do my best work from zero to one. Eleven years across FMCG, semiconductor, adtech and insurance. Currently Manager, AI Strategy & Products at Qatar Insurance Group in Doha.";
+export const SUBLINE = `I do my best work from zero to one. ${YEARS_WORD_CAP} years across FMCG, semiconductor, adtech and insurance. Currently Manager, AI Strategy & Products at Qatar Insurance Group in Doha.`;
 
 /**
  * Approach pillars. Names follow the approved copy pass
@@ -77,12 +101,12 @@ export const PAGE_META = {
   home: {
     title: "Subhabrata Nag, AI product leader in Doha",
     description:
-      "Subhabrata Nag builds AI products for decisions that carry risk, from zero to one. Eleven years across FMCG, semiconductor, adtech and insurance. Currently Manager, AI Strategy & Products at Qatar Insurance Group in Doha.",
+      `Subhabrata Nag builds AI products for decisions that carry risk, from zero to one. ${YEARS_WORD_CAP} years across FMCG, semiconductor, adtech and insurance. Currently Manager, AI Strategy & Products at Qatar Insurance Group in Doha.`,
   },
   work: {
     title: "Work",
     description:
-      "Eleven years of AI, machine learning and analytics products across FMCG, semiconductor, adtech and insurance. Five of the projects are interactive.",
+      `${YEARS_WORD_CAP} years of AI, machine learning and analytics products across FMCG, semiconductor, adtech and insurance. Five of the projects are interactive.`,
   },
   writing: {
     title: "Writing",
@@ -100,6 +124,6 @@ export const PAGE_META = {
   resume: {
     title: "Resume",
     description:
-      "Resume of Subhabrata Nag. Eleven years building AI, machine learning and analytics products across FMCG, semiconductor, adtech and insurance.",
+      `Resume of Subhabrata Nag. ${YEARS_WORD_CAP} years building AI, machine learning and analytics products across FMCG, semiconductor, adtech and insurance.`,
   },
 } as const;

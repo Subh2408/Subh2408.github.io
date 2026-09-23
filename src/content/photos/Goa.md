@@ -16,6 +16,6 @@ frames:
     # shutter: "1/250 s"
     # iso: "400"
   - src: "Goa1.JPEG"
-    alt: ""  # ASK SUBH: alt text for this photo
+    alt: "A weathered white hatchback parked in front of a peeling blue colonial facade with rusted window grilles."
 ---
 

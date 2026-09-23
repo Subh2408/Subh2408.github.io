@@ -1,6 +1,6 @@
 I am a designer at heart who happens to like statistics. I build AI products for decisions that carry risk, and I do my best work from zero to one.
 
-Eleven years across FMCG, semiconductor, adtech and insurance. The domain changes. The problem stays the same: a decision where being wrong costs something.
+{{years}} years across FMCG, semiconductor, adtech and insurance. The domain changes. The problem stays the same: a decision where being wrong costs something.
 
 Most of what I build has a model inside it. A recommender, a demand forecast, a fraud score. The model is one component. The product decides who acts on its output, when, and what happens when it is wrong. That part is my job.
 

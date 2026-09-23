@@ -14,7 +14,7 @@ import { monthLabel, isoMonth, tenure, year, NOW } from "../../lib/dates";
 import { url } from "../../lib/paths";
 import { packChips } from "../../lib/timeline";
 import { shortName } from "../../lib/shortNames";
-import { PAGE_META } from "../../lib/site";
+import { PAGE_META, YEARS_WORD_CAP } from "../../lib/site";
 import { DISCIPLINES, INDUSTRIES, tagList } from "../../lib/taxonomy";
 import { breadcrumbList } from "../../lib/schema";
 
@@ -132,7 +132,7 @@ const jsonLd = [
   <div class="page">
     <Crumbs items={[{ label: "Home", href: url("/") }, { label: "Work" }]} />
     <h1 class="display" style="margin-top:16px">Work.</h1>
-    <p class="lede">Eleven years of work. Five projects are interactive.</p>
+    <p class="lede">{YEARS_WORD_CAP} years of work. Five projects are interactive.</p>
 
     <div class="segwrap">
       <div class="seg" role="tablist" aria-label="Work view">
