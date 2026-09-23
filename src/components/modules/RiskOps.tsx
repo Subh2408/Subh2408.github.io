@@ -39,7 +39,7 @@ export default function RiskOps() {
 
   const readout =
     flagged.length > 45
-      ? "Too noisy. Five departments will start ignoring the feed inside a fortnight, and then the tool is worse than nothing."
+      ? "Too noisy. Five teams will start ignoring the feed inside a fortnight, and then the tool is worse than nothing."
       : missed.length > 6
         ? "Too tight. Severe events are falling through because the exposure floor is set above them."
         : "A workable window. Enough signal to act on, few enough that people still open it.";
