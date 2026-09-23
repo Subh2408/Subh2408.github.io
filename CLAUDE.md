@@ -104,6 +104,42 @@ ever looks obviously coloured, it is too saturated. Body text on them: `--ink` 1
 `--g3 #96918A` was added for large decorative type only (3.13:1 on white, the AA floor for
 large text). `--g2 #E6E4E0` is 1.27:1 and is a hairline colour, never a text colour.
 
+## Surfaces
+
+Every surface defines four tokens: `--surface`, `--surface-raised`, `--surface-line` and
+`--surface-ink`, plus `--surface-accent` for hover and focus. **Components never hard-code
+a background.** They take `--surface-raised` and `--surface-line` from the surface they sit
+on, so the same component stays visible on every surface. The
+rules live in `global.css` under "surfaces"; the raw greys are in `tokens.css`.
+
+| Surface | Selector | Raised (vs surface) | Line (vs surface) | Ink on raised | Accent on raised |
+|---|---|---|---|---|---|
+| Page `#FFFFFF` | `:root` | `#FFFFFF` 1.00 | `#85817A` 3.88 | 19.80 | `--blue` 5.86 |
+| Grey `#F5F4F2` | `.wcard`, `.band.grey` | `#FFFFFF` 1.10 | `#85817A` 3.53 | 19.80 | 5.86 |
+| Warm `#FBF4F0` | `.band.warm` | `#FFFFFF` 1.09 | `#85817A` 3.56 | 19.80 | 5.86 |
+| Cool `#F1F5FB` | `.band.cool` | `#FFFFFF` 1.09 | `#85817A` 3.54 | 19.80 | 5.86 |
+| Dark `#0A0A0A` | `.band.dark` | `#1E1E1E` 1.19 | `#6E6E6E` 3.88 | 16.67 white | `#4D9BFF` 5.91 |
+| Photo `#1C1C1E` | `body.dark` | `#2C2C30` 1.22 | `#7A7A7A` 3.96 | 13.91 white | `#4D9BFF` 4.93 |
+
+Non-text contrast (WCAG 1.4.11) is carried by the **line**, not the fill. A light fill
+cannot reach 3:1 against a light surface (white on `--g1` is 1.10:1), so the fill is only
+a lift and the 1px line does the work. Every line clears 3:1 on its surface.
+
+The case-study chips (`.chip`) are the first component on this system. Older hard-coded
+backgrounds, such as `.wcard .modbox`, predate the rule. Move them over when touched. The
+filter pills (`.pill`) are a separate control and are not chips.
+
+## Content rules
+
+"A KPI slot holds a figure; chips exist to tell cards apart." Enforced in
+`src/content.config.ts`, so a violation fails the build and names the file.
+
+- Every `kpis[].value` contains at least one digit. A word like "Enterprise" or "Live" is
+  not a KPI. If a case study has no real figure, it has no KPI.
+- Chips: at most 3 keys, at most 3 values per key.
+- A chip never repeats its position's industry (no "Insurance" chip on a QIC case study).
+  The industry is read from the position file.
+
 ## Type
 
 - Headings: Oswald (`--head`).

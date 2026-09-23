@@ -70,7 +70,7 @@ const jsonLd = [
       <div class="chipvals">
         {
           entry.data.tags.map((t) => (
-            <a class="pill sm" href={url(`/writing?tag=${encodeURIComponent(t)}`)}>
+            <a class="chip" href={url(`/writing?tag=${encodeURIComponent(t)}`)}>
               {t}
             </a>
           ))

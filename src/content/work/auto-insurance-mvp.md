@@ -14,7 +14,7 @@ kpis:
   - value: "0 → 1"
     label: "product taken from blank page to MVP"
 chips:
-  stack: ["GCP", "Vertex AI", "Flutter", "Firestore", "Dataflow", "BigQuery"]
+  stack: ["GCP", "Vertex AI", "Flutter"]
   domain: ["Auto insurance", "Computer vision"]
   method: ["Roadmapping", "Feature prioritisation", "Customer research"]
 ---

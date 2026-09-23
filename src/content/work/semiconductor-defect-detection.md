@@ -14,7 +14,7 @@ kpis:
   - value: "$2.5M+"
     label: "client account expansion"
 chips:
-  stack: ["GCP", "Vertex AI", "Dataflow", "TFX", "Cloud Composer", "TensorBoard"]
+  stack: ["Vertex AI", "TFX", "Cloud Composer"]
   domain: ["Semiconductor", "MLOps"]
   method: ["Pipeline design", "Experiment tracking"]
 ---

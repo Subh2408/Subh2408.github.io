@@ -21,7 +21,7 @@ const entries = Object.entries(chips ?? {}).filter(([, v]) => v.length > 0);
           <span class="chipkey">{key}</span>
           <span class="chipvals">
             {values.map((v) => (
-              <a class="pill sm" href={url(`/work?filter=${encodeURIComponent(v)}`)}>
+              <a class="chip" href={url(`/work?filter=${encodeURIComponent(v)}`)}>
                 {v}
               </a>
             ))}

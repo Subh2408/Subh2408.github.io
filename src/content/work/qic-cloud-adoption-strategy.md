@@ -8,14 +8,14 @@ description: >-
   Took QIC's enterprise cloud agreement through multiple negotiation rounds, from a
   read of the spend trend to a signed contract that delivered significant savings.
 kpis:
-  - value: "Contract"
-    label: "enterprise cloud agreement closed"
-  - value: "Forecast"
-    label: "commitment sized to where spend was heading"
+  - value: "3–4"
+    label: "negotiation rounds to a signed contract"
+  - value: "~4 months"
+    label: "from first round to signature"
 chips:
   stack: ["GCP"]
   domain: ["Cloud commercials", "Cost optimisation"]
-  method: ["Spend analysis", "Forecasting", "Negotiation", "Stakeholder alignment"]
+  method: ["Spend analysis", "Forecasting", "Negotiation"]
 ---
 
 QIC's enterprise cloud agreement had sat unformalised for about 18 months before I

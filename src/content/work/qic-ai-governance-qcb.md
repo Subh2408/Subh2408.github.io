@@ -7,13 +7,8 @@ order: 3
 description: >-
   Established QIC's enterprise AI register and governance framework, and led the
   AI regulatory submission to the Qatar Central Bank.
-kpis:
-  - value: "QCB"
-    label: "AI regulatory submission led end to end"
-  - value: "Enterprise"
-    label: "AI register and governance framework established"
 chips:
-  domain: ["Insurance", "AI governance", "Regulation"]
+  domain: ["AI governance", "Regulation"]
   method: ["Framework design", "Risk register", "Regulator engagement"]
 ---
 

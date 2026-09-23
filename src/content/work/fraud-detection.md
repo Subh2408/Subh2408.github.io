@@ -12,7 +12,7 @@ kpis:
   - value: "~40%"
     label: "projected reduction in fraudulent claims"
 chips:
-  stack: ["GCP", "Vertex AI", "BigQuery", "Cloud Functions"]
+  stack: ["GCP", "Vertex AI", "BigQuery"]
   domain: ["Fraud", "Auto insurance"]
   method: ["Multi-model design", "Precision/recall trade-off"]
 ---

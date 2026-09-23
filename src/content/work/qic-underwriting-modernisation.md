@@ -12,12 +12,12 @@ description: >-
   programme before go-live.
 kpis:
   - value: "3 teams"
-    label: "cross-functional, over four months"
-  - value: "Business case"
-    label: "and implementation risk framed for leadership"
+    label: "cross-functional teams managed"
+  - value: "~4 months"
+    label: "to a leadership decision before go-live"
 chips:
   domain: ["Commercial insurance", "Underwriting"]
-  method: ["Business case", "Process mapping", "Vendor implementation", "Risk assessment"]
+  method: ["Business case", "Process mapping", "Risk assessment"]
 ---
 
 QIC set out to move commercial underwriting onto a specialist underwriting

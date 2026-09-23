@@ -11,10 +11,8 @@ description: >-
 kpis:
   - value: "8–10"
     label: "concurrent AI initiatives"
-  - value: "Business value"
-    label: "the axis use cases are ranked on"
 chips:
-  domain: ["Insurance", "Portfolio management"]
+  domain: ["Portfolio management"]
   method: ["Portfolio prioritisation", "Agile delivery", "Cross-team coordination"]
 ---
 

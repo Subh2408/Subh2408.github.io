@@ -15,7 +15,7 @@ kpis:
     label: "projected retention uplift"
 chips:
   stack: ["GCP", "BigQuery", "Firestore"]
-  domain: ["Retention", "Insurance"]
+  domain: ["Retention"]
   method: ["Rule-based design", "Phased ML adoption"]
 ---
 

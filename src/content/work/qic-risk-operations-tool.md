@@ -10,11 +10,9 @@ description: >-
 kpis:
   - value: "5"
     label: "teams served from one signal"
-  - value: "Live"
-    label: "policy exposure scored against world events"
 chips:
   stack: ["GCP", "BigQuery"]
-  domain: ["Insurance", "Risk operations", "Reinsurance"]
+  domain: ["Risk operations", "Reinsurance"]
   method: ["Cross-team discovery", "Alert design", "Exposure modelling"]
 ---
 

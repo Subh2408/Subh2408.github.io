@@ -9,12 +9,10 @@ description: >-
   applied across core insurance and support functions, and the governance that has
   to travel with it.
 kpis:
-  - value: "Enterprise"
-    label: "AI strategy, authoring and refining"
   - value: "8–10"
     label: "initiatives sequenced under one strategy"
 chips:
-  domain: ["Insurance", "AI strategy"]
+  domain: ["AI strategy"]
   method: ["Strategy authoring", "Portfolio prioritisation", "Executive alignment"]
 ---
 
