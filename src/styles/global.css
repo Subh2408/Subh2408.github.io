@@ -168,14 +168,15 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--head); font-weight: 600; margin: 0; 
    background: it takes --surface-raised and --surface-line from whatever
    surface it lands on. See "Surfaces" in CLAUDE.md.
 
-   Non-text contrast (WCAG 1.4.11) is carried by the line, not the fill. A
-   light fill cannot reach 3:1 on a light surface, so the fill is only a lift.
+   The line is decorative. A chip's text identifies it, so WCAG 1.4.11 does not
+   ask the border for 3:1. The white fill does the separating on light surfaces
+   and the line only edges it, kept light on purpose (1.4 to 1.8:1).
 
    surface        raised vs surface   line vs surface   ink on raised   accent on raised
-   page  #FFFFFF  #FFFFFF  1.00       #85817A  3.88      19.80           5.86
-   g1    #F5F4F2  #FFFFFF  1.10       #85817A  3.53      19.80           5.86
-   warm  #FBF4F0  #FFFFFF  1.09       #85817A  3.56      19.80           5.86
-   cool  #F1F5FB  #FFFFFF  1.09       #85817A  3.54      19.80           5.86
+   page  #FFFFFF  #FFFFFF  1.00       #CFCBC5  1.62      19.80           5.86
+   g1    #F5F4F2  #FFFFFF  1.10       #CFCBC5  1.47      19.80           5.86
+   warm  #FBF4F0  #FFFFFF  1.09       #CFCBC5  1.48      19.80           5.86
+   cool  #F1F5FB  #FFFFFF  1.09       #CFCBC5  1.48      19.80           5.86
    dark  #0A0A0A  #1E1E1E  1.19       #6E6E6E  3.88      16.67 (white)   5.91 (#4D9BFF)
    photo #1C1C1E  #2C2C30  1.22       #7A7A7A  3.96      13.91 (white)   4.93 (#4D9BFF) */
 :root {
@@ -597,15 +598,15 @@ body.dark {
 .stat.big .stat-v { font-size: clamp(26px, 3.2vw, 38px); }
 .stat-s { font-size: var(--t-meta); color: var(--gt); margin-top: 7px; max-width: 18ch; line-height: 1.35; display: block; }
 
-.chips { margin-top: 22px; display: grid; gap: 9px; }
+.chips { margin-top: 22px; display: grid; gap: 12px; }
 .chiprow { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
 .chipkey { flex: 0 0 78px; font-size: var(--t-meta); color: var(--gt); }
 .chipvals { display: flex; gap: 6px; flex-wrap: wrap; }
 /* Chip pills take their fill and line from the surface they sit on, so they
-   stay visible on every surface. The line carries the 3:1. The /work, /writing and /photography filters are .pill. */
+   stay visible on every surface. The line is decorative. The /work, /writing and /photography filters are .pill. */
 .chip {
-  display: inline-block; font-size: var(--t-meta); line-height: 1.4;
-  padding: 5px 11px; border-radius: 20px; text-decoration: none;
+  display: inline-block; font-size: var(--t-meta); line-height: 1.35;
+  padding: 4px 10px; border-radius: 20px; text-decoration: none;
   background: var(--surface-raised); color: var(--surface-ink);
   border: 1px solid var(--surface-line);
   transition: border-color .13s, color .13s;
@@ -1144,7 +1145,7 @@ input[type=range]::-moz-range-thumb {
   .chipfold .chips { margin-top: 14px; }
 
   /* Chip groups stack: the key on its own line, the values under it. */
-  .chips { gap: 14px; }
+  .chips { gap: 12px; }
   .chiprow { display: block; }
   .chipkey { display: block; width: 100%; margin-bottom: 6px; text-transform: capitalize; }
   .chipvals { gap: 6px; }

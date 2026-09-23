@@ -114,16 +114,17 @@ rules live in `global.css` under "surfaces"; the raw greys are in `tokens.css`.
 
 | Surface | Selector | Raised (vs surface) | Line (vs surface) | Ink on raised | Accent on raised |
 |---|---|---|---|---|---|
-| Page `#FFFFFF` | `:root` | `#FFFFFF` 1.00 | `#85817A` 3.88 | 19.80 | `--blue` 5.86 |
-| Grey `#F5F4F2` | `.wcard`, `.band.grey` | `#FFFFFF` 1.10 | `#85817A` 3.53 | 19.80 | 5.86 |
-| Warm `#FBF4F0` | `.band.warm` | `#FFFFFF` 1.09 | `#85817A` 3.56 | 19.80 | 5.86 |
-| Cool `#F1F5FB` | `.band.cool` | `#FFFFFF` 1.09 | `#85817A` 3.54 | 19.80 | 5.86 |
+| Page `#FFFFFF` | `:root` | `#FFFFFF` 1.00 | `#CFCBC5` 1.62 | 19.80 | `--blue` 5.86 |
+| Grey `#F5F4F2` | `.wcard`, `.band.grey` | `#FFFFFF` 1.10 | `#CFCBC5` 1.47 | 19.80 | 5.86 |
+| Warm `#FBF4F0` | `.band.warm` | `#FFFFFF` 1.09 | `#CFCBC5` 1.48 | 19.80 | 5.86 |
+| Cool `#F1F5FB` | `.band.cool` | `#FFFFFF` 1.09 | `#CFCBC5` 1.48 | 19.80 | 5.86 |
 | Dark `#0A0A0A` | `.band.dark` | `#1E1E1E` 1.19 | `#6E6E6E` 3.88 | 16.67 white | `#4D9BFF` 5.91 |
 | Photo `#1C1C1E` | `body.dark` | `#2C2C30` 1.22 | `#7A7A7A` 3.96 | 13.91 white | `#4D9BFF` 4.93 |
 
-Non-text contrast (WCAG 1.4.11) is carried by the **line**, not the fill. A light fill
-cannot reach 3:1 against a light surface (white on `--g1` is 1.10:1), so the fill is only
-a lift and the 1px line does the work. Every line clears 3:1 on its surface.
+The **line is decorative**. A chip's text identifies it, so WCAG 1.4.11 does not ask the
+border for 3:1. On light surfaces the white fill does the separating and the line only
+edges it, kept deliberately light at 1.4 to 1.8:1. Do not darken it to "pass" a rule that
+does not apply. Hover and focus turn the line and text `--surface-accent`.
 
 The case-study chips (`.chip`) are the first component on this system. Older hard-coded
 backgrounds, such as `.wcard .modbox`, predate the rule. Move them over when touched. The

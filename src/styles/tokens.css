@@ -64,7 +64,7 @@
 
   /* Surface lines and raised fills. Used only through the --surface-* tokens
      each surface defines in global.css. Ratios are listed there. */
-  --line-light: #85817A;
+  --line-light: #CFCBC5;
   --line-dark: #6E6E6E;
   --line-photo: #7A7A7A;
   --raised-dark: #1E1E1E;
