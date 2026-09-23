@@ -1,42 +1,42 @@
 ---
-title: "Cloud adoption strategy"
+title: "Closing the enterprise cloud agreement"
 position: "qatar-insurance-group"
 date: 2025-10
 featured: false
 order: 4
 description: >-
-  Set the roadmap and architecture direction for QIC's AI/ML workloads on Google
-  Cloud, and secured contract terms embedding committed- and sustained-use discounts
-  for cost optimisation.
+  Took QIC's enterprise cloud agreement through multiple negotiation rounds, from a
+  read of the spend trend to a signed contract that delivered significant savings.
 kpis:
-  - value: "CUD/SUD"
-    label: "discount terms secured in contract"
-  - value: "Roadmap"
-    label: "architecture direction set for AI/ML workloads"
+  - value: "Contract"
+    label: "enterprise cloud agreement closed"
+  - value: "Forecast"
+    label: "commitment sized to where spend was heading"
 chips:
   stack: ["GCP"]
-  domain: ["Insurance", "Cloud strategy", "Cost optimisation"]
-  method: ["Architecture direction", "Commercial negotiation", "Roadmapping"]
+  domain: ["Cloud commercials", "Cost optimisation"]
+  method: ["Spend analysis", "Forecasting", "Negotiation", "Stakeholder alignment"]
 ---
 
-Picking where the AI/ML workloads run is half an architecture decision and half a
-commercial one, and doing only one of them well is how cloud bills get out of hand.
+QIC's enterprise cloud agreement had sat unformalised for a long time. Closing it
+was commercial work as much as technical work.
 
-<!-- SKELETON — fill in your own words. -->
+## Reading the spend
 
-## The decision
+I started by analysing the spend trend.
 
-[you fill: what was being chosen and why GCP — the 1–2 reasons that actually decided it.]
+## Sizing the commitment
 
-## The commercial side
+A committed-use agreement trades a spend commitment for a discount. The question is
+how much to commit. I forecast where spend was heading and sized the commitment to
+that forecast. That is the judgement the deal rests on.
 
-[you fill: what CUDs and SUDs bought you, and why locking those terms early mattered.
-outcome-level, no numbers you'd rather not publish.]
+## Getting it signed
 
-## The architecture direction
-
-[you fill: the 2–3 principles you set for how AI/ML workloads are built and run.]
+The agreement went through multiple negotiation rounds. Stakeholders across teams
+had to agree before it could be signed.
 
 ## Outcome
 
-[you fill: where it stands now.]
+QIC signed the contract. It carries committed-use discounts and delivered
+significant savings.

@@ -22,9 +22,6 @@ Risk, claims, underwriting, investments and reinsurance were all reacting to the
 same world events on different timelines, from different sources, with no shared
 view of which policies were actually exposed.
 
-<!-- SKELETON — fill in your own words. The interactive module above already makes
-the threshold argument; the body should carry the story the module can't. -->
-
 ## The problem
 
 Risk, underwriting and compliance each had tools for part of the picture: world

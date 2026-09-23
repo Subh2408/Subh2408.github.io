@@ -20,8 +20,6 @@ chips:
 The strategy sets how AI and ML are applied across QIC's core insurance and support
 functions, and the standards that apply as they are.
 
-<!-- SKELETON — fill in your own words. Facts only, nothing you can't stand behind. -->
-
 ## The problem
 
 The starting point is a familiar one: a mandate to "bring AI into the

@@ -22,8 +22,6 @@ A portfolio of eight to ten AI initiatives is less a delivery problem than a
 prioritisation one: the constraint is rarely whether something can be built, but
 which few things are worth building now.
 
-<!-- SKELETON — fill in your own words. -->
-
 ## How the portfolio is prioritised
 
 Every use case matters to someone, which is exactly why prioritisation is the job.

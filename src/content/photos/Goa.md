@@ -2,15 +2,12 @@
 title: "Goa"
 date: 2026-01
 location: "Goa"
-description: "Random"
 cover: "Goa.JPEG"            # filename inside public/images/photos/<this-set-slug>/
 draft: false
 tags: ["Goa", "India"]
 frames:
   - src: "Goa.JPEG"
-    alt: "Simple day"
-    caption: "Optional caption shown in the lightbox"
-    # EXIF is read automatically from the file by the build script.
+    alt: "Simple day"    # EXIF is read automatically from the file by the build script.
     # Only override if a value is missing or wrong:
     # camera: "Fujifilm X-T4"
     # lens: "XF 35mm f/2"
@@ -19,7 +16,6 @@ frames:
     # shutter: "1/250 s"
     # iso: "400"
   - src: "Goa1.JPEG"
-    alt: "Second photo description"
+    alt: ""  # ASK SUBH: alt text for this photo
 ---
 
-Optional essay body for the set. Renders above or beside the frames.

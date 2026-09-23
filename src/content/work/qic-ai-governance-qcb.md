@@ -20,10 +20,6 @@ chips:
 A regulator asking what your AI does, who owns it, and what happens when it is wrong
 is a product question before it is a legal one.
 
-<!-- SKELETON — fill in your own words. NOTE: this is a live regulatory matter with
-your current employer. Keep to your role and outcomes. Consider "a Gulf insurance
-regulator" instead of naming QCB if you'd rather not name it publicly. -->
-
 ## Why it mattered
 
 In Qatar, financial institutions operate under the Qatar Central Bank. When QCB

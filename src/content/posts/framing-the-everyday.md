@@ -15,6 +15,7 @@ It could be a moving cyclist, a stationary shopkeeper, or just the way shadows f
 ---
 
 ![Random Guy](/images/blog/vegseller.jpg)
+
 ---
 ### Framing a Stationary Subject
 
