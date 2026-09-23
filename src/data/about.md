@@ -1,26 +1,18 @@
-I am a designer at heart who happens to like statistics. Eleven years of
-building products, most of them with machine learning somewhere inside. The
-label changed to AI along the way. The work did not.
+I am a designer at heart who happens to like statistics. I build AI products for decisions that carry risk, and I do my best work from zero to one.
 
-I lead AI strategy and products at Qatar Insurance Group, where eight to ten initiatives run
-at once. That has meant an enterprise AI register, a regulatory submission to
-the Qatar Central Bank, a risk operations tool that five departments now run
-on, and a cloud adoption path underneath all of it.
+Eleven years across FMCG, semiconductor, adtech and insurance. The domain changes. The problem stays the same: a decision where being wrong costs something.
 
-Before Doha: a claims platform for a Fortune 100 insurer, the first version of
-an auto insurance product, an MLOps pipeline for a semiconductor manufacturer,
-and shelf-space rationalisation for an FMCG giant.
+Most of what I build has a model inside it. A recommender, a demand forecast, a fraud score. The model is one component. The product decides who acts on its output, when, and what happens when it is wrong. That part is my job.
 
-Most of what I do is figuring out which lever actually moved the number, then
-designing the thing that moves it on purpose. I am best early, when there is no
-data yet and someone still has to decide what the product should do.
+At WNS I worked on shelf space for a Fortune 100 FMCG brand, and the SKU decisions saved it over $5M a year. At Quantiphi I delivered a real-time defect detection pipeline for a semiconductor manufacturer, and cut claims adjudication for a Fortune 100 insurer from a day or more to about 15 minutes. At an auto insurance startup I took the product from a blank page to a working MVP.
 
-Between March and October 2024 I stepped away from work to care for my mother
-through her terminal illness. I returned to my career after she passed.
+At Qatar Insurance Group I built and shipped LUMINA, an AI learning app now used by more than 200 people across the business, and a risk operations tool that scores world events against live policy exposure for five teams. I also led the AI regulatory submission to the Qatar Central Bank. In a regulated business the product and its governance ship together.
 
-Domain experience spans insurance, FMCG, semiconductor and advertising. I am
-looking for a Head of Product role, or a lead product role on a new AI product
-line. Early-stage work interests me most.
+Most AI programmes stall because someone owns the model, someone else owns the platform, someone else owns the regulator, and nobody owns the seam. I work on the seam.
+
+Between March and October 2024 I stepped away from work to care for my mother through her terminal illness. I returned to my career after she passed.
+
+I am looking for a Head of Product role, or the first product lead on a new product line. Zero to one is where I am most useful, in whatever domain the problem lives.
 
 ## Education
 

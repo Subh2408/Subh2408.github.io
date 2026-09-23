@@ -54,7 +54,7 @@ export function person(origin: URL, positions: Position[], skills: string[]) {
     ],
     jobTitle: current?.data.role ?? SITE.role,
     description:
-      "Product leader in AI and machine learning. Leads AI strategy and product at Qatar Insurance Group in Doha, Qatar.",
+      "Product leader who takes AI products from zero to one, across FMCG, semiconductor, adtech and insurance. Currently at Qatar Insurance Group in Doha, Qatar.",
     address: {
       "@type": "PostalAddress",
       addressLocality: SITE.locality,

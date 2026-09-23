@@ -23,7 +23,7 @@ export const SITE = {
 
 /** Hero. Author's copy. */
 export const POSITIONING = "I build AI products for decisions that carry risk.";
-export const SUBLINE = "I lead AI strategy and product at Qatar Insurance Group. Eleven years building in insurance, FMCG, semiconductor and adtech.";
+export const SUBLINE = "I do my best work from zero to one. Eleven years across FMCG, semiconductor, adtech and insurance. Currently Manager, AI Strategy & Products at Qatar Insurance Group in Doha.";
 
 /**
  * Approach pillars. Names follow the approved copy pass
@@ -51,15 +51,15 @@ export const APPROACH = [
 /** Feeds Person.knowsAbout and Occupation.skills in the structured data. */
 export const SKILLS = [
   "Product management",
-  "Product leadership",
-  "AI product strategy",
-  "Machine learning product management",
+  "Zero to one product development",
+  "AI product management",
+  "Product strategy",
+  "Machine learning products",
+  "Decision systems",
+  "Retail and FMCG analytics",
+  "MLOps",
   "AI governance",
   "Insurance",
-  "Risk operations",
-  "Analytics",
-  "MLOps",
-  "Program management",
 ] as const;
 
 export const EDUCATION = [
@@ -77,12 +77,12 @@ export const PAGE_META = {
   home: {
     title: "Subhabrata Nag, AI product leader in Doha",
     description:
-      "Subhabrata Nag builds AI products for decisions that carry risk. Leads AI product at Qatar Insurance Group, with eleven years across insurance, FMCG, semiconductor and adtech. Based in Doha, Qatar.",
+      "Subhabrata Nag builds AI products for decisions that carry risk, from zero to one. Eleven years across FMCG, semiconductor, adtech and insurance. Currently Manager, AI Strategy & Products at Qatar Insurance Group in Doha.",
   },
   work: {
     title: "Work",
     description:
-      "Eleven years of AI, machine learning and analytics work across insurance, FMCG, semiconductor and adtech. Five of the projects are interactive.",
+      "Eleven years of AI, machine learning and analytics products across FMCG, semiconductor, adtech and insurance. Five of the projects are interactive.",
   },
   writing: {
     title: "Writing",
@@ -90,16 +90,16 @@ export const PAGE_META = {
   },
   photography: {
     title: "Photography",
-    description: "Photographs from Doha, Kolkata and Goa by Subhabrata Nag.",
+    description: "Photographs from Goa and Vietnam by Subhabrata Nag.",
   },
   about: {
     title: "About",
     description:
-      "Subhabrata Nag is a product leader in AI, machine learning and analytics, currently leading enterprise AI strategy and products at Qatar Insurance Group in Doha.",
+      "Subhabrata Nag is a product leader who takes AI products from zero to one, across FMCG, semiconductor, adtech and insurance. Based in Doha, Qatar.",
   },
   resume: {
     title: "Resume",
     description:
-      "Resume of Subhabrata Nag. Eleven years in AI, machine learning and analytics across insurance, FMCG, semiconductor and advertising. Plain semantic markup.",
+      "Resume of Subhabrata Nag. Eleven years building AI, machine learning and analytics products across FMCG, semiconductor, adtech and insurance.",
   },
 } as const;
