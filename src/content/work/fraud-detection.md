@@ -48,8 +48,8 @@ Our system employed a sophisticated, multi-layered approach to fraud detection, 
 
 ## Operational Excellence: Monitoring, Retraining & Impact
 
--   **Continuous System Monitoring:** Implemented robust monitoring (using Google Cloud Monitoring & Logging) for system latency, error rates, and model performance drift to ensure sustained effectiveness.
--   **Adaptive Learning & Retraining:** A regular retraining schedule (e.g., monthly) incorporated new claim data and adjudicator feedback, allowing models to adapt to evolving fraud patterns and improve accuracy over time via Vertex AI and Dataflow.
+-   **Continuous System Monitoring:** Designed robust monitoring (using Google Cloud Monitoring & Logging) for system latency, error rates, and model performance drift to ensure sustained effectiveness.
+-   **Adaptive Learning & Retraining:** A regular retraining schedule (e.g., monthly) was designed to incorporate new claim data and adjudicator feedback, allowing models to adapt to evolving fraud patterns and improve accuracy over time via Vertex AI and Dataflow.
 
 **Projected Business Impact:**
 

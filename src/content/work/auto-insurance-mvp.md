@@ -95,9 +95,6 @@ The MVP successfully demonstrated the transformative potential of AI in the auto
 
 -   **Accelerated Claim Processing:** Achieved an estimated **30% reduction** in average claim processing time, enhancing efficiency for both customers and adjudicators.
 -   **Foundation for Enhanced Fraud Detection:** The architecture is designed to support a projected reduction of up to **~40%** in fraudulent claims once the fraud module is deployed.
--   **Improved Operational Efficiency:** Reduced manual review workload for claims agents by an estimated **60%**, freeing resources for complex cases and value-added tasks.
--   **Optimised Model Performance:** Maintained an average model inference latency of **~0.8 seconds per image**, crucial for real-time applications.
--   **Elevated Customer Satisfaction:** Forecasted a potential **+10 point increase** in Net Promoter Score (NPS) driven by faster resolutions and improved service transparency.
 
 ## Strategic Roadmap and Future Enhancements
 

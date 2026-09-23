@@ -36,7 +36,7 @@ The challenge was to design a solution that improved quality without stifling cr
 
 A three-part Quality Check programme was developed, combining checklist-based reviews, documentation standards, and reusable templates tailored to the unique analytical workflows across pods.
 
-At the core of the programme was a comprehensive checklist framework divided into three components: data quality, formatting, and insight generation. For data quality, a taxonomy of typical use cases was compiled and deconstructed into standardised workflows — covering the entire process from discovery and collection to manipulation, analysis, and interpretation. These workflows were accompanied by clear checkpoints to ensure data lineage, traceability, and accuracy were maintained throughout.
+At the core of the programme was a comprehensive checklist framework divided into two components: data quality and formatting. For data quality, a taxonomy of typical use cases was compiled and deconstructed into standardised workflows — covering the entire process from discovery and collection to manipulation, analysis, and interpretation. These workflows were accompanied by clear checkpoints to ensure data lineage, traceability, and accuracy were maintained throughout.
 
 On the formatting front, standard templates were created for common analytical problems, enabling consistency in presentation while accounting for pod-specific nuances. This allowed analysts to spend less time on structuring decks and more on refining insights. Additionally, guidance on storytelling, slide structure, and annotation was incorporated to strengthen the communicative clarity of outputs.
 

@@ -3,7 +3,7 @@ title: "Risk operations tool"
 position: "qatar-insurance-group"
 date: 2026-03
 featured: true
-order: 3
+order: 4
 description: >-
   Designed and built a tool for five teams that scores real-world events against
   live policy exposure and recommends action for the teams that have to respond.

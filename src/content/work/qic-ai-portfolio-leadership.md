@@ -3,7 +3,7 @@ title: "Leading the AI initiative portfolio"
 position: "qatar-insurance-group"
 date: 2026-02
 featured: false
-order: 5
+order: 7
 description: >-
   Runs a portfolio of 8–10 concurrent AI initiatives, prioritising use cases by
   business value and coordinating delivery across engineering and business teams
@@ -52,7 +52,7 @@ written up in [closing the enterprise cloud agreement](/work/qic-cloud-adoption-
 
 ## Outcome
 
-The portfolio has shipped LUMINA, an AI learning app with more than 200 active
+The portfolio has shipped [LUMINA](/work/qic-lumina), an AI learning app with more than 200 active
 users across the business. It has also shipped the
 [risk operations tool](/work/qic-risk-operations-tool) and the
 [AI regulatory submission to the Qatar Central Bank](/work/qic-ai-governance-qcb). 

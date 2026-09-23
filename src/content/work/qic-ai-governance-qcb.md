@@ -3,7 +3,7 @@ title: "AI governance and the regulatory submission"
 position: "qatar-insurance-group"
 date: 2025-12
 featured: true
-order: 2
+order: 3
 description: >-
   Established QIC's enterprise AI register and governance framework, and led the
   AI regulatory submission to the Qatar Central Bank.

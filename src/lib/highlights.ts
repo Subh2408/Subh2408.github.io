@@ -62,10 +62,10 @@ export const HIGHLIGHTS: Highlight[] = [
   },
   {
     kind: "kpi",
-    number: "40%",
-    label: "targeted fraud reduction",
-    context: "Auto insurance startup",
-    slug: "fraud-detection",
+    number: "200+",
+    label: "active users of LUMINA",
+    context: "Qatar Insurance Group",
+    slug: "qic-lumina",
   },
   {
     kind: "kpi",

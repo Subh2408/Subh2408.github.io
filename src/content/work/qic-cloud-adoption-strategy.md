@@ -3,7 +3,7 @@ title: "Closing the enterprise cloud agreement"
 position: "qatar-insurance-group"
 date: 2025-10
 featured: false
-order: 4
+order: 6
 description: >-
   Took QIC's enterprise cloud agreement through multiple negotiation rounds, from a
   read of the spend trend to a signed contract that delivered significant savings.
@@ -18,12 +18,13 @@ chips:
   method: ["Spend analysis", "Forecasting", "Negotiation", "Stakeholder alignment"]
 ---
 
-QIC's enterprise cloud agreement had sat unformalised for a long time. Closing it
-was commercial work as much as technical work.
+QIC's enterprise cloud agreement had sat unformalised for about 18 months before I
+took it on. Closing it was commercial work as much as technical work.
 
 ## Reading the spend
 
-I started by analysing the spend trend.
+I started by breaking the spend down and analysing its trend. That showed where
+the money was going and where it wasn't.
 
 ## Sizing the commitment
 
